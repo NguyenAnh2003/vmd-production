@@ -1,7 +1,9 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from speech_api.routes import router
-def setup_app():
+""" libs """
+
+def setup_app() -> FastAPI:
     """ setup app including CORS config and router
     :return: app(FastAPI)
     """
@@ -15,6 +17,7 @@ def setup_app():
             allow_methods=["*"],
             allow_headers=["*"],
         )
-        app.include_router(router) # include router
+        app.include_router(router=router) # include router
+        return app
     except Exception as e:
         raise HTTPException(status_code=500, detail="Server error")

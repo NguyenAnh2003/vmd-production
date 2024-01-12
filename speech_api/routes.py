@@ -2,6 +2,10 @@ from fastapi import APIRouter, HTTPException, status
 
 router = APIRouter()
 
+@router.get('/', status_code=status.HTTP_200_OK)
+def index():
+    return {"message": "Hello word"}
+
 @router.post('/danangvsr/vmd', status_code=status.HTTP_200_OK)
 def correction_route():
     """ input of correction route is "wav" file
