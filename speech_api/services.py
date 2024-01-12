@@ -1,3 +1,3 @@
 # service class
-def correcting_Service(file):
+def correcting_service(file):
     return
