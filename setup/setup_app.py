@@ -18,6 +18,6 @@ def setup_app() -> FastAPI:
             allow_headers=["*"],
         )
         app.include_router(router=router) # include router
-        return app
+        return app # return app
     except Exception as e:
-        raise HTTPException(status_code=500, detail="Server error")
+        raise HTTPException(status_code=500, detail=f"Server error with message: {format(str(e))}")
