@@ -12,8 +12,9 @@ def index():
 
 @router.post('/danangvsr/vmd', status_code=status.HTTP_200_OK)
 def correction_route(file: UploadFile, text_target: str = Form(...)):
+    text, size = correcting_service(file, text_target)
     """ input of correction route is "wav" file and text """
-    return {"message": text_target, "file": {file.size, file.filename}}
+    return {"target": text, "file": size}
 
 @router.post('/test/upload', status_code=status.HTTP_200_OK)
 def test_route(file: UploadFile):
