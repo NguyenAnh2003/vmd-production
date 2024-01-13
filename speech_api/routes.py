@@ -1,4 +1,5 @@
-from fastapi import APIRouter, HTTPException, status, UploadFile
+from fastapi import APIRouter, HTTPException, status, \
+    UploadFile, Form
 from speech_api.services import correcting_service
 """ modules """
 
@@ -10,10 +11,9 @@ def index():
     return {"message": "Hello word"}
 
 @router.post('/danangvsr/vmd', status_code=status.HTTP_200_OK)
-def correction_route(file: UploadFile):
+def correction_route(file: UploadFile, text_target: str = Form(...)):
     """ input of correction route is "wav" file and text """
-    # text = request.text
-    return
+    return {"message": text_target, "file": {file.size, file.filename}}
 
 @router.post('/test/upload', status_code=status.HTTP_200_OK)
 def test_route(file: UploadFile):
