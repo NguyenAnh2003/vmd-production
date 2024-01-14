@@ -8,6 +8,7 @@ import io
 import numpy as np
 import soundfile as sf
 import requests
+import os
 
 # run interface ui `streamlit run interface/interface.py`
 
@@ -41,11 +42,11 @@ if st.button("Compute"):
         Read all byte in buffer after record and save the file
         Alternative can use Cloudinary service
         """
-        filename = "recorded_audio.wav"
-        sf.write(filename, audio_array, 41000, 'PCM_16')
+        OUT_WAV_FILE = "upload/recorded_audio.wav"
+        sf.write(OUT_WAV_FILE, audio_array, 41000, 'PCM_16')
 
         # Use the recorded audio directly for the API request
-        file_data = {"file": ("recorded_audio.wav",
+        file_data = {"file": (OUT_WAV_FILE,
                               io.BytesIO(audio_bytes), "audio/wav")}
         text_data = {"text_target": text}
         response = requests.post(API, files=file_data,
