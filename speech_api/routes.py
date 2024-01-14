@@ -5,7 +5,6 @@ from speech_api.services import correcting_service
 # router define
 router = APIRouter()
 
-
 @router.get('/', status_code=status.HTTP_200_OK)
 def index():
     return {"message": "Hello word"}

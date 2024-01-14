@@ -4,3 +4,6 @@ streamlit~=1.30.0
 python-multipart~=0.0.6
 torchaudio~=2.1.2
 torch~=2.1.2
+numpy~=1.25.2
+soundfile~=0.12.1
+requests~=2.31.0
