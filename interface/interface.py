@@ -15,7 +15,7 @@ audio_bytes = audio_recorder(pause_threshold=10.0, sample_rate=41_000)
 if audio_bytes:
     st.audio(audio_bytes, format="audio/wav")
 
-if st.button("Save Audio"):
+if st.button("Compute"):
     # Convert audio_bytes to a NumPy array
     audio_array = np.frombuffer(audio_bytes, dtype=np.int16)
 
@@ -24,7 +24,6 @@ if st.button("Save Audio"):
         # You can change the filename and format accordingly
         filename = "recorded_audio.wav"
         sf.write(filename, audio_array, 41000, 'PCM_16')
-        st.success(f"Audio saved to {filename}")
 
         # Use the recorded audio directly for the API request
         file_data = {"file": ("recorded_audio.wav",
