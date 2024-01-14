@@ -4,5 +4,5 @@ def correcting_service(media, text):
     :return the output contain phonemes each one will be associated with a tag
     that labeled T(true), F(false)
     """
-    
-    return
+    size = media.size
+    return (text, size)
