@@ -44,7 +44,6 @@ if st.button("Save Audio"):
             # Display the data in your Streamlit app
             st.write("API Response:", data)
         else:
-            st.error(f"Failed to fetch data. Status code: {
-                     response.status_code}")
+            st.error(f"Failed to fetch data. Status code: {response.status_code}")
     else:
         st.warning("The audio data is empty.")
