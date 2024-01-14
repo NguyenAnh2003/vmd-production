@@ -10,11 +10,12 @@ import soundfile as sf
 import requests
 import time
 import os
+from dotenv import load_dotenv
+
+# dotenv config
+load_dotenv()
 
 # run interface ui `streamlit run interface/interface.py`
-
-# header config
-API = "http://localhost:8000/danangvsr/vmd" # define local API URL
 
 # setup interface
 st.write(""" # Correction VMD
@@ -36,8 +37,6 @@ if st.button("Compute"):
     audio_array = np.frombuffer(audio_bytes, dtype=np.int16)
 
     if len(audio_array) > 0:
-        # Save the audio to a file using soundfile library
-        # You can change the filename and format accordingly
         """
         define temporarily upload dir (saving file from buffer)
         Read all byte in buffer after record and save the file
@@ -50,7 +49,7 @@ if st.button("Compute"):
         file_data = {"file": (OUT_WAV_FILE,
                               io.BytesIO(audio_bytes), "audio/wav")}
         text_data = {"text_target": text}
-        response = requests.post(API, files=file_data,
+        response = requests.post(os.getenv("API"), files=file_data,
                                  data=text_data,)
 
         if response.status_code == 200:
