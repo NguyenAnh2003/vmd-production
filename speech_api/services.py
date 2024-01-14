@@ -5,4 +5,4 @@ def correcting_service(media, text):
     that labeled T(true), F(false)
     """
     size = media.size
-    return (text, size)
+    return text, size
