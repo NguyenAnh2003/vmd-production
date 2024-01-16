@@ -57,9 +57,10 @@ def translate(sentence: str, method: str):
         data_trans.pop()
         print(f"Translate: {' '.join(data_trans)}")
 
-
-my_vocab = get_vocab_from_file("dataset/lexicon_vmd.txt")
-phoneme_sequence = ""
-text = "địu định đệu"
-translate(text, method="text_to_phoneme")
-# translate("speech_dataset/test_phones.csv", method="phoneme_to_text", types="transcript")
+if __name__ == "__main__":
+    my_vocab = get_vocab_from_file("dataset/lexicon_vmd.txt")
+    phoneme_sequence = "ɗ i-5 uz $ ɗ i-5 ŋ̟z $ ɗ e-5 uz"
+    text = "địu định đệu"
+    translate(text, method="text_to_phoneme")
+    translate(phoneme_sequence, method="phoneme_to_text")
+    # translate("speech_dataset/test_phones.csv", method="phoneme_to_text", types="transcript")
