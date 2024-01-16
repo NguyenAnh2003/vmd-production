@@ -3,16 +3,7 @@ import torch.nn as nn
 from model.rnn_stack import RNN_Layer
 from model.vmd_model import Model_Main
 from utils.dataset.data_loader import Vocab
-import argparse
-import yaml
-
-def load_config(path: str):
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--conf', default=path)
-    args = parser.parse_args()
-    config_path = args.conf
-    param = yaml.safe_load(open(config_path, 'r', encoding="utf8"))
-    return param
+from utils.utils import load_config
 
 class Model(Model_Main):
     def __init__(self, a_param=None, pi_param=None, p_param=None, l_param=None, vocab=None):
