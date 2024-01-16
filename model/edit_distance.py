@@ -1,3 +1,5 @@
+""" edit distance processing prediction """
+
 def process(preds: list, labels: list):
     len_preds = len(preds)
     len_labels = len(labels)
