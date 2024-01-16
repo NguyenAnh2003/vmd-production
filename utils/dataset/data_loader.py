@@ -1,13 +1,4 @@
-import argparse
-import yaml
-
-def load_config(path: str):
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--conf', default=path)
-    args = parser.parse_args()
-    config_path = args.conf
-    param = yaml.safe_load(open(config_path, 'r', encoding="utf8"))
-    return param
+""" dataloader """
 
 pad = [r"<PAD>"]
 initial = [r'f', r'h', r'k', r'l', r'm', r'n', r'p', r's', r't', r'tʰ', r't͡ɕ', r'v', r'x', r'z', r'ŋ', r'ɓ', r'ɗ', r'ɣ', r'ɲ']
