@@ -9,5 +9,4 @@ def correcting_service(media, text):
     """
     audio, _ = torchaudio.load(io.BytesIO(media))
     print(audio)
-    audio = ""
     return text, audio
