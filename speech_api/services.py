@@ -1,3 +1,5 @@
+import torch
+import torchaudio
 # service class
 def correcting_service(media, text):
     """ the service responsible for dealing with wav file
