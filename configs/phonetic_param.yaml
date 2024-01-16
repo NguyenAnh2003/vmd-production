@@ -1,0 +1,24 @@
+# Extract Features
+
+
+#CNN Parameters
+cnn_layers: 1
+cnn_channel: "[(1, 16), (16, 64)]"
+cnn_kernel_size: "[(3, 3), (3, 3)]"
+cnn_stride: "[(1, 1), (1, 1)]"
+cnn_padding: "[(1, 1), (1, 1)]"
+cnn_pooling: "None"
+cnn_activation_function: "nn.Relu"
+cnn_drop_out: 0.1
+
+#RNN Parameters0
+rnn_layers: 1
+rnn_input_size: 768
+rnn_hidden_size: 384
+rnn_type: "nn.LSTM"
+rnn_bidirectional: True
+rnn_batch_first: False
+rnn_drop_out: 0.1
+
+device: "torch.cuda"
+dtype: "torch.float32"
