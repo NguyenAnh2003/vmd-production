@@ -1,10 +1,12 @@
 import torch
 import torchaudio
+import io
+
 # service class
 def correcting_service(media, text):
     """ the service responsible for dealing with wav file
-    :return the output contain phonemes each one will be associated with a tag
-    that labeled T(true), F(false)
+    :return the output
     """
-    size = media.size
-    return text, size
+    audio, _ = torchaudio.load(io.BytesIO(media))
+    print(audio)
+    return text, audio
