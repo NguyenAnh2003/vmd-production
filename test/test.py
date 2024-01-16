@@ -1,9 +1,8 @@
 import torch
 import torchaudio
 from utils.dataset.data_loader import Vocab
-from phonetic_embedding import phonetic_embedding
-import edit_distance
-from model import customize_model
+from feats.phonetic_embedding import phonetic_embedding
+from model import customize_model, edit_distance
 
 
 def test_1_audio(Model_Training, path_save_model, audio, canonical):

@@ -1,7 +1,6 @@
 import torch
 from transformers import Wav2Vec2FeatureExtractor, Wav2Vec2Model
 
-
 def load_model_ASR_VietAI(model_name: str = "nguyenvulebinh/wav2vec2-base-vietnamese-250h"):
     """
     Args:
