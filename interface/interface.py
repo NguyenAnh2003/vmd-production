@@ -9,12 +9,11 @@ import numpy as np
 import soundfile as sf
 import requests
 import time
+from dotenv import load_dotenv
 import os
 
+load_dotenv()
 # run interface ui `streamlit run interface/interface.py`
-
-# header config
-API = "http://localhost:8000/danangvsr/vmd" # define local API URL
 
 # setup interface
 st.write(""" # Correction VMD
@@ -50,7 +49,7 @@ if st.button("Compute"):
         file_data = {"file": (OUT_WAV_FILE,
                               io.BytesIO(audio_bytes), "audio/wav")}
         text_data = {"text_target": text}
-        response = requests.post(API, files=file_data,
+        response = requests.post(os.getenv("API"), files=file_data,
                                  data=text_data,)
 
         if response.status_code == 200:
