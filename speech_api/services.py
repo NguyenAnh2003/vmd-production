@@ -8,7 +8,6 @@ from feats.phonetic_embedding import phonetic_embedding
 from utils.dataset.data_loader import Vocab
 from model.customize_model import Model
 
-
 # service class
 def correcting_service(media, text):
     """ the service responsible for dealing with wav file
@@ -61,19 +60,19 @@ def correcting_service(media, text):
 
             return predict_phoneme
 
-        """ define params """
-        cannonical = translate(sentence=text,
+        """ define canonical """
+        canonical = translate(sentence=text,
                                method="text_to_phoneme",
                                my_vocab=my_vocab)  # translate 2 phoneme
 
-        # """ prediction call function """
+        """ prediction call function """
         result = prediction(Model_Training=Model,
                             path_save_model="./saved_model/model_Customize_All_3e3.pth",
-                            audio=media, canonical=cannonical)
+                            audio=media, canonical=canonical)
 
         print(f"Prediction {result}")
 
-        return f"got result"
+        return f"prediction: {str(result)} canonical: {text} translate to {canonical}"
     except Exception as e:
         print(f"Error at service class: {e}")
         raise e
