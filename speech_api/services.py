@@ -39,7 +39,8 @@ def correcting_service(media, text):
             model.eval()
 
             audio_array, _ = torchaudio.load(io.BytesIO(audio))
-            audio_array = audio_array.squeeze(0)
+            print(audio_array.shape)
+            audio_array = audio_array.reshape(1,audio_array.shape[0]*audio_array.shape[1]).squeeze(0)
             phonetic = phonetic_embedding(audio_array).unsqueeze(0)
 
             phonetic = phonetic.to(device)
