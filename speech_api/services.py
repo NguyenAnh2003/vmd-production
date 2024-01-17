@@ -8,6 +8,7 @@ from feats.phonetic_embedding import phonetic_embedding
 from utils.dataset.data_loader import Vocab
 from model.customize_model import Model
 
+
 # service class
 def correcting_service(media, text):
     """ the service responsible for dealing with wav file
@@ -19,6 +20,7 @@ def correcting_service(media, text):
         my_vocab = get_vocab_from_file("./utils/dataset/lexicon_vmd.txt")
 
         """ prediction function """
+
         def prediction(Model_Training, path_save_model, audio, canonical):
             device = torch.device('cpu')
             vocab = Vocab("./utils/dataset/phoneme.txt")
@@ -37,7 +39,7 @@ def correcting_service(media, text):
             model.to(device)
             model.eval()
 
-            audio_array, _ = torchaudio.load(audio)
+            audio_array, _ = torchaudio.load(io.BytesIO(audio))
             audio_array = audio_array.squeeze(0)
             phonetic = phonetic_embedding(audio_array).unsqueeze(0)
 
@@ -59,15 +61,17 @@ def correcting_service(media, text):
 
             return predict_phoneme
 
-        # """ prediction call function """
-        # result = prediction(Model_Training=Model,
-        #            path_save_model="../saved_model/model_Customize_All_3e3.pth",
-        #            audio=media)
+        """ define params """
+        cannonical = translate(sentence=text,
+                               method="text_to_phoneme",
+                               my_vocab=my_vocab)  # translate 2 phoneme
 
-        result = translate(sentence=text,
-                           method="text_to_phoneme",
-                           my_vocab=my_vocab) # translate 2 phoneme
-        print(f"Translate text 2 phoneme: {result}")
+        # """ prediction call function """
+        result = prediction(Model_Training=Model,
+                            path_save_model="./saved_model/model_Customize_All_3e3.pth",
+                            audio=media, canonical=cannonical)
+
+        print(f"Prediction {result}")
 
         return f"got result"
     except Exception as e:
