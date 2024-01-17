@@ -2,10 +2,8 @@ import csv
 
 # Lấy dữ liệu để so sánh
 def get_vocab_from_file(file: str):
-    print(f"help")
     f = open(file, "r", encoding="UTF-8")
     lines = f.readlines()
-    print(f"file error {lines}")
     result = []
     for x in lines:
         x = x.replace('\n', '')
@@ -56,7 +54,8 @@ def translate(sentence: str, method: str, my_vocab):
                 data_trans.extend("$")
 
             data_trans.pop()
-            print(f"Translate: {' '.join(data_trans)}")
+            # print(f"Translate: {' '.join(data_trans)}")
+            return ' '.join(data_trans)
     except Exception as e:
         print(f"Error: {e}")
         raise e
