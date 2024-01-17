@@ -1,6 +1,6 @@
 import os
 from dotenv import load_dotenv
 
-TEXT2PHONEME="TEXT2PHONEME"
-PHONEME2TEXT="PHONEME2TEXT"
+TEXT2PHONEME="text_to_phoneme"
+PHONEME2TEXT="phoneme_to_text"
 API=os.getenv("API")

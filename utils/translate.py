@@ -14,25 +14,25 @@ def get_vocab_from_file(file: str):
     for res in result:
         for r in res:
             vocab.append(r.split(' '))
-
     return vocab
 
-
-# So sánh dữ liệu
-def compare_data(arg: str, method: str):
-    str_split = lambda x: x.split()
-    t = str_split(arg)
-
-    for i, sublist in enumerate(my_vocab):
-        if t == sublist[1:] and method == "phoneme_to_text":
-            rs = my_vocab[i]
-            return rs
-        elif t == sublist[:1] and method == "text_to_phoneme":
-            rs = my_vocab[i]
-            return rs
-
-def translate(sentence: str, method: str):
+def translate(sentence: str, method: str, my_vocab):
     data_trans = []
+
+    # So sánh dữ liệu
+    def compare_data(arg: str, method: str):
+        str_split = lambda x: x.split()
+        t = str_split(arg)
+
+        for i, sublist in enumerate(my_vocab):
+            if t == sublist[1:] and method == "phoneme_to_text":
+                rs = my_vocab[i]
+                return rs
+            elif t == sublist[:1] and method == "text_to_phoneme":
+                rs = my_vocab[i]
+                return rs
+
+
     if method == "phoneme_to_text":
         trans = sentence.split(' $ ')
         for i, tran in enumerate(trans):

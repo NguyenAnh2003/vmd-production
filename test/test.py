@@ -4,7 +4,6 @@ from utils.dataset.data_loader import Vocab
 from feats.phonetic_embedding import phonetic_embedding
 from model import customize_model, edit_distance
 
-
 def test_1_audio(Model_Training, path_save_model, audio, canonical):
     try:
         device = torch.device('cpu')
@@ -46,7 +45,7 @@ def test_1_audio(Model_Training, path_save_model, audio, canonical):
 
         return predict_phoneme
     except Exception as e:
-        print(f"{e}")
+        print(f"Error: {e}")
         raise e
 
 

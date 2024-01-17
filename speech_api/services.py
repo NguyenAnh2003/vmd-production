@@ -1,6 +1,8 @@
 import torch
 import torchaudio
 import io
+from utils.translate import translate, get_vocab_from_file
+from utils.constants import TEXT2PHONEME
 
 # service class
 def correcting_service(media, text):
@@ -8,5 +10,6 @@ def correcting_service(media, text):
     :return the output
     """
     audio, _ = torchaudio.load(io.BytesIO(media))
-    print(audio)
+    phoneme = translate(text, TEXT2PHONEME)
+    print(audio, phoneme)
     return text, audio
