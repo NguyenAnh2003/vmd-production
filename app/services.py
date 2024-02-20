@@ -73,7 +73,7 @@ def correcting_service(media, text):
                             path_save_model="./saved_model/model_Customize_All_3e3.pth",
                             audio=media, canonical=canonical)
 
-        print(f"Prediction {result}")
+        print(f"{result}")
 
         return f"prediction: {str(result)} canonical: {text} translate to {canonical}"
     except Exception as e:

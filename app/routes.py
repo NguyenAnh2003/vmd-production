@@ -1,6 +1,6 @@
-from fastapi import APIRouter, HTTPException, status, \
+from fastapi import APIRouter, status, \
     UploadFile, Form, File
-from speech_api.services import correcting_service
+from app.services import correcting_service
 """ modules """
 
 # router define
