@@ -41,8 +41,7 @@ def translate(sentence: str, method: str, my_vocab):
                 if result is None:
                     continue
                 data_trans.extend(result[:1])
-
-            print(f"Translate: {' '.join(data_trans)}")
+            return data_trans
 
         elif method == "text_to_phoneme":
             trans = sentence.split(' ')

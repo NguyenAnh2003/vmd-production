@@ -3,6 +3,8 @@ import torchaudio
 from utils.dataset.data_loader import Vocab
 from feats.phonetic_embedding import phonetic_embedding
 from model import customize_model, edit_distance
+from model.metric import Align
+from utils.translate import translate, get_vocab_from_file
 
 def test_1_audio(Model_Training, path_save_model, audio, canonical):
     try:
@@ -48,10 +50,31 @@ def test_1_audio(Model_Training, path_save_model, audio, canonical):
         print(f"Error: {e}")
         raise e
 
+def compare_can_trans(cannonical, transcript):
+    try:
+        cannonical = " ".join(cannonical.split()).split()
+        transcript = " ".join(transcript.split()).split()
+        can, trans = Align(cannonical, transcript)
+
+        correct = []
+        for c, t in zip(can, trans):
+            if c == t:
+                correct.append(1)
+            else:
+                correct.append(0)
+        return can, trans, correct
+    except Exception as e:
+        print(f"Error: {e}")
+        raise e
 
 if __name__ == "__main__":
-    a = test_1_audio(Model_Training=customize_model.Model,
-                     path_save_model="../saved_model/model_Customize_All_3e3.pth",
-                     audio="vao-nui_1618754929889.wav",
-                     canonical="v aː-1 uz $ n w i-4")
+    my_vocab = get_vocab_from_file("../utils/dataset/lexicon_vmd.txt")
+    phoneme_sequence = "t w o-3 iz $ f iə-4"
+    a = translate(phoneme_sequence, method="phoneme_to_text", my_vocab=my_vocab)  #
+    print(a)
+    # a = test_1_audio(Model_Training=customize_model.Model,
+    #                  path_save_model="../saved_model/model_Customize_All_3e3.pth",
+    #                  audio="vao-nui_1618754929889.wav",
+    #                  canonical="v aː-1 uz $ n w i-4")
+    a = compare_can_trans("t w o-3 iz $ f iə-4","t w o-3")
     print(a)
