@@ -59,7 +59,9 @@ def correcting_service(media, text):
                 predict = edit_distance.preprocess_predict(predict, len(predict))
                 predict_phoneme = [*map(vocab.index2word.get, predict)]
 
-            return predict_phoneme
+            result = " ".join(predict_phoneme)
+
+            return result
 
         """ define canonical """
         canonical = translate(sentence=text,
