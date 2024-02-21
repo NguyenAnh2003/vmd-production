@@ -1,7 +1,3 @@
-"""
-interface to report the research result
-the interface will manipulate the streamlit library
-"""
 import streamlit as st
 from audio_recorder_streamlit import audio_recorder
 import io
@@ -13,7 +9,6 @@ from dotenv import load_dotenv
 import os
 
 load_dotenv()
-# run interface ui `streamlit run app/view/interface.py `
 
 def main():
     # setup interface
@@ -66,5 +61,6 @@ def main():
             st.warning("The audio data is empty.")
 
 if __name__ == "__main__":
-    st.set_page_config(page_title="VMD DEMO")
+    # run interface ui `streamlit run app/view/interface.py `
+    st.set_page_config(page_title="Mispronunciation detection")
     main()
