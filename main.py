@@ -4,7 +4,7 @@ import uvicorn
 from core.mylogger import setup_logger
 
 # setup logger
-_logger = setup_logger("./core/logs/app_run.log")
+_logger = setup_logger("./core/logs/app_run.log", location="main")
 _logger.getLogger("main")
 
 """ setup app and run """
