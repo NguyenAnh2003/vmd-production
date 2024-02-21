@@ -1,3 +1,8 @@
+### Init venv
+```python
+python -m venv venv
+```
+
 ### Activate venv to download dependencies
 ```python 
 Window: .\venv\Scripts\activate
