@@ -7,6 +7,7 @@ import model.edit_distance as edit_distance
 from feats.phonetic_embedding import phonetic_embedding
 from utils.dataset.data_loader import Vocab
 from model.customize_model import Model
+from model.metric import Align
 
 # service class
 def correcting_service(media, text):
@@ -16,13 +17,13 @@ def correcting_service(media, text):
     """
     try:
         """ get vocab """
-        my_vocab = get_vocab_from_file("./utils/dataset/lexicon_vmd.txt")
+        my_vocab = get_vocab_from_file("../utils/dataset/lexicon_vmd.txt")
 
         """ prediction function """
 
         def prediction(Model_Training, path_save_model, audio, canonical):
             device = torch.device('cpu')
-            vocab = Vocab("./utils/dataset/phoneme.txt")
+            vocab = Vocab("../utils/dataset/phoneme.txt")
             new_path_save_model = path_save_model
 
             package = torch.load(new_path_save_model, map_location=device)
@@ -38,9 +39,8 @@ def correcting_service(media, text):
             model.to(device)
             model.eval()
 
-            audio_array, _ = torchaudio.load(io.BytesIO(audio))
-            print(audio_array.shape)
-            audio_array = audio_array.reshape(1,audio_array.shape[0]*audio_array.shape[1]).squeeze(0)
+            audio_array, _ = torchaudio.load(audio)
+            audio_array = audio_array.reshape(1, audio_array.shape[0]*audio_array.shape[1]).squeeze(0)
             phonetic = phonetic_embedding(audio_array).unsqueeze(0)
 
             phonetic = phonetic.to(device)
@@ -70,12 +70,34 @@ def correcting_service(media, text):
 
         """ prediction call function """
         result = prediction(Model_Training=Model,
-                            path_save_model="./saved_model/model_Customize_All_3e3.pth",
+                            path_save_model="../saved_model/model_Customize_All_3e3.pth",
                             audio=media, canonical=canonical)
 
+        canonical = " ".join(canonical.replace("$", "").split())
+        compare_transcript_canonical(canonical, result)
         print(f"{result}")
 
         return f"prediction: {str(result)} canonical: {text} translate to {canonical}"
     except Exception as e:
         print(f"Error at service class: {e}")
         raise e
+
+def compare_transcript_canonical(canonical, transcript):
+    result = []
+    can_align, trans_align = Align(canonical.split(), transcript.split())
+    print(can_align, trans_align )
+    for can, tran in zip(can_align, trans_align):
+        if can != "<eps>" and tran == "<eps>":
+            result.append(("#", "1"))
+        elif can != "<eps>" and tran != "<eps>":
+            if can != tran:
+                result.append((tran, "1"))
+            else:
+                result.append((tran, "0"))
+    print(result)
+    return result
+
+if __name__ == "__main__":
+    media = "/home/vkuai/Downloads/VMD_VLSP/private_test/audio_data/private_test/cao-gay_1618758834960.wav"
+    text = "cao gầy" # Cần try catch lại
+    print(correcting_service(media, text))
