@@ -61,6 +61,6 @@ def main():
             st.warning("The audio data is empty.")
 
 if __name__ == "__main__":
-    # run interface ui `streamlit run app/view/interface.py`
+    # run interface ui --- streamlit run app/view/interface.py ---
     st.set_page_config(page_title="Mispronunciation detection")
     main()
