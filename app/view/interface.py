@@ -39,7 +39,7 @@ def main():
             Read all byte in buffer after record and save the file
             Alternative can use Cloudinary service
             """
-            OUT_WAV_FILE = f"upload/recorded_audio{time.time()}.wav" # define absolute path
+            OUT_WAV_FILE = f"../upload/recorded_audio{time.time()}.wav" # define absolute path
             sf.write(OUT_WAV_FILE, audio_array, 16000, 'PCM_16')
 
             # Use the recorded audio directly for the API request

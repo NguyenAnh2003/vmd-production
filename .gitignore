@@ -159,5 +159,10 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
-upload/
+app/upload/
+
+# saved audio folder
+app/upload/
+
+# saved_model file
 saved_model/model_Customize_All_3e3.pth
