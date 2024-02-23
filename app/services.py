@@ -17,12 +17,12 @@ def correcting_service(media, text):
     """
     try:
         """ get vocab """
-        my_vocab = get_vocab_from_file("../utils/dataset/lexicon_vmd.txt")
+        my_vocab = get_vocab_from_file("./utils/dataset/lexicon_vmd.txt")
 
         """ prediction function """
         def prediction(Model_Training, path_save_model, audio, canonical):
             device = torch.device('cpu')
-            vocab = Vocab("../utils/dataset/phoneme.txt")
+            vocab = Vocab("./utils/dataset/phoneme.txt")
             new_path_save_model = path_save_model
 
             package = torch.load(new_path_save_model, map_location=device)
@@ -70,16 +70,15 @@ def correcting_service(media, text):
 
         """ prediction call function """
         predicted = prediction(Model_Training=Model,
-                            path_save_model="../saved_model/model_Customize_All_3e3.pth",
+                            path_save_model="./saved_model/model_Customize_All_3e3.pth",
                             audio=media, canonical=canonical)
 
-        # canonical = " ".join(canonical.replace("$", "").split())
         canonical = " ".join(canonical.split())
         canonical = canonical.split()
         list_compare = compare_transcript_canonical(canonical, predicted)
-        result_compare = displace_word_mispronounce(canonical, list_compare)
-        target_list = text.split()
-        result = dict(zip(target_list, result_compare))
+        compared = displace_word_mispronounce(canonical, list_compare)
+        target_list = text.split() # split text by white space and form list
+        result = dict(zip(target_list, compared)) # mapping 2 list and form dict
         return result
     except Exception as e:
         print(f"Error at service class: {e}")
