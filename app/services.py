@@ -76,9 +76,9 @@ def correcting_service(media, text):
         canonical = " ".join(canonical.split())
         canonical = canonical.split()
         list_compare = compare_transcript_canonical(canonical, predicted)
-        result_compare = displace_word_mispronounce(canonical, list_compare)
-        target_list = text.split()
-        result = dict(zip(target_list, result_compare))
+        compared = displace_word_mispronounce(canonical, list_compare)
+        target_list = text.split() # split text by white space and form list
+        result = dict(zip(target_list, compared)) # mapping 2 list and form dict
         return result
     except Exception as e:
         print(f"Error at service class: {e}")
