@@ -7,6 +7,5 @@ torch~=2.1.2
 numpy~=1.25.2
 soundfile~=0.12.1
 requests~=2.31.0
-PyAudio~=0.2.14
 python-dotenv~=1.0.1
 uvicorn~=0.27.1
