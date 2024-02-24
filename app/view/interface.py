@@ -21,9 +21,8 @@ def main():
     st.write('The current test is', text)
 
     # Record audio using the audio_recorder function
-    audio_bytes = audio_recorder(pause_threshold=1, sample_rate=41_000)
+    audio_bytes = audio_recorder(text="", pause_threshold=1, sample_rate=41_000)
 
-    #
     if audio_bytes:
         st.audio(audio_bytes, format="audio/wav")
 

@@ -73,8 +73,8 @@ def correcting_service(media, text):
         predicted = prediction(Model_Training=Model,
                             path_save_model="./saved_model/model_Customize_All_3e3.pth",
                             audio=media, canonical=canonical)
-
-        print(predicted)
+        a, _ = torchaudio.load(media)
+        print(a.shape)
         print(canonical)
         # canonical = " ".join(canonical.replace("$", "").split())
         canonical = " ".join(canonical.split())
@@ -86,7 +86,6 @@ def correcting_service(media, text):
         return result
     except Exception as e:
         print(f"Error at service class: {e}")
-        raise e
 
 def compare_transcript_canonical(canonical, transcript):
     result = []
