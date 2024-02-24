@@ -20,6 +20,51 @@ streamlit run app/view/inteface.py
 ```
 
 ### Model .pth and .env file
-```python
 https://drive.google.com/drive/folders/1jrACQF0nceiSlgTyUmrRJSgX9VC0pd5O?usp=drive_link
-``` 
+
+### Project Structure
+```bash
+├── README.md
+├── app
+│   ├── __pycache__
+│   ├── exceptions.py
+│   ├── routes.py
+│   ├── services.py
+│   └── view
+├── configs
+│   ├── linguistic_param.yaml
+│   ├── phonetic_param.yaml
+│   └── training_param.yaml
+├── core
+│   ├── logs
+│   ├── mylogger.py
+│   └── note.txt
+├── feats
+│   └── phonetic_embedding.py
+├── main.py
+├── model
+│   ├── cnn_stack.py
+│   ├── customize_model.py
+│   ├── edit_distance.py
+│   ├── metric.py
+│   ├── rnn_stack.py
+│   └── vmd_model.py
+├── requirements.txt
+├── saved_model
+│   └── model_Customize_All_3e3.pth
+├── setup
+│   └── setup_app.py
+├── test
+│   ├── test.py
+│   ├── test_inference.py
+│   └── vao-nui_1618754929889.wav
+├── test_main.http
+├── upload
+└── utils
+    ├── char2phome.json
+    ├── constants.py
+    ├── dataset
+    ├── translate.py
+    └── utils.py
+├── .env
+```
