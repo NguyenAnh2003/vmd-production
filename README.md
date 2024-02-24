@@ -20,7 +20,7 @@ streamlit run app/view/inteface.py
 ```
 
 ### Model .pth and .env file
-[link]([doc:linking-to-pages#anchor-links](https://drive.google.com/drive/folders/1jrACQF0nceiSlgTyUmrRJSgX9VC0pd5O?usp=drive_link))
+[link]([doc:linking-to-pages#anchor-links](https://drive.google.com/drive/folders/1jrACQF0nceiSlgTyUmrRJSgX9VC0pd5O?usp=drive_link#anchor-links))
 
 ### Project Structure
 ```bash
