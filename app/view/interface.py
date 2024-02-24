@@ -46,7 +46,7 @@ def main():
             file_data = {"file": (OUT_WAV_FILE,
                                   io.BytesIO(audio_bytes), "audio/wav")}
             text_data = {"text_target": text}
-            response = requests.post("http://localhost:8000/danangvsr/vmd", files=file_data,
+            response = requests.post("http://127.0.0.1:8000/danangvsr/vmd", files=file_data,
                                      data=text_data,)
 
             if response.status_code == 200:
