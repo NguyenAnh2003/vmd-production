@@ -5,8 +5,9 @@ import model.edit_distance as edit_distance
 from model.customize_model import Model
 from utils.dataset.data_loader import Vocab
 from utils.translate import translate, get_vocab_from_file
+import librosa
 
-file_path = "../upload/d.wav"
+file_path = "../upload/10f466f0fff204bc7c735c7269009e7ae1140ed1e6ad8237aec791c4.wav"
 target_text = "vào núi"
 
 my_vocab = get_vocab_from_file("../utils/dataset/lexicon_vmd.txt")
@@ -30,10 +31,12 @@ def prediction(Model_Training, path_save_model, audio, canonical):
     model.to(device)
     model.eval()
 
-    audio_array, _ = torchaudio.load(audio)
+    audio_array, _ = librosa.load(audio)
+    audio_array = torch.tensor(audio_array)
+    # audio_array, _ = torchaudio.load(audio)
     print(f"Before mean: {audio_array.shape}")
     # audio_array = audio_array.reshape(1, audio_array.shape[0]*audio_array.shape[1]).squeeze(0)
-    audio_array = torch.mean(audio_array, dim=0)
+    # audio_array = torch.mean(audio_array, dim=0)
     print(f"After mean: {audio_array.shape}")
     phonetic = phonetic_embedding(audio_array).unsqueeze(0)
 
@@ -67,3 +70,4 @@ if __name__ == "__main__":
                            path_save_model="../saved_model/model_Customize_All_3e3.pth",
                            audio=file_path, canonical=canonical)
     print(predicted)
+    print(target_text)
