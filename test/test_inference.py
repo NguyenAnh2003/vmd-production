@@ -7,8 +7,8 @@ from utils.dataset.data_loader import Vocab
 from utils.translate import translate, get_vocab_from_file
 import librosa
 
-file_path = "../upload/10f466f0fff204bc7c735c7269009e7ae1140ed1e6ad8237aec791c4.wav"
-target_text = "vào núi"
+file_path = "../upload/anhbay.wav"
+target_text = "anh bảy"
 
 my_vocab = get_vocab_from_file("../utils/dataset/lexicon_vmd.txt")
 

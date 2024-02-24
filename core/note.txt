@@ -1,0 +1,13 @@
+Prediction: v aː-1 uz $ n w i-4 Cannonical: v aː-1 uz $ n w i-4 Target: vào núi
+Prediction: v aː-1 uz $ n w i-4 Cannonical: v aː-1 uz $ n w i-4 Target: vào núi
+Prediction: v aː-1 uz $ n w i-4 i-0 Cannonical: v aː-1 uz $ n w i-0 Target: vào nui
+Prediction: v aː-1 uz $ n w i-0 Cannonical: v aː-1 uz $ n w i-0 Target: vào nui
+Prediction: v aː-1 uz $ n w i-0 Cannonical: v aː-1 uz $ n w i-4 Target: vào núi
+Prediction: ɓ aː-0 uz $ v ə-0 iz Cannonical: ɓ aː-0 uz $ v ə-0 iz Target: bao vây
+Prediction: eaː-0 ŋ̟z $ ɓ a-3 iz Cannonical: eaː-0 ŋ̟z $ ɓ a-3 iz Target: anh bảy
+Prediction: t͡ɕ iə-1 uz $ k aː-0 uz Cannonical: t͡ɕ iə-1 uz $ k aː-0 uz Target: chiều cao
+Prediction: n a-5 ŋz $ n ɛ-3 Cannonical: n a-5 ŋz $ n ɛ-3 Target: nặng nẻ
+Prediction: n a-5 ŋz $ n e-1 Cannonical: n a-5 ŋz $ n e-1 Target: nặng nề
+Prediction: n a-4 ŋz $ n ɛ-3 Cannonical: n a-4 ŋz $ n ɛ-3 Target: nắng nẻ
+Prediction: ɓ eaː-4 ŋ̟z $ k ə-0 ŋ̟z Cannonical: ɓ eaː-4 ŋ̟z $ k eaː-0 ŋ̟z Target: bánh canh
+Prediction: ɓ o-1 nz $ ɓ o-1 nz $ ɓ w nz w o-1 nz Cannonical: ɓ w o-1 nz $ ɓ w o-1 nz Target: buồn buồn

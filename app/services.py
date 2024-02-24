@@ -8,6 +8,11 @@ from feats.phonetic_embedding import phonetic_embedding
 from utils.dataset.data_loader import Vocab
 from model.customize_model import Model
 from model.metric import Align
+import librosa
+from core.mylogger import setup_logger
+
+logger = setup_logger(path="./core/logs/prediction.log", location="services")
+logger.getLogger("services")
 
 # service class
 def correcting_service(media, text):
@@ -38,10 +43,11 @@ def correcting_service(media, text):
             model.to(device)
             model.eval()
 
-            audio_array, _ = torchaudio.load(audio)
+            audio_array, _ = librosa.load(audio)
+            audio_array = torch.tensor(audio_array)
             print(audio_array.shape)
             # audio_array = audio_array.reshape(1, audio_array.shape[0]*audio_array.shape[1]).squeeze(0)
-            audio_array = torch.mean(audio_array, dim=0)
+            # audio_array = torch.mean(audio_array, dim=0)
             phonetic = phonetic_embedding(audio_array).unsqueeze(0)
 
             phonetic = phonetic.to(device)
@@ -73,9 +79,12 @@ def correcting_service(media, text):
         predicted = prediction(Model_Training=Model,
                             path_save_model="./saved_model/model_Customize_All_3e3.pth",
                             audio=media, canonical=canonical)
-        a, _ = torchaudio.load(media)
-        print(a.shape)
-        print(canonical)
+
+        logger.log(logger.INFO, f"Prediction: {predicted} Cannonical: {canonical} Target: {text}")
+
+        with open("./core/note.txt", 'a') as file:
+            file.write(f"Prediction: {predicted} Cannonical: {canonical} Target: {text}")
+
         # canonical = " ".join(canonical.replace("$", "").split())
         canonical = " ".join(canonical.split())
         canonical = canonical.split()
