@@ -21,7 +21,7 @@ def main():
     st.write('The current test is', text)
 
     # Record audio using the audio_recorder function
-    audio_bytes = audio_recorder(pause_threshold=1, sample_rate=16_000)
+    audio_bytes = audio_recorder(pause_threshold=1, sample_rate=41_000)
 
     #
     if audio_bytes:
@@ -40,7 +40,7 @@ def main():
             Alternative can use Cloudinary service
             """
             OUT_WAV_FILE = f"upload/recorded_audio{time.time()}.wav" # define absolute path
-            sf.write(OUT_WAV_FILE, audio_array, 16000, 'PCM_16')
+            sf.write(OUT_WAV_FILE, audio_array, 41000, 'PCM_16')
 
             # Use the recorded audio directly for the API request
             file_data = {"file": (OUT_WAV_FILE,
@@ -60,7 +60,6 @@ def main():
         else:
             st.warning("The audio data is empty.")
 
-if __name__ == "__main__":
-    # run interface ui `streamlit run app/view/interface.py `
-    st.set_page_config(page_title="Mispronunciation detection")
-    main()
+# run interface ui `streamlit run app/view/interface.py`
+st.set_page_config(page_title="Mispronunciation detection")
+main()
