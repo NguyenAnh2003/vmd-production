@@ -17,12 +17,12 @@ def correcting_service(media, text):
     """
     try:
         """ get vocab """
-        my_vocab = get_vocab_from_file("../utils/dataset/lexicon_vmd.txt")
+        my_vocab = get_vocab_from_file("./utils/dataset/lexicon_vmd.txt")
 
         """ prediction function """
         def prediction(Model_Training, path_save_model, audio, canonical):
             device = torch.device('cpu')
-            vocab = Vocab("../utils/dataset/phoneme.txt")
+            vocab = Vocab("./utils/dataset/phoneme.txt")
             new_path_save_model = path_save_model
 
             package = torch.load(new_path_save_model, map_location=device)
@@ -39,6 +39,7 @@ def correcting_service(media, text):
             model.eval()
 
             audio_array, _ = torchaudio.load(audio)
+            print(audio_array.shape)
             # audio_array = audio_array.reshape(1, audio_array.shape[0]*audio_array.shape[1]).squeeze(0)
             audio_array = torch.mean(audio_array, dim=0)
             phonetic = phonetic_embedding(audio_array).unsqueeze(0)
@@ -70,9 +71,11 @@ def correcting_service(media, text):
 
         """ prediction call function """
         predicted = prediction(Model_Training=Model,
-                            path_save_model="../saved_model/model_Customize_All_3e3.pth",
+                            path_save_model="./saved_model/model_Customize_All_3e3.pth",
                             audio=media, canonical=canonical)
 
+        print(predicted)
+        print(canonical)
         # canonical = " ".join(canonical.replace("$", "").split())
         canonical = " ".join(canonical.split())
         canonical = canonical.split()
@@ -102,7 +105,6 @@ def displace_word_mispronounce(canonicals, list_compare):
     phoneme_each_word_compare = []
     phoneme_one_word_compare = []
     for i, (can, compare) in enumerate(zip(canonicals, list_compare)):
-
         if can != "$":
             phoneme_one_word_compare.append(compare)
         if can == "$" or i == len(canonicals)-1:
@@ -112,6 +114,6 @@ def displace_word_mispronounce(canonicals, list_compare):
     return list_result
 
 if __name__ == "__main__":
-    media = "/home/vkuai/Downloads/VMD_VLSP/private_test/audio_data/private_test/cao-gay_1618758834960.wav"
-    text = "cao đen gầy" # Cần try catch lại
+    media = "/home/vkuai/nguyenanh/vao-nui3.wav"
+    text = "vào nụi" # Cần try catch lại
     print(correcting_service(media, text))

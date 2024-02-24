@@ -16,7 +16,7 @@ def correction_route(file: bytes = File(...), text_target: str = Form(...)):
     result = correcting_service(file, text_target)
     """ input of correction route is "wav" file and text """
     # return {"target": text, "file": audio}
-    return {"target": result}
+    return result
 
 
 @router.post('/test/upload', status_code=status.HTTP_200_OK)
