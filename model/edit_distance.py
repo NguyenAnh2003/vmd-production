@@ -74,7 +74,7 @@ def process(preds: list, labels: list):
 def preprocess_predict(predict, input_size):
     pred = []
     for i in range(len(predict[:input_size])):
-        if predict[i] == 0 or predict[i] == 1:
+        if predict[i] == 0:# or predict[i] == 1:
             continue
         if i == 0:
             pred.append(predict[i])
