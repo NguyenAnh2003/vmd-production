@@ -16,7 +16,7 @@ pip install -r requirements.txt
 
 ### Run streamlit
 ```python
-streamlit run app/view/inteface.py
+streamlit run app/view/interface.py
 ```
 
 ### Model .pth and .env file
