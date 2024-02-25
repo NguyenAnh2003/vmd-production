@@ -94,7 +94,8 @@ def correcting_service(media, text):
         result = dict(zip(target_list, result_compare))
         return result
     except Exception as e:
-        print(f"Error at service class: {e}")
+        print(f"Error at service class: {e} Type: {type(e)}")
+        logger.log(logger.ERROR, f"{e} Type error: {type(e)}")
 
 def compare_transcript_canonical(canonical, transcript):
     result = []
