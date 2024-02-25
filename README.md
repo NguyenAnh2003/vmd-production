@@ -68,3 +68,8 @@ https://drive.google.com/drive/folders/1jrACQF0nceiSlgTyUmrRJSgX9VC0pd5O?usp=dri
     └── utils.py
 ├── .env
 ```
+
+## Attention when cloned repo 
+1. create logs folder in core
+2. create upload folder in root
+3. create saved_model folder in root
