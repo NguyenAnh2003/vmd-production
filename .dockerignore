@@ -1,0 +1,11 @@
+# idea
+.idea
+
+# upload audio folder
+upload/
+
+# __pycache__
+**/__pycache__/
+
+# logger file
+core/logs/

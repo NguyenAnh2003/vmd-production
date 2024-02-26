@@ -15,10 +15,12 @@ def index():
 
 
 @router.post('/danangvsr/vmd', status_code=status.HTTP_200_OK)
-async def correction_route(file: UploadFile = File(...), text_target: str = Form(...)):
+async def correction_route(file: UploadFile = File(...), text_target: str = Form(...),
+                           username: str = Form(...), country: str = Form(...), age: int = Form(...)):
     file_data = file.file
     print(file_data)
-    result = correcting_service(media=file_data, text=text_target)
+    result = correcting_service(media=file_data, file_name=file.filename, text=text_target,
+                                username=username, country=country, age=age)
     """ input of correction route is "wav" file and text """
     # return {"target": text, "file": audio}
     return result
