@@ -104,15 +104,14 @@ def correcting_service(media, file_name, text, username, country, age):
 
         # save data to csv
         _save_data_csv(file_name=file_name, prediction=predicted, cannonical=target, text_target=text,
-                       result=result, username=username, country=country, age=age)
+                       result=json.dumps(result), username=username, country=country, age=age)
 
         return result
     except Exception as e:
         print(f"Error at service class: {e} Type: {type(e)}")
-        logger.log(logger.ERROR, f"{e} Type error: {type(e)}")
 
 def _save_data_csv(file_name: str, prediction: str, cannonical: str, text_target: str,
-                   result: dict, username: str, country: str, age: int) -> None:
+                   result: json, username: str, country: str, age: int) -> None:
     """ save data sent from UI to csv file
     :param file_name: file name for audio
     :param prediction: string of prediction phoneme
@@ -130,9 +129,6 @@ def _save_data_csv(file_name: str, prediction: str, cannonical: str, text_target
         # write title for each col
         csv_writer.writerow(["audio_name", "prediction", "cannonical", "text_target",
                              "result", "username", "country", "age"])
-
-        # convert dict to str
-        result = json.dumps(result)
 
         # write data
         csv_writer.writerow([file_name, prediction, cannonical, text_target,

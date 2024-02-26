@@ -12,13 +12,13 @@ load_dotenv()
 
 def main():
     # setup interface
-    st.write(""" # Correction VMD
-    Below having a input form and audio recorder, 
-    the input form represent target text and audio record is the data want to detect ur mispronounce word 
-    """)
+    st.title(""" Hello, we need your information to improve our service """)
 
     text = st.text_input('Target text', '')
     st.write('The current test is', text)
+    username = st.text_input("Your name", "")
+    country = st.text_input("Your country", "")
+    age = st.number_input("Your age", min_value=0)
 
     # Record audio using the audio_recorder function
     audio_bytes = audio_recorder(text="", pause_threshold=1, sample_rate=41_000)
@@ -44,9 +44,9 @@ def main():
             # Use the recorded audio directly for the API request
             file_data = {"file": (OUT_WAV_FILE,
                                   io.BytesIO(audio_bytes), "audio/wav")}
-            text_data = {"text_target": text}
-            response = requests.post("http://127.0.0.1:8000/danangvsr/vmd", files=file_data,
-                                     data=text_data,)
+            # packaging data form
+            data_package = {"text_target": text, "username": username, "country": country, "age": age}
+            response = requests.post("http://127.0.0.1:8000/danangvsr/vmd", files=file_data, data=data_package)
 
             if response.status_code == 200:
                 # Parse the JSON response

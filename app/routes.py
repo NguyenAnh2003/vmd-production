@@ -4,10 +4,12 @@ from fastapi import APIRouter, status, \
     UploadFile, Form, File
 from app.services import correcting_service
 import torchaudio
+
 """ modules """
 
 # router define
 router = APIRouter()
+
 
 @router.get('/', status_code=status.HTTP_200_OK)
 def index():
@@ -15,11 +17,11 @@ def index():
 
 
 @router.post('/danangvsr/vmd', status_code=status.HTTP_200_OK)
-async def correction_route(file: UploadFile = File(...), text_target: str = Form(...),
-                           username: str = Form(...), country: str = Form(...), age: int = Form(...)):
-    file_data = file.file
-    print(file_data)
-    result = correcting_service(media=file_data, file_name=file.filename, text=text_target,
+def correction_route(file: UploadFile = File(...), text_target: str = Form(...),
+                     username: str = Form(...), country: str = Form(...), age: int = Form(...)):
+    file_data = file.file # file content
+    print(f"Filename: {file.filename} Username: {username} Country: {country} Age: {age}")
+    result = correcting_service(media=file_data, file_name=str(file.filename), text=text_target,
                                 username=username, country=country, age=age)
     """ input of correction route is "wav" file and text """
     # return {"target": text, "file": audio}
