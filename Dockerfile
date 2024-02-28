@@ -18,9 +18,3 @@ EXPOSE 8000
 # running docker container
 # running server - using CMD not RUN when we had instance of image
 CMD ["uvicorn", "main:app", "--host", "127.0.0.1", "--port", "8000"]
-
-# docker build 
-# docker build -t vmd-api .
-
-# docker run
-# docker run -p 8080:80 vmd-api
