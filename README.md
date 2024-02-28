@@ -70,13 +70,14 @@ docker run -p 8000:8000 vmd-api
 │   └── vao-nui_1618754929889.wav
 ├── test_main.http
 ├── upload
+├── .env
+├── meta_data.csv
 └── utils
     ├── char2phome.json
     ├── constants.py
     ├── dataset
     ├── translate.py
     └── utils.py
-├── .env
 ```
 
 ## Attention when cloned repo 

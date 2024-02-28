@@ -1,7 +1,6 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from app.routes import router
-""" libs """
 
 def setup_app() -> FastAPI:
     """ setup app including CORS config and router
