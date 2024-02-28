@@ -1,22 +1,22 @@
 # 
-FROM python:3.10
-
-
-# adding files to image
-COPY . .
+FROM python:3.10-slim
 
 # setup working dir
-WORKDIR /
+WORKDIR /vmd-app
+
+# copy all files to vmd-app folder
+# copy . . if using . /vmd-app it would be /vmd-app/vmd-app (not fk good)
+COPY . .
 
 # install requirements.txt
+# copy all files to /vmd-app then should setup working dir
 RUN pip install -r requirements.txt
 
-# make port 80 vailable ?
+# set port for container
 EXPOSE 80
 
-
 # running docker container
-# running server
+# running server - using CMD not RUN when we had instance of image
 CMD ["uvicorn", "main:app", "--host", "127.0.0.1", "--port", "8000"]
 
 # docker build 
