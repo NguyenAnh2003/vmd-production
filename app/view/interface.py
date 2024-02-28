@@ -10,6 +10,14 @@ import os
 
 load_dotenv()
 
+def colorize(value):
+    if value == 1:
+        return "color: green"
+    elif value == 0:
+        return "color: red"
+    else:
+        return ""
+
 def main():
     # setup interface
     st.title(""" Hello, we need your information to improve our service """)
@@ -50,10 +58,16 @@ def main():
 
             if response.status_code == 200:
                 # Parse the JSON response
-                data = response.json() # casts to JSON
+                result = response.json() # casts to JSON
+
+                result_html = ""
+                for key, value in result.items():
+                    result_html += f"<p style='{colorize(value)}; margin-left: 5px; font-size: 25px'>{key}</p>"
+                st.markdown(f"<div style='display: flex; flex-direction: row; gap: 0;'>{result_html}</div>",
+                            unsafe_allow_html=True)
 
                 # Display the data in your Streamlit app
-                st.write("API Response:", data, response.status_code) # including status code and data
+                # st.write("API Response:", data, response.status_code) # including status code and data
             else:
                 st.error(f"Failed to fetch data. Status code: {response.status_code}")
         else:
