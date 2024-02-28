@@ -13,7 +13,7 @@ COPY . .
 RUN pip install -r requirements.txt
 
 # set port for container
-EXPOSE 80
+EXPOSE 8000
 
 # running docker container
 # running server - using CMD not RUN when we had instance of image

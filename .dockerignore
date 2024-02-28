@@ -12,3 +12,12 @@ upload/
 
 # logger file
 core/logs/
+
+# logs file
+**/*.log
+
+# wav test file
+**/*.wav
+
+# flac test file
+**/*.flac

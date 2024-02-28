@@ -22,6 +22,16 @@ streamlit run app/view/interface.py
 ### Model .pth and .env file
 https://drive.google.com/drive/folders/1jrACQF0nceiSlgTyUmrRJSgX9VC0pd5O?usp=drive_link
 
+### Docker build
+```python
+docker build -t vmd-api
+```
+
+### Docker run container
+```python
+docker run -p 8000:8000 vmd-api
+```
+
 ### Project Structure
 ```bash
 ├── README.md
