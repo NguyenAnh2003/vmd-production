@@ -15,9 +15,6 @@ RUN pip install -r requirements.txt
 # copy . . if using . /vmd-app it would be /vmd-app/vmd-app (not fk good)
 COPY . .
 
-# set port for container
-EXPOSE 8000
-
 # running docker container
 # running server - using CMD not RUN when we had instance of image
 CMD ["uvicorn", "main:app", "--host", "127.0.0.1", "--port", "8000"]
