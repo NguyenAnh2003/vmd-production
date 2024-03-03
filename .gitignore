@@ -159,8 +159,8 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
-# upload audio folder
-upload/
+# wav file
+**/*.wav
 
 #
 .devcontainer
