@@ -49,11 +49,13 @@ def main():
             OUT_WAV_FILE = f"upload/recorded_audio{time.time()}.wav" # define absolute path
             sf.write(OUT_WAV_FILE, audio_array, 41000, 'PCM_16')
 
-            st.write(OUT_WAV_FILE, text, username, country, age)
-
             # Use the recorded audio directly for the API request
             file_data = {"file": (OUT_WAV_FILE,
                                   io.BytesIO(audio_bytes), "audio/wav")}
+            
+            st.write(OUT_WAV_FILE, text, username, country, age)
+            st.write(file_data)
+            
             # packaging data form
             data_package = {"text_target": text, "username": username, "country": country, "age": age}
             response = requests.post("http://127.0.0.1:8000/danangvsr/vmd", files=file_data, data=data_package)
