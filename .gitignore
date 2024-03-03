@@ -162,6 +162,9 @@ cython_debug/
 # upload audio folder
 upload/
 
+#
+.devcontainer
+
 # saved model
 saved_model/model_Customize_All_3e3.pth
 
