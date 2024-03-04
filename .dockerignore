@@ -1,6 +1,9 @@
 # idea
 .idea/
 
+# devcontainer
+.devcontainer/
+
 # venv
 venv/
 
