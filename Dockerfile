@@ -1,4 +1,4 @@
- FROM python:3.11-slim
+FROM python:3.11-slim
 
 # setup working dir
 WORKDIR /vmd-app
