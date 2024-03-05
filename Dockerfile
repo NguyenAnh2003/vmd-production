@@ -1,7 +1,7 @@
 FROM python:3.11-slim
 
 # setup working dir
-WORKDIR /vmd-app
+WORKDIR /vmd
 
 # caching req file when having changes
 # COPY requirements.txt .
@@ -16,4 +16,4 @@ RUN pip install -r requirements.txt
 
 # running docker container
 # running server - using CMD not RUN when we had instance of image
-CMD ["uvicorn", "main:app", "--host", "127.0.0.1", "--port", "8000"]
+CMD ["uvicorn", "vmd.main:app", "--host", "0.0.0.0", "--port", "8000"]

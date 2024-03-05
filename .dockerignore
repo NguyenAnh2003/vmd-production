@@ -13,11 +13,11 @@ upload/
 # __pycache__
 **/__pycache__/
 
-# logger file
-core/logs/
-
-# logs file
-**/*.log
+## logger file
+#core/logs/
+#
+## logs file
+#**/*.log
 
 # wav test file
 **/*.wav
