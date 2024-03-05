@@ -15,7 +15,7 @@ upload/
 
 ## logger file
 #core/logs/
-#
+
 ## logs file
 #**/*.log
 

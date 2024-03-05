@@ -172,4 +172,4 @@ saved_model/model_Customize_All_3e3.pth
 **/__pycache__/
 
 # storage data csv
-app/storage/meta_data.csv
+meta_data.csv

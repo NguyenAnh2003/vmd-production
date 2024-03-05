@@ -11,3 +11,4 @@ Prediction: n a-5 ŋz $ n e-1 Cannonical: n a-5 ŋz $ n e-1 Target: nặng nề
 Prediction: n a-4 ŋz $ n ɛ-3 Cannonical: n a-4 ŋz $ n ɛ-3 Target: nắng nẻ
 Prediction: ɓ eaː-4 ŋ̟z $ k ə-0 ŋ̟z Cannonical: ɓ eaː-4 ŋ̟z $ k eaː-0 ŋ̟z Target: bánh canh
 Prediction: ɓ o-1 nz $ ɓ o-1 nz $ ɓ w nz w o-1 nz Cannonical: ɓ w o-1 nz $ ɓ w o-1 nz Target: buồn buồn
+Prediction: eaː-0 ŋ̟z $ ɓ a-3 iz Cannonical: eaː-0 ŋ̟z $ ɓ a-3 iz Target: anh bảyPrediction: eaː-0 ŋ̟z $ ɓ iz Cannonical: eaː-0 ŋ̟z $ ɓ u-4 nz Target: anh bún
