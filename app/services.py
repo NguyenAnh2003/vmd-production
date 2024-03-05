@@ -123,7 +123,7 @@ def _save_data_csv(file_name: str, prediction: str, cannonical: str, text_target
     :return:
     """
     try:
-        csv_file = open("./storage/meta_data.csv", "w")
+        csv_file = open("meta_data.csv", "w")
         csv_writer = csv.writer(csv_file)
 
         # write title for each col
