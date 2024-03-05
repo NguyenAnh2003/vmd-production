@@ -1,18 +1,20 @@
-FROM python:3.11-slim
-
-# setup working dir
-WORKDIR /vmd
+FROM python:3.11-slim-bookworm
 
 # caching req file when having changes
 COPY requirements.txt .
 
+# setup working dir
+WORKDIR /vmd
+
 # install requirements.txt
-# copy all files to /vmd-app then should setup working dir
+# copy all files to /vmd then should setup working dir
 RUN pip install -r requirements.txt
 
 # copy all files to vmd-app folder
-# copy . . if using . /vmd-app it would be /vmd-app/vmd-app (not fk good)
+# copy . . if using . /vmd it would be /vmd/vmd (not fk good)
 COPY . .
+
+# build multi-stages
 
 
 # running docker container

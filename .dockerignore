@@ -1,14 +1,23 @@
 # idea
 .idea/
 
+# .git
+.git
+
 # devcontainer
 .devcontainer/
 
 # venv
 venv/
 
+# app/view
+app/view/
+
 # upload audio folder
 upload/
+
+# test folder
+test
 
 # __pycache__
 **/__pycache__/
@@ -24,3 +33,15 @@ upload/
 
 # flac test file
 **/*.flac
+
+# README file
+README.md
+
+# 
+test_main.http
+
+# gitignore
+.gitignore
+
+# prevent storing temporary container
+/tmp/*
