@@ -33,24 +33,24 @@ def main():
     # setup interface
     st.title(""" Data collection """)
 
-    text = st.text_input('Target text', '')
-    st.write('The current test is', text)
-    username = st.text_input("Your name", "")
-    country = st.text_input("Your Residence (E.g: Đà Nằng or ĐN)", "")
-    age = st.number_input("Your age", min_value=0)
+    text = st.text_input('Văn bản mục tiêu (tối đa 2 từ E.g: vào nụi)', '')
+    st.write('Văn bản hiện tại', text)
+    username = st.text_input("Tên của bạn", "")
+    country = st.text_input("Quê quán (E.g: Đà Nằng or ĐN)", "")
+    age = st.number_input("Tuổi", min_value=0)
 
     # Record audio using the audio_recorder function
     col1, col2, _, _ = st.columns(4)
     with col1:
         audio_bytes = audio_recorder(text="", pause_threshold=1, sample_rate=44100, energy_threshold=0.)
     with col2:
-        if st.button("Reload"):
+        if st.button("Tải lại"):
             audio_bytes = []
 
     if audio_bytes:
         st.audio(audio_bytes, format="audio/wav")
 
-    if st.button("Save data"):
+    if st.button("Lưu dữ liệu"):
         # Convert audio_bytes to a NumPy array
         audio_array = np.frombuffer(audio_bytes, dtype=np.int16)
 
@@ -79,7 +79,7 @@ def main():
                 print(f"DB: {response}")
 
                 if response:
-                    st.write("THANKS = ]]]")
+                    st.write("Thanks")
 
                 else:
                     st.error(f"Failed to fetch data")

@@ -14,6 +14,9 @@ RUN pip install -r requirements.txt
 # copy . . if using . /vmd it would be /vmd/vmd (not fk good)
 COPY . .
 
+# expose port
+EXPOSE 8000
+
 # build multi-stages
 
 
