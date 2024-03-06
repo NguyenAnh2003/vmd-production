@@ -6,11 +6,10 @@ WORKDIR /vmd
 # caching req file when having changes
 COPY requirements.txt .
 
-# virtualenv python init venv
-RUN python -m venv venv
-
-# install requirements.txt
-RUN . venv/bin/activate && pip install -r requirements.txt
+# init venv & install requirements.txt
+RUN python -m venv venv && \
+    . venv/bin/activate && \ 
+    pip install -r requirements.txt
 
 # copy all files to vmd-app folder
 # copy . . if using . /vmd it would be /vmd/vmd (not fk good)
