@@ -13,6 +13,7 @@ RUN apt-get update && \
     . venv/bin/activate && \
     pip install --upgrade pip && \
     pip install -r requirements.txt && \
+    # remove package info cache
     rm -rf /var/lib/apt/lists/*
 
 # copy all files to vmd-app folder
