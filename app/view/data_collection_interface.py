@@ -40,7 +40,12 @@ def main():
     age = st.number_input("Your age", min_value=0)
 
     # Record audio using the audio_recorder function
-    audio_bytes = audio_recorder(text="", pause_threshold=1, sample_rate=44_100)
+    col1, col2, _, _ = st.columns(4)
+    with col1:
+        audio_bytes = audio_recorder(text="", pause_threshold=1, sample_rate=44100, energy_threshold=0.)
+    with col2:
+        if st.button("Reload"):
+            audio_bytes = []
 
     if audio_bytes:
         st.audio(audio_bytes, format="audio/wav")
@@ -64,8 +69,8 @@ def main():
             bucket_res = DB.storage.from_("vmd-bucket").upload(file=OUT_WAV_FILE, path=f"{OUT_WAV_FILE}",
                                                   file_options={"content-type": "audio/wav"})
             print(f"Bucket: {bucket_res}")
-            # get audio_url
-            if bucket_res:
+            if OUT_WAV_FILE:
+                # get audio_url
                 wav_url = DB.storage.from_("vmd-bucket").get_public_url(path=f"{OUT_WAV_FILE}")
                 print(f"Wav url: {wav_url}")
                 response = DB.table("vmd-data").insert({"audio_url": wav_url, "text_target": text,
