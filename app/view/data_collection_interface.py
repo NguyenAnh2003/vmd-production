@@ -36,7 +36,7 @@ def main():
     text = st.text_input('Target text', '')
     st.write('The current test is', text)
     username = st.text_input("Your name", "")
-    country = st.text_input("Your country", "")
+    country = st.text_input("Your Location", "")
     age = st.number_input("Your age", min_value=0)
 
     # Record audio using the audio_recorder function
