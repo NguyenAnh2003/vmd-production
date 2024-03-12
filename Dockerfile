@@ -1,13 +1,15 @@
-FROM python:3.11-slim-bookworm
+# using pytorch base image CUDA 11.8 driver
+FROM pytorch/pytorch:2.1.2-cuda11.8-cudnn8-runtime
 
 # setup working dir
 WORKDIR /vmd
 
+# cachine requirement
 COPY requirements.txt .
 
 # init venv & install requirements.txt
 # avoid caching 
-RUN apt-get update && \ 
+RUN apt-get install && apt-get update && \ 
     apt-get -y update && \
     python -m venv venv && \
     . venv/bin/activate && \

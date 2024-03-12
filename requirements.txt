@@ -1,7 +1,7 @@
 # docker build
 
-torch~=2.1.2
-torchaudio~=2.1.2
+# torch~=2.1.2
+# torchaudio~=2.1.2
 
 transformers~=4.38.1
 pydantic~=2.5.3
@@ -13,10 +13,10 @@ uvicorn~=0.27.1
 librosa~=0.10.1
 
 # 
-supabase~=2.4.0
-requests~=2.31.0
-soundfile~=0.12.1
+# supabase~=2.4.0
+# requests~=2.31.0
+# soundfile~=0.12.1
 
 # UI
-streamlit~=1.30.0
-audio-recorder-streamlit~=0.0.8
+# streamlit~=1.30.0
+# audio-recorder-streamlit~=0.0.8
