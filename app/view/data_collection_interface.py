@@ -116,7 +116,7 @@ def main():
         st.markdown(f"<p><strong>Bước 2</strong> Điền đẩy đủ thông tin</p>"
                     f"<p><strong>Bước 3</strong> Bấm vào Micro để thu âm giúp mình</p>"
                     f"<strong><span style='color: red'>Lưu ý bạn tạm nghỉ khoảng 1s rồi phát âm nhé</span></strong>"
-                    f"<p><strong>Bước 4</strong> Ngoài việc phát âm đúng từ hiện tại </br> làm ơn phát âm biến thể của từ đó</p>", unsafe_allow_html=True)
+                    f"<p><strong>Bước 4</strong> Ngoài việc phát âm đúng từ hiện tại </br> bạn vui lòng phát âm biến thể của từ đó</p>", unsafe_allow_html=True)
         st.write("")
 
 if __name__ == "__main__":
