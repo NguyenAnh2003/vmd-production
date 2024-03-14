@@ -20,3 +20,11 @@ librosa~=0.10.1
 # UI
 # streamlit~=1.30.0
 # audio-recorder-streamlit~=0.0.8
+
+streamlit~=1.31.1
+sounddevice~=0.4.6
+soundfile~=0.12.1
+requests~=2.31.0
+supabase~=2.4.0
+scipy~=1.11.2
+torch~=2.2.1

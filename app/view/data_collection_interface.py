@@ -8,7 +8,9 @@ import time
 from dotenv import load_dotenv
 import supabase
 from supabase import create_client, Client
+import scipy.io.wavfile as wavfile
 import os
+import wave
 
 # init DB
 url: str = "https://cceebjjirmrvyhqecubk.supabase.co"
@@ -67,6 +69,7 @@ def main():
         if st.button("Lưu dữ liệu"):
             if username != '' and text != '' and age != 0 and country != '':
                 # Convert audio_bytes to a NumPy array
+                print(audio_bytes)
                 audio_array = np.frombuffer(audio_bytes, dtype=np.int16)
 
                 if len(audio_array) > 0:
@@ -77,27 +80,29 @@ def main():
                     Read all byte in buffer after record and save the file
                     Alternative can use Cloudinary service
                     """
-                    OUT_WAV_FILE = f"upload/recorded_audio{time.time()}.wav"  # define absolute path
-                    sf.write(OUT_WAV_FILE, audio_array, 44100, 'PCM_24')
+                    wavfile.write(f"upload/recorded_audio{time.time()}.wav", 44100, audio_array)
+
+                    # OUT_WAV_FILE = f"upload/recorded_audio{time.time()}.wav"  # define absolute path
+                    # sf.write(OUT_WAV_FILE, audio_array, 44100, 'PCM_24')
 
                     # send audio file
-                    bucket_res = DB.storage.from_("vmd-bucket").upload(file=OUT_WAV_FILE, path=f"{OUT_WAV_FILE}",
-                                                                       file_options={"content-type": "audio/wav"})
-                    print(f"Bucket: {bucket_res}")
-                    if OUT_WAV_FILE:
-                        # get audio_url
-                        wav_url = DB.storage.from_("vmd-bucket").get_public_url(path=f"{OUT_WAV_FILE}")
-                        print(f"Wav url: {wav_url}")
-                        response = DB.table("vmd-data").insert({"audio_url": wav_url, "text_target": text,
-                                                                "username": username, "country": country,
-                                                                "age": age}).execute()
-                        print(f"DB: {response}")
-
-                        if response:
-                            st.write("Thanks")
-
-                        else:
-                            st.error(f"Failed to fetch data")
+                    # bucket_res = DB.storage.from_("vmd-bucket").upload(file=OUT_WAV_FILE, path=f"{OUT_WAV_FILE}",
+                    #                                                    file_options={"content-type": "audio/wav"})
+                    # print(f"Bucket: {bucket_res}")
+                    # if OUT_WAV_FILE:
+                    #     # get audio_url
+                    #     wav_url = DB.storage.from_("vmd-bucket").get_public_url(path=f"{OUT_WAV_FILE}")
+                    #     print(f"Wav url: {wav_url}")
+                    #     response = DB.table("vmd-data").insert({"audio_url": wav_url, "text_target": text,
+                    #                                             "username": username, "country": country,
+                    #                                             "age": age}).execute()
+                    #     print(f"DB: {response}")
+                    #
+                    #     if response:
+                    #         st.write("Thanks")
+                    #
+                    #     else:
+                    #         st.error(f"Failed to fetch data")
                 else:
                     st.warning("The audio data is empty.")
             else:
