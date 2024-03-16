@@ -1,5 +1,4 @@
 import streamlit as st
-from audio_recorder_streamlit import audio_recorder
 import io
 import numpy as np
 import soundfile as sf
@@ -7,6 +6,7 @@ import requests
 import time
 from dotenv import load_dotenv
 import supabase
+from st_audiorec import st_audiorec
 from supabase import create_client, Client
 import scipy.io.wavfile as wavfile
 import os
@@ -54,23 +54,21 @@ def main():
         age = st.number_input("Tuổi", min_value=0)
 
         # Record audio using the audio_recorder function
-        col1, col2, _, _ = st.columns([4, 2, 1, 1])
-        with col1:
-            st.markdown(f"<p style='font-size: 15px; color: red'>Phát âm theo từ "
-                        f"<strong>{text}</strong></p>", unsafe_allow_html=True)
-            audio_bytes = audio_recorder(text="", pause_threshold=1, sample_rate=44100, energy_threshold=0.)
-        with col2:
-            if st.button("Tải lại"):
-                audio_bytes = []
+        st.markdown(f"<p style='font-size: 15px; color: red'>Phát âm theo từ "
+                    f"<strong>{text}</strong></p>", unsafe_allow_html=True)
 
-        if audio_bytes:
-            st.audio(audio_bytes, format="audio/wav")
+        # RECORD AUDIO WITH STREAMLIT-AUDIOREC
+        wav_audio_data = st_audiorec()
 
-        if st.button("Lưu dữ liệu"):
+        # audio_bytes = audio_recorder(text="", pause_threshold=1, sample_rate=44100, energy_threshold=0.)
+
+        # if audio_bytes:
+        #     st.audio(audio_bytes, format="audio/wav")
+
+        if st.button("Lưu dữ liệu") and wav_audio_data:
             if username != '' and text != '' and age != 0 and country != '':
                 # Convert audio_bytes to a NumPy array
-                print(audio_bytes)
-                audio_array = np.frombuffer(audio_bytes, dtype=np.int16)
+                audio_array = np.frombuffer(wav_audio_data, dtype=np.int32)
 
                 if len(audio_array) > 0:
                     # Save the audio to a file using soundfile library
@@ -82,27 +80,27 @@ def main():
                     """
                     wavfile.write(f"upload/recorded_audio{time.time()}.wav", 44100, audio_array)
 
-                    # OUT_WAV_FILE = f"upload/recorded_audio{time.time()}.wav"  # define absolute path
-                    # sf.write(OUT_WAV_FILE, audio_array, 44100, 'PCM_24')
+                    OUT_WAV_FILE = f"upload/recorded_audio{time.time()}.wav"  # define absolute path
+                    sf.write(OUT_WAV_FILE, audio_array, 44100)
 
                     # send audio file
-                    # bucket_res = DB.storage.from_("vmd-bucket").upload(file=OUT_WAV_FILE, path=f"{OUT_WAV_FILE}",
-                    #                                                    file_options={"content-type": "audio/wav"})
-                    # print(f"Bucket: {bucket_res}")
-                    # if OUT_WAV_FILE:
-                    #     # get audio_url
-                    #     wav_url = DB.storage.from_("vmd-bucket").get_public_url(path=f"{OUT_WAV_FILE}")
-                    #     print(f"Wav url: {wav_url}")
-                    #     response = DB.table("vmd-data").insert({"audio_url": wav_url, "text_target": text,
-                    #                                             "username": username, "country": country,
-                    #                                             "age": age}).execute()
-                    #     print(f"DB: {response}")
+                    bucket_res = DB.storage.from_("vmd-bucket").upload(file=OUT_WAV_FILE, path=f"{OUT_WAV_FILE}",
+                                                                       file_options={"content-type": "audio/wav"})
+                    print(f"Bucket: {bucket_res}")
+                    if OUT_WAV_FILE:
+                        # get audio_url
+                        wav_url = DB.storage.from_("vmd-bucket").get_public_url(path=f"{OUT_WAV_FILE}")
+                        print(f"Wav url: {wav_url}")
+                        response = DB.table("vmd-data").insert({"audio_url": wav_url, "text_target": text,
+                                                                "username": username, "country": country,
+                                                                "age": age}).execute()
+                        print(f"DB: {response}")
                     #
-                    #     if response:
-                    #         st.write("Thanks")
+                        if response:
+                            st.write("Thanks")
                     #
-                    #     else:
-                    #         st.error(f"Failed to fetch data")
+                        else:
+                            st.error(f"Failed to fetch data")
                 else:
                     st.warning("The audio data is empty.")
             else:
