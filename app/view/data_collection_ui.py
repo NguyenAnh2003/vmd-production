@@ -9,25 +9,13 @@ import scipy.io.wavfile as wavfile
 from pathlib import Path
 import sys
 
-sys.path.append(str(Path(__file__).resolve().parent.parent))
-
 # init DB
 url: str = "https://cceebjjirmrvyhqecubk.supabase.co"
 key: str = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNjZWViamppcm1ydnlocWVjdWJrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDk2NDMxMTMsImV4cCI6MjAyNTIxOTExM30.dh4WE15QV41Ch7GZlpNyELOa6ZZiapV9RsYHuHi6ZQ8"
 DB: Client = create_client(supabase_url=url, supabase_key=key)
 
-print(f"Supabase: {DB}")
-
 # demo app using streamlit integrating model prediction -> return mapped result
 # call api to save data recorded and call model api to predict
-
-dict_path = "dictionary_ui.txt"
-
-with open(dict_path, 'r', encoding='utf-8') as file:
-    for line in file:
-        print(line)
-
-pronounce_words = ["vào nụi", "bao vây", "anh bảy"]
 
 def colorize(value):
     if value == 1:
@@ -37,30 +25,49 @@ def colorize(value):
     else:
         return ""
 
+def _get_phonemes(file_path):
+    list_of_phonemes = []
+    with open(file_path, "r", encoding="utf-8") as file:
+        for line in file:
+            list_of_phonemes.append(line)
+
+    return list_of_phonemes
 
 def main():
+    # sample for select box
+    list_phonemes = _get_phonemes("phoneme_dict.txt")
     cl1, _, cl3  = st.columns([3, 1, 2])
     with cl1:
         # setup interface
         st.markdown("<h1>Thu thập dữ liệu</h1>", unsafe_allow_html=True)
         st.markdown("<span style='color: red ;font-size: 20px'>Bình tĩnh đọc hướng dẫn sử dụng đã</span>", unsafe_allow_html=True)
 
+        scol1, scol2 = st.columns([3, 2])
 
-        # toggle box
-        text = st.selectbox(
-            "Từ bạn muốn phát âm",
-            pronounce_words,
-            index=0,
-            placeholder="Select contact method...",
-        )
+        with scol1:
+            # toggle box
+            suggestion = st.selectbox(
+                "Gợi ý tự bạn muốn phát âm",
+                list_phonemes,
+                index=0,
+                placeholder="Select contact method...",
+            )
+        with scol2:
+            selected_suggetion = suggestion.split("-")
+            if suggestion:
+                target_text = st.text_input("Từ bạn muốn phát âm", selected_suggetion[0])
+            else:
+                target_text = st.text_input('(tối đa 2 từ E.g: vào nụi)', '')
+
+
         # text = st.text_input('(tối đa 2 từ E.g: vào nụi)', '')
         username = st.text_input("Tên của bạn", "")
         country = st.text_input("Quê quán (E.g: Đà Nằng or ĐN)", "")
         age = st.number_input("Tuổi", min_value=0)
 
         # Record audio using the audio_recorder function
-        st.markdown(f"<p style='font-size: 15px; color: red'>Phát âm theo từ "
-                    f"<strong>{text}</strong></p>", unsafe_allow_html=True)
+        st.markdown(f"<p style='font-size: 15px; color: 'black'>Từ bạn muốn phát âm "
+                    f"<span style='font-size: 20px; color: 'red'><strong>{target_text}</strong></span></p>", unsafe_allow_html=True)
 
         # RECORD AUDIO WITH STREAMLIT-AUDIOREC
         wav_audio_data = st_audiorec()
@@ -71,7 +78,7 @@ def main():
         #     st.audio(audio_bytes, format="audio/wav")
 
         if st.button("Lưu dữ liệu") and wav_audio_data:
-            if username != '' and text != '' and age != 0 and country != '':
+            if username != '' and target_text != '' and age != 0 and country != '':
                 # Convert audio_bytes to a NumPy array
                 audio_array = np.frombuffer(wav_audio_data, dtype=np.int32)
 
@@ -96,7 +103,7 @@ def main():
                         # get audio_url
                         wav_url = DB.storage.from_("vmd-bucket").get_public_url(path=f"{OUT_WAV_FILE}")
                         print(f"Wav url: {wav_url}")
-                        response = DB.table("vmd-data").insert({"audio_url": wav_url, "text_target": text,
+                        response = DB.table("vmd-data").insert({"audio_url": wav_url, "text_target": target_text.strip(),
                                                                 "username": username, "country": country,
                                                                 "age": age}).execute()
                         print(f"DB: {response}")

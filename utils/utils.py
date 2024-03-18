@@ -8,3 +8,9 @@ def load_config(path: str):
     config_path = args.conf
     param = yaml.safe_load(open(config_path, 'r', encoding="utf8"))
     return param
+
+
+
+
+if __name__ == "__main__":
+    pass
