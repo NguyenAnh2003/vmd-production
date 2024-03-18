@@ -85,11 +85,6 @@ def main():
                 if len(audio_array) > 0:
                     # Save the audio to a file using soundfile library
                     # You can change the filename and format accordingly
-                    """
-                    define temporarily upload dir (saving file from buffer)
-                    Read all byte in buffer after record and save the file
-                    Alternative can use Cloudinary service
-                    """
                     wavfile.write(f"upload/recorded_audio{time.time()}.wav", 44100, audio_array)
 
                     OUT_WAV_FILE = f"upload/recorded_audio{time.time()}.wav"  # define absolute path
@@ -103,6 +98,7 @@ def main():
                         # get audio_url
                         wav_url = DB.storage.from_("vmd-bucket").get_public_url(path=f"{OUT_WAV_FILE}")
                         print(f"Wav url: {wav_url}")
+                        st.write("Đang chờ xử lý")
                         response = DB.table("vmd-data").insert({"audio_url": wav_url, "text_target": target_text.strip(),
                                                                 "username": username, "country": country,
                                                                 "age": age}).execute()
