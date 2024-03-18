@@ -121,7 +121,7 @@ def main():
                     f"<strong>(ghi xong nhấn enter giúp mình)</strong></p>", unsafe_allow_html=True)
 
         st.markdown(f"<p><strong>Bước 2</strong> Điền đẩy đủ thông tin</p>"
-                    f"<p><strong>Bước 3</strong> Bấm vào Micro để thu âm giúp mình</p>"
+                    f"<p><strong>Bước 3</strong> Bấm vào Start Recording để thu âm giúp mình</p>"
                     f"<p><strong>Bước 4</strong> Ngoài việc phát âm đúng từ hiện tại </br> bạn vui lòng phát âm từ sai của từ đó giúp mình nhé </br>"
                     f"(Eg: vào nụi -> vào núi)</p>"
                     f"<strong><span style='color: red'>Lưu ý đợi thanh màu đỏ hiện lên rồi phát âm nhé</span></strong>", unsafe_allow_html=True)
