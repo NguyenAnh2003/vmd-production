@@ -1,16 +1,15 @@
 import streamlit as st
-import io
 import numpy as np
 import soundfile as sf
-import requests
 import time
-from dotenv import load_dotenv
 import supabase
 from st_audiorec import st_audiorec
 from supabase import create_client, Client
 import scipy.io.wavfile as wavfile
-import os
-import wave
+from pathlib import Path
+import sys
+
+sys.path.append(str(Path(__file__).resolve().parent.parent))
 
 # init DB
 url: str = "https://cceebjjirmrvyhqecubk.supabase.co"
@@ -21,6 +20,12 @@ print(f"Supabase: {DB}")
 
 # demo app using streamlit integrating model prediction -> return mapped result
 # call api to save data recorded and call model api to predict
+
+dict_path = "dictionary_ui.txt"
+
+with open(dict_path, 'r', encoding='utf-8') as file:
+    for line in file:
+        print(line)
 
 pronounce_words = ["vào nụi", "bao vây", "anh bảy"]
 
@@ -118,6 +123,6 @@ def main():
         st.write("")
 
 if __name__ == "__main__":
-    # run interface ui `streamlit run app/view/data_collection_interface.py`
+    # run interface ui `streamlit run app/view/data_collection_ui.py`
     st.set_page_config(page_title="Mispronunciation detection", layout="wide")
     main()
