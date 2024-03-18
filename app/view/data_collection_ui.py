@@ -107,10 +107,9 @@ def main():
                                                                 "username": username, "country": country,
                                                                 "age": age}).execute()
                         print(f"DB: {response}")
-                    #
                         if response:
-                            st.write("Thanks")
-                    #
+                            st.markdown(f"<div style='color: red; font-size: 25px'>Cảm ơn bạn đã giành thời gian</div>",
+                                        unsafe_allow_html=True)
                         else:
                             st.error(f"Failed to fetch data")
                 else:
@@ -121,13 +120,16 @@ def main():
     with cl3:
         st.markdown(f"<h2>Hướng dẫn sử dụng</h2>", unsafe_allow_html=True)
 
-        st.markdown(f"<p><strong>Bước 1</strong> Chọn từ bạn muốn ghi âm </p>", unsafe_allow_html=True)
+        st.markdown(f"<p><strong>Bước 1</strong> Chọn từ bạn muốn ghi âm </br>"
+                    f"Bạn có thể chọn từ trong hộp gợi ý hoặc từ ghi </br> "
+                    f"<strong>(ghi xong nhấn enter giúp mình)</strong></p>", unsafe_allow_html=True)
 
         st.markdown(f"<p><strong>Bước 2</strong> Điền đẩy đủ thông tin</p>"
                     f"<p><strong>Bước 3</strong> Bấm vào Micro để thu âm giúp mình</p>"
-                    f"<strong><span style='color: red'>Lưu ý bạn tạm nghỉ khoảng 1s rồi phát âm nhé</span></strong>"
-                    f"<p><strong>Bước 4</strong> Ngoài việc phát âm đúng từ hiện tại </br> bạn vui lòng phát âm biến thể của từ đó</p>", unsafe_allow_html=True)
-        st.write("")
+                    f"<p><strong>Bước 4</strong> Ngoài việc phát âm đúng từ hiện tại </br> bạn vui lòng phát âm từ sai của từ đó giúp mình nhé </br>"
+                    f"(Eg: vào nụi -> vào núi)</p>"
+                    f"<strong><span style='color: red'>Lưu ý đợi thanh màu đỏ hiện lên rồi phát âm nhé</span></strong>", unsafe_allow_html=True)
+        st.image("visualize.png", width=300)
 
 if __name__ == "__main__":
     # run interface ui `streamlit run app/view/data_collection_ui.py`
