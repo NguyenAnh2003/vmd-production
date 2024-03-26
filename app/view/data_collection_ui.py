@@ -132,7 +132,7 @@ def main():
                     f"<strong><span style='color: green'>Eg: vào nụi -> vào núi, vào nui, vào nùi</span></strong></p> </br>"
                     f"<strong><span style='color: red'>Lưu ý đợi thanh màu đỏ hiện lên rồi phát âm nhé</span></strong> </br>", unsafe_allow_html=True)
         st.image("visualize.png", width=300)
-        st.markdown(f"<strong>Cảm ơn sự hợp tác của bạn</strong>")
+        st.markdown(f"<strong>Cảm ơn sự hợp tác của bạn</strong>", unsafe_allow_html=True)
 
 if __name__ == "__main__":
     # run interface ui `streamlit run app/view/data_collection_ui.py`
