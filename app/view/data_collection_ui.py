@@ -129,8 +129,9 @@ def main():
                     f"<p><strong>Bước 3</strong> Bấm vào Start Recording để thu âm giúp mình</p>"
                     f"<p><strong>Bước 4</strong> Ngoài việc phát âm đúng từ hiện tại </br> bạn vui lòng phát âm từ sai của từ đó giúp mình nhé </br>"
                     f"<strong><span style='color: red'>Nhóm chúng mình cần bạn phát âm một từ với 4 audio (1 phát âm đúng và 3 sai).</span></strong> </br>"
-                    f"<strong><span style='color: green'>Eg: vào nụi -> vào núi, vào nui, vào nùi</span></strong></p> </br> <p>Cảm ơn sự hợp tác của bạn</p>"
-                    f"<strong><span style='color: red'>Lưu ý đợi thanh màu đỏ hiện lên rồi phát âm nhé</span></strong>", unsafe_allow_html=True)
+                    f"<strong><span style='color: green'>Eg: vào nụi -> vào núi, vào nui, vào nùi</span></strong></p> </br>"
+                    f"<strong><span style='color: red'>Lưu ý đợi thanh màu đỏ hiện lên rồi phát âm nhé</span></strong> </br>"
+                    f"<strong>Cảm ơn sự hợp tác của bạn</strong>", unsafe_allow_html=True)
         st.image("visualize.png", width=300)
 
 if __name__ == "__main__":
