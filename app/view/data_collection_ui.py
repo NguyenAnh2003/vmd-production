@@ -128,8 +128,8 @@ def main():
         st.markdown(f"<p><strong>Bước 2</strong> Điền đẩy đủ thông tin</p>"
                     f"<p><strong>Bước 3</strong> Bấm vào Start Recording để thu âm giúp mình</p>"
                     f"<p><strong>Bước 4</strong> Ngoài việc phát âm đúng từ hiện tại </br> bạn vui lòng phát âm từ sai của từ đó giúp mình nhé </br>"
-                    f"<p>Nhóm chúng mình cần bạn phát âm một từ với 4 audio (1 phát âm đúng và 3 sai).</p> </br>"
-                    f"(Eg: vào nụi -> vào núi, vào nui, vào nùi)</p> </br> <p>Cảm ơn sự hợp tác của bạn</p>"
+                    f"<strong><span style='color: red'>Nhóm chúng mình cần bạn phát âm một từ với 4 audio (1 phát âm đúng và 3 sai).</span></strong> </br>"
+                    f"<strong><span style='green'>Eg: vào nụi -> vào núi, vào nui, vào nùi</span></strong></p> </br> <p>Cảm ơn sự hợp tác của bạn</p>"
                     f"<strong><span style='color: red'>Lưu ý đợi thanh màu đỏ hiện lên rồi phát âm nhé</span></strong>", unsafe_allow_html=True)
         st.image("visualize.png", width=300)
 
