@@ -6,6 +6,7 @@ import supabase
 from st_audiorec import st_audiorec
 from supabase import create_client, Client
 import scipy.io.wavfile as wavfile
+import os
 from pathlib import Path
 import sys
 
@@ -40,7 +41,7 @@ def main():
     with cl1:
         # setup interface
         st.markdown("<h1>Thu thập dữ liệu</h1>", unsafe_allow_html=True)
-        st.markdown("<span style='color: red ;font-size: 20px'>Bình tĩnh đọc hướng dẫn sử dụng đã</span>", unsafe_allow_html=True)
+        st.markdown("<span style='color: red ;font-size: 20px'>Bạn vui lòng đọc hướng dẫn sử dụng</span>", unsafe_allow_html=True)
 
         scol1, scol2 = st.columns([3, 2])
 
@@ -106,6 +107,10 @@ def main():
                         if response:
                             st.markdown(f"<div style='color: red; font-size: 25px'>Cảm ơn bạn đã giành thời gian</div>",
                                         unsafe_allow_html=True)
+                            
+                            # delete wav file
+                            if os.path.exists(OUT_WAV_FILE):
+                                os.remove(OUT_WAV_FILE)
                         else:
                             st.error(f"Failed to fetch data")
                 else:
@@ -122,8 +127,9 @@ def main():
 
         st.markdown(f"<p><strong>Bước 2</strong> Điền đẩy đủ thông tin</p>"
                     f"<p><strong>Bước 3</strong> Bấm vào Start Recording để thu âm giúp mình</p>"
-                    f"<p><strong>Bước 4</strong> Ngoài việc phát âm đúng từ hiện tại </br> bạn vui lòng phát âm từ sai của từ đó giúp mình nhé </br>"
-                    f"(Eg: vào nụi -> vào núi)</p>"
+                    f"<p><strong>Bước 4</strong> Ngoài việc phát âm đúng từ hiện tại </br> bạn vui lòng phát âm từ sai của từ đó giúp mình nhé </br>
+                    <p>Nhóm chúng mình cần bạn phát âm một từ với 4 audio (1 phát âm đúng và 3 sai).</p> </br>"
+                    f"(Eg: vào nụi -> vào núi, vào nui, vào nùi)</p> </br> <p>Cảm ơn sự hợp tác của bạn</p>"
                     f"<strong><span style='color: red'>Lưu ý đợi thanh màu đỏ hiện lên rồi phát âm nhé</span></strong>", unsafe_allow_html=True)
         st.image("visualize.png", width=300)
 
