@@ -66,7 +66,8 @@ def main():
         # 
         with scol3:
             if suggestion:
-                mispronouned_word = st.text_input("Từ phát âm sai", selected_suggetion[1])
+                m_words = selected_suggetion[1].split(",").strip()
+                mispronouned_word = st.text_input("Từ phát âm sai", m_words[0])
             else:
                 mispronouned_word = st.text_input(f"Từ sai của f{target_text}", "")
 
