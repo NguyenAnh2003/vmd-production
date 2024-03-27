@@ -122,7 +122,7 @@ def main():
         st.markdown(f"<h2>Hướng dẫn sử dụng</h2>", unsafe_allow_html=True)
 
         st.markdown(f"<p><strong>Bước 1</strong> Chọn từ bạn muốn ghi âm </br>"
-                    f"Bạn có thể chọn từ trong hộp gợi ý hoặc từ ghi </br> "
+                    f"Bạn có thể chọn từ trong hộp gợi ý hoặc tự ghi </br> "
                     f"<strong>(ghi xong nhấn enter giúp mình)</strong></p>", unsafe_allow_html=True)
 
         st.markdown(f"<p><strong>Bước 2</strong> Điền đẩy đủ thông tin</p>"
