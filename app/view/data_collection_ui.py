@@ -127,12 +127,12 @@ def main():
 
         st.markdown(f"<p><strong>Bước 2</strong> Điền đẩy đủ thông tin</p>"
                     f"<p><strong>Bước 3</strong> Bấm vào Start Recording để thu âm giúp mình</p>"
-                    f"<p><strong>Bước 4</strong> Ngoài việc phát âm đúng từ hiện tại </br> bạn vui lòng phát âm từ sai của từ đó giúp mình nhé </br>"
-                    f"<strong><span style='color: red'>Nhóm chúng mình cần bạn phát âm một từ với 4 audio (1 phát âm đúng và 3 sai).</span></strong> </br>"
+                    f"<p><strong>Bước 4</strong> Ngoài việc phát âm đúng từ hiện tại </br> bạn có thể chọn phát âm sai như trong hộp gợi ý, </br> hoặc phát âm sai như ví dụ bên dưới </br>"
+                    f"<strong><span style='color: red'>Nhóm chúng mình cần bạn phát âm một từ với 4 audio (1 phát âm đúng và 3 phát âm sai).</span></strong> </br>"
                     f"<strong><span style='color: green'>Eg: vào nụi -> vào núi, vào nui, vào nùi</span></strong></p> </br>"
                     f"<strong><span style='color: red'>Lưu ý đợi thanh màu đỏ hiện lên rồi phát âm nhé</span></strong> </br>", unsafe_allow_html=True)
         st.image("visualize.png", width=300)
-        st.markdown(f"<strong>Cảm ơn sự hợp tác của bạn</strong>", unsafe_allow_html=True)
+        st.markdown(f"<span style='font-size: 25px'><strong>Cảm ơn sự hợp tác của bạn rất nhiều</strong></span>", unsafe_allow_html=True)
 
 if __name__ == "__main__":
     # run interface ui `streamlit run app/view/data_collection_ui.py`
