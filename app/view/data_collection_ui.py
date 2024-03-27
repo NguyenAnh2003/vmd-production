@@ -43,7 +43,7 @@ def main():
         st.markdown("<h1>Thu thập dữ liệu</h1>", unsafe_allow_html=True)
         st.markdown("<span style='color: red ;font-size: 20px'>Bạn vui lòng đọc hướng dẫn sử dụng</span>", unsafe_allow_html=True)
 
-        scol1, scol2 = st.columns([3, 2])
+        scol1, scol2, scol3 = st.columns([3, 2, 2])
 
         with scol1:
             # toggle box
@@ -53,12 +53,22 @@ def main():
                 index=0,
                 placeholder="Select contact method...",
             )
+        # 
+        selected_suggetion = suggestion.split("-")
+
+        # 
         with scol2:
-            selected_suggetion = suggestion.split("-")
             if suggestion:
-                target_text = st.text_input("Từ bạn muốn phát âm", selected_suggetion[0])
+                target_text = st.text_input("Từ phát âm đúng", selected_suggetion[0])
             else:
                 target_text = st.text_input('(tối đa 2 từ E.g: vào nụi)', '')
+
+        # 
+        with scol3:
+            if suggestion:
+                mispronouned_word = st.text_input("Từ phát âm sai", selected_suggetion[1])
+            else:
+                mispronouned_word = st.text_input(f"Từ sai của f{target_text}", "")
 
 
         # text = st.text_input('(tối đa 2 từ E.g: vào nụi)', '')
@@ -100,7 +110,8 @@ def main():
                         wav_url = DB.storage.from_("vmd-bucket").get_public_url(path=f"{OUT_WAV_FILE}")
                         print(f"Wav url: {wav_url}")
                         st.write("Đang chờ xử lý")
-                        response = DB.table("vmd-data").insert({"audio_url": wav_url, "text_target": target_text.strip(),
+                        response = DB.table("vmd-data").insert({"audio_url": wav_url, "text_target": target_text.strip(), 
+                                                                "mispro_noun": mispronouned_word.strip(),
                                                                 "username": username, "country": country,
                                                                 "age": age}).execute()
                         print(f"DB: {response}")
