@@ -85,7 +85,7 @@ def main():
                         f"""<div style="display: flex; gap: 10px"><p style='font-size: 15px; color: 'black'>Từ phát âm đúng <span style='font-size: 20px; color: 'red'><strong>{target_text}</strong></span></p></div>""",
                         unsafe_allow_html=True)
         with sscol2:
-            st.button("Nghe thử")
+            st.button("Nghe")
 
         st.markdown(f"<p>Từ bạn muốn phát âm <span style='font-size: 20px; color: 'red'><strong>{mispronouned_word}</strong></span></p>", unsafe_allow_html=True)
 
