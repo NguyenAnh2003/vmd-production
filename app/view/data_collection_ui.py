@@ -80,7 +80,7 @@ def main():
         # Record audio using the audio_recorder function
         st.markdown(f'<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">'
                     f"""<div style="display: flex; gap: 10px"><p style='font-size: 15px; color: 'black'>Từ phát âm đúng <span style='font-size: 20px; color: 'red'><strong>{target_text}</strong></span></p>
-                    <i style="margin-top: 10px" class="fa-solid fa-volume-low"></i></div>""",
+                    <i style="margin-top: 15px; margin-left: 10px; transform: scale(1.5); cursor: pointer" class="fa-solid fa-volume-low"></i></div>""",
                     unsafe_allow_html=True)
 
         st.markdown(f"<p>Từ bạn muốn phát âm <span style='font-size: 20px; color: 'red'><strong>{mispronouned_word}</strong></span></p>", unsafe_allow_html=True)
