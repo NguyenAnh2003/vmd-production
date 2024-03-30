@@ -48,7 +48,7 @@ def main():
         with scol1:
             # toggle box
             suggestion = st.selectbox(
-                "Gợi ý tự bạn muốn phát âm",
+                "Gợi ý tự bạn muốn phát âm (phát âm đúng - phát âm sai)",
                 list_phonemes,
                 index=0,
                 placeholder="Select contact method...",
@@ -67,9 +67,9 @@ def main():
         with scol3:
             if suggestion:
                 m_words = selected_suggetion[1].split(",")
-                mispronouned_word = st.text_input("Từ phát âm sai", m_words[0])
+                mispronouned_word = st.text_input("Từ bạn muốn phát âm", m_words[0])
             else:
-                mispronouned_word = st.text_input(f"Từ sai của f{target_text}", "")
+                mispronouned_word = st.text_input(f"Phát âm sai của f{target_text}", "")
 
 
         # text = st.text_input('(tối đa 2 từ E.g: vào nụi)', '')
@@ -78,8 +78,10 @@ def main():
         age = st.number_input("Tuổi", min_value=0)
 
         # Record audio using the audio_recorder function
-        st.markdown(f"<p style='font-size: 15px; color: 'black'>Từ bạn muốn phát âm "
-                    f"<span style='font-size: 20px; color: 'red'><strong>{target_text}</strong></span></p>", unsafe_allow_html=True)
+        st.markdown(f"<p style='font-size: 15px; color: 'black'>Từ phát âm đúng <span style='font-size: 20px; color: 'red'><strong>{target_text}</strong></span></p>"
+                    f"Từ bạn muốn phát âm <span style='font-size: 20px; color: 'red'><strong>{mispronouned_word}</strong></span></p>",
+                    unsafe_allow_html=True)
+
 
         # RECORD AUDIO WITH STREAMLIT-AUDIOREC
         wav_audio_data = st_audiorec()
@@ -111,8 +113,8 @@ def main():
                         wav_url = DB.storage.from_("vmd-bucket").get_public_url(path=f"{OUT_WAV_FILE}")
                         print(f"Wav url: {wav_url}")
                         st.write("Đang chờ xử lý")
-                        response = DB.table("vmd-data").insert({"audio_url": wav_url, "text_target": target_text.strip(), 
-                                                                "mispro_noun": mispronouned_word.strip(),
+                        response = DB.table("vmd-data").insert({"audio_url": wav_url, "canonical_text": target_text.strip(),
+                                                                "transcript_text": mispronouned_word.strip(),
                                                                 "username": username, "country": country,
                                                                 "age": age}).execute()
                         print(f"DB: {response}")
@@ -133,20 +135,16 @@ def main():
     with cl3:
         st.markdown(f"<h2>Hướng dẫn sử dụng</h2>", unsafe_allow_html=True)
 
-        st.markdown(f"<p><strong>Bước 1</strong> Chọn từ bạn muốn ghi âm </br>"
-                    f"Bạn có thể chọn từ trong hộp gợi ý hoặc tự ghi </br> "
-                    f"<strong>(ghi xong nhấn enter giúp mình)</strong></p>", unsafe_allow_html=True)
-
-        st.markdown(f"<p><strong>Bước 2</strong> Điền đẩy đủ thông tin</p>"
-                    f"<p><strong>Bước 3</strong> Bấm vào Start Recording để thu âm giúp mình</p>"
-                    f"<p><strong>Bước 4</strong> Ngoài việc phát âm đúng từ hiện tại </br> bạn có thể chọn phát âm sai như trong hộp gợi ý, </br> hoặc phát âm sai như ví dụ bên dưới </br>"
-                    f"<strong><span style='color: red'>Nhóm chúng mình cần bạn phát âm một từ với </br> 4 audio (1 phát âm đúng và 3 phát âm sai).</span></strong> </br>"
-                    f"<strong><span style='color: green'>Eg: vào nụi -> vào núi, vào nui, vào nùi</span></strong></p> </br>"
-                    f"<strong><span style='color: red'>Lưu ý đợi thanh màu đỏ hiện lên rồi phát âm nhé</span></strong> </br>", unsafe_allow_html=True)
-        st.image("visualize.png", width=300)
+        st.markdown(f"<p><strong>Bước 1</strong> Chọn từ bạn muốn ghi âm, chọn từ trong hộp gợi ý hoặc tự chọn.</p></br>"
+                    f"<p><strong>Bước 2</strong> <strong>Điền đầy đủ thông tin </strong>, đặc biệt là ”<strong>từ phát âm đúng”</strong> và” <strong>từ bạn muốn phát âm</strong>”. Lưu ý <strong>từ muốn bạn phát âm</strong> là <strong>từ bạn sẽ phát âm khi ghi âm.</strong></p>"
+                    f"<p><strong>Bước 3</strong> Bấm <strong>“Start Recording”</strong> để thu âm, sau khi thu âm xong bấm <strong>Stop</strong> và nghe lại phần ghi âm ở bên dưới. Nếu phần ghi âm <strong>bị lỗi hoặc thiếu </strong>thì bấm <strong>“Reset”</strong> để ghi âm lại nha.</p>"
+                    f"<p><strong>Bước 4</strong> Bấm <strong>“Lưu dữ liệu”</strong> để gửi ghi âm về cho chúng mình bạn nhé</p></br>"
+                    f"<strong><span style='color: red'>Lưu ý: </span></strong> Nhóm chúng mình cần dữ liệu phát âm sai, bạn có thể giúp chúng mình phát âm <strong>1 từ với 4 bản ghi âm: 1 bản phát âm đúng và 3 bản phát âm sai.</strong> Ví dụ: <strong>“vào núi (phát âm đúng) - vào nui, vào nùi, vào nụi (phát âm sai).</strong></br>"
+                    f"<strong><span style='color: green'>Eg: vào nụi(phát âm đúng) -> vào núi, vào nui, vào nùi(phát âm sai)</span></strong></p> </br>"
+                    f"<strong><span style='color: red'>Khi thanh ghi âm hiện lên/sáng lên bạn hẳn phát âm nhé.</span></strong> </br>", unsafe_allow_html=True)
+        st.image("visualize.png", width=300) # aaaa
         st.markdown(f"<strong><span style='font-size: 25px'>Cảm ơn sự giúp đỡ của bạn rất nhiều</span></strong>", unsafe_allow_html=True)
 
 if __name__ == "__main__":
-    # run interface ui `streamlit run app/view/data_collection_ui.py`
     st.set_page_config(page_title="Mispronunciation detection", layout="wide")
     main()
