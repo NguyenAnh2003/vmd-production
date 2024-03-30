@@ -9,6 +9,7 @@ import scipy.io.wavfile as wavfile
 import os
 from pathlib import Path
 import sys
+from PIL import Image
 
 # init DB
 url: str = "https://cceebjjirmrvyhqecubk.supabase.co"
@@ -78,10 +79,13 @@ def main():
         age = st.number_input("Tuổi", min_value=0)
 
         # Record audio using the audio_recorder function
-        st.markdown(f'<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">'
-                    f"""<div style="display: flex; gap: 10px"><p style='font-size: 15px; color: 'black'>Từ phát âm đúng <span style='font-size: 20px; color: 'red'><strong>{target_text}</strong></span></p>
-                    <i style="margin-top: 15px; margin-left: 10px; transform: scale(1.5); cursor: pointer" class="fa-solid fa-volume-low"></i></div>""",
-                    unsafe_allow_html=True)
+        sscol1, sscol2, _, _ = st.columns([1, 1, 1, 1])
+        with sscol1:
+            st.markdown("""<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">"""
+                        f"""<div style="display: flex; gap: 10px"><p style='font-size: 15px; color: 'black'>Từ phát âm đúng <span style='font-size: 20px; color: 'red'><strong>{target_text}</strong></span></p></div>""",
+                        unsafe_allow_html=True)
+        with sscol2:
+            st.button("Nghe thử")
 
         st.markdown(f"<p>Từ bạn muốn phát âm <span style='font-size: 20px; color: 'red'><strong>{mispronouned_word}</strong></span></p>", unsafe_allow_html=True)
 
