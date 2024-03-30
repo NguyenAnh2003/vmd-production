@@ -48,7 +48,7 @@ def main():
         with scol1:
             # toggle box
             suggestion = st.selectbox(
-                "Gợi ý tự bạn muốn phát âm (phát âm đúng - phát âm sai)",
+                "Gợi ý tự bạn muốn phát âm (phát âm đúng - sai)",
                 list_phonemes,
                 index=0,
                 placeholder="Select contact method...",
@@ -135,7 +135,7 @@ def main():
     with cl3:
         st.markdown(f"<h2>Hướng dẫn sử dụng</h2>", unsafe_allow_html=True)
 
-        st.markdown(f"<p><strong>Bước 1</strong> Chọn từ bạn muốn ghi âm, chọn từ trong hộp gợi ý hoặc tự chọn.</p></br>"
+        st.markdown(f"<p><strong>Bước 1</strong> Chọn từ bạn muốn ghi âm, chọn từ trong hộp gợi ý hoặc tự chọn.</p>"
                     f"<p><strong>Bước 2</strong> <strong>Điền đầy đủ thông tin </strong>, đặc biệt là ”<strong>từ phát âm đúng”</strong> và” <strong>từ bạn muốn phát âm</strong>”. Lưu ý <strong>từ muốn bạn phát âm</strong> là <strong>từ bạn sẽ phát âm khi ghi âm.</strong></p>"
                     f"<p><strong>Bước 3</strong> Bấm <strong>“Start Recording”</strong> để thu âm, sau khi thu âm xong bấm <strong>Stop</strong> và nghe lại phần ghi âm ở bên dưới. Nếu phần ghi âm <strong>bị lỗi hoặc thiếu </strong>thì bấm <strong>“Reset”</strong> để ghi âm lại nha.</p>"
                     f"<p><strong>Bước 4</strong> Bấm <strong>“Lưu dữ liệu”</strong> để gửi ghi âm về cho chúng mình bạn nhé</p></br>"
