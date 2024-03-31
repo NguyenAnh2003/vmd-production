@@ -91,28 +91,30 @@ def main():
             <span style='font-size: 20px; color: 'red'><strong>{target_text}</strong></span></p></div>""",
             unsafe_allow_html=True)
 
-        # sscol1, sscol2, sscol3 = st.columns([1, 1, 1])
+        sscol1, sscol2, sscol3 = st.columns([1, 1, 1])
 
-        st.markdown(
-            f"<p>Từ bạn muốn phát âm <span style='font-size: 20px; color: 'red'><strong>{mispronouned_word}</strong"
-            f"></span></p>",
+        with sscol1:
+            st.markdown(
+                f"<p>Từ bạn muốn phát âm <span style='font-size: 20px; color: 'red'><strong>{mispronouned_word}</strong"
+                f"></span></p>",
             unsafe_allow_html=True)
 
-        if st.button("Nghe từ muốn phát âm"):
-            url = 'https://api.fpt.ai/hmi/tts/v5'
+        with sscol2:
+            if st.button("Nghe từ muốn phát âm"):
+                url = 'https://api.fpt.ai/hmi/tts/v5'
 
-            payload = mispronouned_word
-            headers = {
-                'api-key': '03Aw9xRXvspjlbUTlpJway0DTznJ01HY',
-                'speed': '-2.5',
-                'voice': 'banmai'
-            }
+                payload = mispronouned_word
+                headers = {
+                    'api-key': '03Aw9xRXvspjlbUTlpJway0DTznJ01HY',
+                    'speed': '-2.5',
+                    'voice': 'banmai'
+                }
 
-            response = requests.request('POST', url, data=payload.encode('utf-8'), headers=headers)
+                response = requests.request('POST', url, data=payload.encode('utf-8'), headers=headers)
 
-            audio_url = response.text.split("\"")[3]
+                audio_url = response.text.split("\"")[3]
 
-            st.audio(audio_url, format='audio/wav', start_time=0)
+                st.audio(audio_url, format='audio/wav', start_time=0)
 
         # RECORD AUDIO WITH STREAMLIT-AUDIOREC
         wav_audio_data = st_audiorec()
