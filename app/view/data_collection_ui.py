@@ -40,7 +40,7 @@ def _get_phonemes(file_path):
     return list_of_phonemes
 
 def get_api_audio_fpt(person):
-    number = 3
+    number = 12
     if number == 1:
         api_key = 'pfZsKNQYvj1CZwnRyOdASha4Pl1qJNTl'  # 1
     elif number == 2:
@@ -79,7 +79,7 @@ def main():
     # sample for select box
     list_phonemes = _get_phonemes("phoneme_dict.txt")
     voice = ["Phổ thông", "Địa phương"]
-    cl1, _, cl3 = st.columns([3, 1, 2])
+    cl1, _, cl3 = st.columns([6, 1, 4])
     with cl1:
         # setup interface
         st.markdown("<h1>Thu thập dữ liệu</h1>", unsafe_allow_html=True)
@@ -141,7 +141,7 @@ def main():
                 unsafe_allow_html=True)
         
         if st.button("Nghe phát âm đúng"):
-            time.sleep(1)
+            time.sleep(0.5)
             response = requests.request('POST', url_api, data=target_text.encode('utf-8'), headers=api_audio_fpt)
             audio_url = response.text.split("\"")[3]
             if audio_url != "API rate limit exceeded":
@@ -225,6 +225,8 @@ def main():
                     f"phát âm đúng”</strong> và”<strong>từ bạn muốn phát âm</strong>”. Lưu ý <strong>từ muốn bạn "
                     f"phát âm</strong> là <strong>từ bạn sẽ phát âm khi ghi âm.</strong> Bạn có thể nghe thử cách "
                     f"phát âm ở bên cạnh.</p>"
+                    f"<p><strong>Bước 3</strong> Chọn phát âm theo giọng <strong>địa phương</strong> hay giọng <strong>phổ thông (Hà Nội)</strong>."
+                    f"Mặc định phát âm theo giọng phổ thông</p>"
                     f"<p><strong>Bước 3</strong> Bấm <strong>“Start Recording”</strong> để thu âm, sau khi thu âm "
                     f"xong bấm ”<strong>Stop</strong>” và nghe lại phần ghi âm ở bên dưới. Nếu phần ghi âm <strong>bị "
                     f"lỗi hoặc thiếu </strong>thì bấm <strong>“Reset”</strong> để ghi âm lại nha.</p>"
@@ -232,9 +234,8 @@ def main():
                     f"bạn nhé</p></br>"
                     f"<strong><span style='color: red'>Lưu ý: </span></strong> Nhóm chúng mình cần dữ liệu phát âm "
                     f"sai, bạn có thể giúp chúng mình phát âm <strong>1 từ với 4 bản ghi âm: 1 bản phát âm đúng và 3 "
-                    f"bản phát âm sai.</strong> Ví dụ: <strong>“vào núi (phát âm đúng) - vào nui, vào nùi, "
-                    f"vào nụi (phát âm sai).</strong></br>"
-                    f"<strong><span style='color: green'>Eg: vào nụi(phát âm đúng) -> vào núi, vào nui, vào nùi(phát "
+                    f"bản phát âm sai.</strong>"
+                    f"<strong><span style='color: green'>Eg: sinh viên(phát âm đúng) -> sinh diên, xinh viên, sinh viền(phát "
                     f"âm sai)</span></strong></p> </br>"
                     f"<strong><span style='color: red'>Khi thanh ghi âm hiện lên/sáng lên bạn hẳn phát âm "
                     f"nhé.</span></strong> </br>",
