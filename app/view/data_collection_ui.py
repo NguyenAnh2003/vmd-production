@@ -39,8 +39,8 @@ def _get_phonemes(file_path):
 
     return list_of_phonemes
 
-def get_api_audio_fpt(person):
-    number = 12
+def get_api_audio_fpt(text):
+    number = 15
     if number == 1:
         api_key = 'pfZsKNQYvj1CZwnRyOdASha4Pl1qJNTl'  # 1
     elif number == 2:
@@ -57,7 +57,7 @@ def get_api_audio_fpt(person):
         api_key = 'xR0kWklCVUdWCiUPHjCWSuakJpHAhX1v'  # 7
     elif number == 8:
         api_key = 'eJPoGo4SbItvitkAxJYmxjivwgmrXto3'  # 8
-    elif number == 9:
+    elif     number == 9:
         api_key = 'ZfmREGOOvxJd5HyL0FPuHbFhYPPyeTbn'  # 9
     elif number == 10:
         api_key = 'JBE715oQE3Varh0hmNRtWrY4LZbzUOnM'  # 10
@@ -65,21 +65,24 @@ def get_api_audio_fpt(person):
         api_key = 'gWxgcKjlDQENcseGO8K4wQmpT2PZ219E'  # 11
     elif number == 12:
         api_key = 'r1RisDUsxbecTubSfOteZ5WCqgji9Twp'  # 12
-
+    else:
+        api_key = '03Aw9xRXvspjlbUTlpJway0DTznJ01HY'
     headers = {
         'api-key': api_key,
         'speed': '-2.5',
-        'voice': person
+        'voice': "banmai"
     }
-    return headers
+    time.sleep(0.2)
+    response = requests.request('POST', url_api, data=text.encode('utf-8'), headers=headers)
+    audio_url = response.text.split("\"")[3]
+    return audio_url
 
-api_audio_fpt = get_api_audio_fpt('banmai')
 
 def main():
     # sample for select box
     list_phonemes = _get_phonemes("phoneme_dict.txt")
     voice = ["Phổ thông", "Địa phương"]
-    cl1, _, cl3 = st.columns([6, 1, 4])
+    _, cl1, cl3, _ = st.columns([1, 6, 4, 1])
     with cl1:
         # setup interface
         st.markdown("<h1>Thu thập dữ liệu</h1>", unsafe_allow_html=True)
@@ -141,9 +144,7 @@ def main():
                 unsafe_allow_html=True)
         
         if st.button("Nghe phát âm đúng"):
-            time.sleep(0.5)
-            response = requests.request('POST', url_api, data=target_text.encode('utf-8'), headers=api_audio_fpt)
-            audio_url = response.text.split("\"")[3]
+            audio_url = get_api_audio_fpt(target_text)
             if audio_url != "API rate limit exceeded":
                 st.audio(audio_url, format='audio/wav', start_time=0)
             else:
@@ -226,16 +227,16 @@ def main():
                     f"phát âm</strong> là <strong>từ bạn sẽ phát âm khi ghi âm.</strong> Bạn có thể nghe thử cách "
                     f"phát âm ở bên cạnh.</p>"
                     f"<p><strong>Bước 3</strong> Chọn phát âm theo giọng <strong>địa phương</strong> hay giọng <strong>phổ thông (Hà Nội)</strong>."
-                    f"Mặc định phát âm theo giọng phổ thông</p>"
-                    f"<p><strong>Bước 3</strong> Bấm <strong>“Start Recording”</strong> để thu âm, sau khi thu âm "
+                    f" Mặc định phát âm theo giọng phổ thông nhé</p>"
+                    f"<p><strong>Bước 4</strong> Bấm <strong>“Start Recording”</strong> để thu âm, sau khi thu âm "
                     f"xong bấm ”<strong>Stop</strong>” và nghe lại phần ghi âm ở bên dưới. Nếu phần ghi âm <strong>bị "
                     f"lỗi hoặc thiếu </strong>thì bấm <strong>“Reset”</strong> để ghi âm lại nha.</p>"
-                    f"<p><strong>Bước 4</strong> Bấm <strong>“Lưu dữ liệu”</strong> để gửi ghi âm về cho chúng mình "
+                    f"<p><strong>Bước 5</strong> Bấm <strong>“Lưu dữ liệu”</strong> để gửi ghi âm về cho chúng mình "
                     f"bạn nhé</p></br>"
                     f"<strong><span style='color: red'>Lưu ý: </span></strong> Nhóm chúng mình cần dữ liệu phát âm "
                     f"sai, bạn có thể giúp chúng mình phát âm <strong>1 từ với 4 bản ghi âm: 1 bản phát âm đúng và 3 "
                     f"bản phát âm sai.</strong>"
-                    f"<strong><span style='color: green'>Eg: sinh viên(phát âm đúng) -> sinh diên, xinh viên, sinh viền(phát "
+                    f"<strong><span style='color: green'> Eg: sinh viên(phát âm đúng) -> sinh diên, xinh viên, sinh viền(phát "
                     f"âm sai)</span></strong></p> </br>"
                     f"<strong><span style='color: red'>Khi thanh ghi âm hiện lên/sáng lên bạn hẳn phát âm "
                     f"nhé.</span></strong> </br>",
