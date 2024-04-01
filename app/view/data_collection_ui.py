@@ -135,7 +135,7 @@ def main():
 
         # Record audio using the audio_recorder function
 
-        sscol1, sscol2, _ = st.columns([1, 1, 1])
+        sscol1, sscol2, _ = st.columns([5, 5, 1])
 
         with sscol1:
             st.markdown(
@@ -146,10 +146,9 @@ def main():
         if st.button("Nghe phát âm đúng"):
             audio_url = get_api_audio_fpt(target_text)
             if audio_url != "API rate limit exceeded":
-                st.error(audio_url)
                 st.audio(audio_url, format='audio/mp3', start_time=0)
             else:
-                st.title("API FPT rate limit exceeded")
+                st.warning("API FPT rate limit exceeded")
         
         with sscol2:
             st.markdown(
