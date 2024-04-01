@@ -82,7 +82,7 @@ def main():
     # sample for select box
     list_phonemes = _get_phonemes("phoneme_dict.txt")
     voice = ["Phổ thông", "Địa phương"]
-    _, cl1, cl3, _ = st.columns([1, 6, 4, 1])
+    _, cl1,_, cl3, _ = st.columns([1, 10, 1 , 6, 1])
     with cl1:
         # setup interface
         st.markdown("<h1>Thu thập dữ liệu</h1>", unsafe_allow_html=True)
