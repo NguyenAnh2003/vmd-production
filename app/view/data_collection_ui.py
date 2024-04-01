@@ -69,7 +69,7 @@ def get_api_audio_fpt(text):
         api_key = '6RSbnPGtIbog1UZxZhnWvBpE6Cay574K'
     headers = {
         'api-key': api_key,
-        'speed': '-2.5',
+        'speed': '-2.0',
         'voice': "banmai"
     }
     time.sleep(0.2)
@@ -146,8 +146,8 @@ def main():
         if st.button("Nghe phát âm đúng"):
             audio_url = get_api_audio_fpt(target_text)
             if audio_url != "API rate limit exceeded":
-                st.title(audio_url)
-                st.audio(audio_url, format='audio/wav', start_time=0)
+                st.error(audio_url)
+                st.audio(audio_url, format='audio/mp3', start_time=0)
             else:
                 st.title("API FPT rate limit exceeded")
         
