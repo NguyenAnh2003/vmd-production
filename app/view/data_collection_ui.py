@@ -57,7 +57,7 @@ def get_api_audio_fpt(text):
         api_key = 'xR0kWklCVUdWCiUPHjCWSuakJpHAhX1v'  # 7
     elif number == 8:
         api_key = 'eJPoGo4SbItvitkAxJYmxjivwgmrXto3'  # 8
-    elif     number == 9:
+    elif number == 9:
         api_key = 'ZfmREGOOvxJd5HyL0FPuHbFhYPPyeTbn'  # 9
     elif number == 10:
         api_key = 'JBE715oQE3Varh0hmNRtWrY4LZbzUOnM'  # 10
@@ -66,7 +66,7 @@ def get_api_audio_fpt(text):
     elif number == 12:
         api_key = 'r1RisDUsxbecTubSfOteZ5WCqgji9Twp'  # 12
     else:
-        api_key = '03Aw9xRXvspjlbUTlpJway0DTznJ01HY'
+        api_key = '6RSbnPGtIbog1UZxZhnWvBpE6Cay574K'
     headers = {
         'api-key': api_key,
         'speed': '-2.5',
@@ -146,9 +146,10 @@ def main():
         if st.button("Nghe phát âm đúng"):
             audio_url = get_api_audio_fpt(target_text)
             if audio_url != "API rate limit exceeded":
+                st.title(audio_url)
                 st.audio(audio_url, format='audio/wav', start_time=0)
             else:
-                print("API FPT rate limit exceeded")
+                st.title("API FPT rate limit exceeded")
         
         with sscol2:
             st.markdown(
