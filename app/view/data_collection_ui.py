@@ -15,6 +15,7 @@ from PIL import Image
 # init DB
 url: str = "https://cceebjjirmrvyhqecubk.supabase.co"
 key: str = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNjZWViamppcm1ydnlocWVjdWJrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDk2NDMxMTMsImV4cCI6MjAyNTIxOTExM30.dh4WE15QV41Ch7GZlpNyELOa6ZZiapV9RsYHuHi6ZQ8"
+url_api = 'https://api.fpt.ai/hmi/tts/v5'
 DB: Client = create_client(supabase_url=url, supabase_key=key)
 
 
@@ -38,6 +39,41 @@ def _get_phonemes(file_path):
 
     return list_of_phonemes
 
+def get_api_audio_fpt(person):
+    global number
+    if number == 1:
+        api_key = 'pfZsKNQYvj1CZwnRyOdASha4Pl1qJNTl'  # 1
+    elif number == 2:
+        api_key = 'c3r38KxajnMjtZ4V95ggxa3WVcyQTsBb'  # 2
+    elif number == 3:
+        api_key = 'eMQy9VMPNDMa4LnM828W5ctvjOuTKRek'  # 3
+    elif number == 4:
+        api_key = 'gm936wFJcmGN8WGPShF6G1S67HFV9iXh'  # 4
+    elif number == 5:
+        api_key = '0WQWEsA7rGhih6preBAqft56Hy66Hsxb'  # 5
+    elif number == 6:
+        api_key = 'CR6X2VLjiP0PUEGeN0Hwqyo6Lvjn3Fty'  # 6
+    elif number == 7:
+        api_key = 'xR0kWklCVUdWCiUPHjCWSuakJpHAhX1v'  # 7
+    elif number == 8:
+        api_key = 'eJPoGo4SbItvitkAxJYmxjivwgmrXto3'  # 8
+    elif number == 9:
+        api_key = 'ZfmREGOOvxJd5HyL0FPuHbFhYPPyeTbn'  # 9
+    elif number == 10:
+        api_key = 'JBE715oQE3Varh0hmNRtWrY4LZbzUOnM'  # 10
+    elif number == 11:
+        api_key = 'gWxgcKjlDQENcseGO8K4wQmpT2PZ219E'  # 11
+    elif number == 12:
+        api_key = 'r1RisDUsxbecTubSfOteZ5WCqgji9Twp'  # 12
+
+    headers = {
+        'api-key': api_key,
+        'speed': '-2.5',
+        'voice': person
+    }
+    return headers
+
+api_audio_fpt = get_api_audio_fpt('banmai')
 
 def main():
     # sample for select box
@@ -103,27 +139,22 @@ def main():
                 f"""<div style="display: flex; gap: 10px"><p style='font-size: 15px; color: 'black'>Từ phát âm đúng 
                         <span style='font-size: 20px; color: 'red'><strong>{target_text}</strong></span></p></div>""",
                 unsafe_allow_html=True)
+        
+        if st.button("Nghe phát âm đúng"):
+            time.sleep(1)
+            response = requests.request('POST', url_api, data=target_text.encode('utf-8'), headers=api_audio_fpt)
+            audio_url = response.text.split("\"")[3]
+            if audio_url != "API rate limit exceeded":
+                st.audio(audio_url, format='audio/wav', start_time=0)
+            else:
+                print("API FPT rate limit exceeded")
+        
         with sscol2:
             st.markdown(
                 f"<p>Từ bạn muốn phát âm <span style='font-size: 20px; color: 'red'><strong>{mispronouned_word}</strong"
                 f"></span></p>",
                 unsafe_allow_html=True)
 
-        if st.button("Nghe từ muốn phát âm"):
-            url = 'https://api.fpt.ai/hmi/tts/v5'
-
-            payload = mispronouned_word
-            headers = {
-                'api-key': '03Aw9xRXvspjlbUTlpJway0DTznJ01HY',
-                'speed': '-2.5',
-                'voice': 'banmai'
-            }
-
-            response = requests.request('POST', url, data=payload.encode('utf-8'), headers=headers)
-
-            audio_url = response.text.split("\"")[3]
-
-            st.audio(audio_url, format='audio/wav', start_time=0)
 
         # RECORD AUDIO WITH STREAMLIT-AUDIOREC
         wav_audio_data = st_audiorec()
