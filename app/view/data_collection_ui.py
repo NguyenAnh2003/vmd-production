@@ -40,7 +40,7 @@ def _get_phonemes(file_path):
     return list_of_phonemes
 
 def get_api_audio_fpt(person):
-    global number
+    number = 3
     if number == 1:
         api_key = 'pfZsKNQYvj1CZwnRyOdASha4Pl1qJNTl'  # 1
     elif number == 2:
