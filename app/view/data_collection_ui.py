@@ -42,6 +42,7 @@ def _get_phonemes(file_path):
 def main():
     # sample for select box
     list_phonemes = _get_phonemes("phoneme_dict.txt")
+    voice = ["Phổ thông", "Địa phương"]
     cl1, _, cl3 = st.columns([3, 1, 2])
     with cl1:
         # setup interface
@@ -49,7 +50,7 @@ def main():
         st.markdown("<span style='color: red ;font-size: 20px'>Bạn vui lòng đọc hướng dẫn sử dụng</span>",
                     unsafe_allow_html=True)
 
-        scol1, scol2, scol3 = st.columns([3, 2, 2])
+        scol1, scol2, scol3 = st.columns([4, 2, 2])
 
         with scol1:
             # toggle box
@@ -57,7 +58,7 @@ def main():
                 "Gợi ý tự bạn muốn phát âm (phát âm đúng - sai)",
                 list_phonemes,
                 index=0,
-                placeholder="Select contact method...",
+                placeholder="Từ đúng - Từ sai",
             )
         # 
         selected_suggetion = suggestion.split("-")
@@ -77,44 +78,52 @@ def main():
             else:
                 mispronouned_word = st.text_input(f"Phát âm sai của f{target_text}", "")
 
-        # text = st.text_input('(tối đa 2 từ E.g: vào nụi)', '')
-        username = st.text_input("Tên của bạn", "")
-        country = st.text_input("Quê quán (E.g: Đà Nằng or ĐN)", "")
-        age = st.number_input("Tuổi", min_value=0)
+        c1, c2, c3, c4 = st.columns([2, 2, 2, 2])
+
+        with c1:
+            username = st.text_input("Tên của bạn", "", placeholder="Ví dụ: Nguyễn Văn A")
+        with c2:
+            country = st.text_input("Quê quán", "", placeholder="Ví dụ: Đà Nẵng/ĐN")
+        with c3:
+            age = st.number_input("Tuổi", min_value=0)
+        with c4:
+            voice_type = st.selectbox(
+                label="Giọng phát âm",
+                options=voice,
+                index=0,
+                placeholder="Giọng",
+            )
 
         # Record audio using the audio_recorder function
 
-        st.markdown(
-            """<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min
-            .css">"""
-            f"""<div style="display: flex; gap: 10px"><p style='font-size: 15px; color: 'black'>Từ phát âm đúng 
-            <span style='font-size: 20px; color: 'red'><strong>{target_text}</strong></span></p></div>""",
-            unsafe_allow_html=True)
-
-        sscol1, sscol2, sscol3 = st.columns([1, 1, 1])
+        sscol1, sscol2, _ = st.columns([1, 1, 1])
 
         with sscol1:
             st.markdown(
+                f"""<div style="display: flex; gap: 10px"><p style='font-size: 15px; color: 'black'>Từ phát âm đúng 
+                        <span style='font-size: 20px; color: 'red'><strong>{target_text}</strong></span></p></div>""",
+                unsafe_allow_html=True)
+        with sscol2:
+            st.markdown(
                 f"<p>Từ bạn muốn phát âm <span style='font-size: 20px; color: 'red'><strong>{mispronouned_word}</strong"
                 f"></span></p>",
-            unsafe_allow_html=True)
+                unsafe_allow_html=True)
 
-        with sscol2:
-            if st.button("Nghe từ muốn phát âm"):
-                url = 'https://api.fpt.ai/hmi/tts/v5'
+        if st.button("Nghe từ muốn phát âm"):
+            url = 'https://api.fpt.ai/hmi/tts/v5'
 
-                payload = mispronouned_word
-                headers = {
-                    'api-key': '03Aw9xRXvspjlbUTlpJway0DTznJ01HY',
-                    'speed': '-2.5',
-                    'voice': 'banmai'
-                }
+            payload = mispronouned_word
+            headers = {
+                'api-key': '03Aw9xRXvspjlbUTlpJway0DTznJ01HY',
+                'speed': '-2.5',
+                'voice': 'banmai'
+            }
 
-                response = requests.request('POST', url, data=payload.encode('utf-8'), headers=headers)
+            response = requests.request('POST', url, data=payload.encode('utf-8'), headers=headers)
 
-                audio_url = response.text.split("\"")[3]
+            audio_url = response.text.split("\"")[3]
 
-                st.audio(audio_url, format='audio/wav', start_time=0)
+            st.audio(audio_url, format='audio/wav', start_time=0)
 
         # RECORD AUDIO WITH STREAMLIT-AUDIOREC
         wav_audio_data = st_audiorec()
@@ -125,7 +134,7 @@ def main():
         #     st.audio(audio_bytes, format="audio/wav")
 
         if st.button("Lưu dữ liệu") and wav_audio_data:
-            if username != '' and target_text != '' and age != 0 and country != '':
+            if username != '' and target_text != '' and age != 0 and country != '' and voice_type != '':
                 # Convert audio_bytes to a NumPy array
                 audio_array = np.frombuffer(wav_audio_data, dtype=np.int32)
 
@@ -146,14 +155,25 @@ def main():
                         wav_url = DB.storage.from_("vmd-bucket").get_public_url(path=f"{OUT_WAV_FILE}")
                         print(f"Wav url: {wav_url}")
                         st.write("Đang chờ xử lý")
-                        response = DB.table("vmd-data").insert(
-                            {"audio_url": wav_url, "canonical_text": target_text.strip(),
-                             "transcript_text": mispronouned_word.strip(),
-                             "username": username, "country": country,
-                             "age": age}).execute()
-                        print(f"DB: {response}")
+
+                        if voice_type == "Phổ thông":
+                            response = DB.table("vmd-data").insert(
+                                {"audio_url": wav_url, "canonical_text": target_text.strip(),
+                                 "transcript_text": mispronouned_word.strip(),
+                                 "username": username, "country": country,
+                                 "age": age, "type_voice": True}).execute()
+                            print(f"DB: {response}")
+                        else:
+                            response = DB.table("vmd-data").insert(
+                                {"audio_url": wav_url, "canonical_text": target_text.strip(),
+                                 "transcript_text": mispronouned_word.strip(),
+                                 "username": username, "country": country,
+                                 "age": age, "type_voice": False}).execute()
+                            print(f"DB: {response}")
+
                         if response:
-                            st.markdown(f"<div style='color: red; font-size: 25px'>Cảm ơn bạn đã giành thời gian</div>",
+                            st.markdown(f"<div style='color: red; font-size: 25px'>Cảm ơn bạn đã giành thời gian giúp "
+                                        f"chúng mình</div>",
                                         unsafe_allow_html=True)
 
                             # delete wav file
