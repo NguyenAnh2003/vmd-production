@@ -16,6 +16,7 @@ from PIL import Image
 # init DB
 url: str = "https://cceebjjirmrvyhqecubk.supabase.co"
 key: str = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNjZWViamppcm1ydnlocWVjdWJrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDk2NDMxMTMsImV4cCI6MjAyNTIxOTExM30.dh4WE15QV41Ch7GZlpNyELOa6ZZiapV9RsYHuHi6ZQ8"
+url_api = 'https://api.fpt.ai/hmi/tts/v5'
 DB: Client = create_client(supabase_url=url, supabase_key=key)
 
 
@@ -39,18 +40,57 @@ def _get_phonemes(file_path):
 
     return list_of_phonemes
 
+def get_api_audio_fpt(text):
+    number = 15
+    if number == 1:
+        api_key = 'pfZsKNQYvj1CZwnRyOdASha4Pl1qJNTl'  # 1
+    elif number == 2:
+        api_key = 'c3r38KxajnMjtZ4V95ggxa3WVcyQTsBb'  # 2
+    elif number == 3:
+        api_key = 'eMQy9VMPNDMa4LnM828W5ctvjOuTKRek'  # 3
+    elif number == 4:
+        api_key = 'gm936wFJcmGN8WGPShF6G1S67HFV9iXh'  # 4
+    elif number == 5:
+        api_key = '0WQWEsA7rGhih6preBAqft56Hy66Hsxb'  # 5
+    elif number == 6:
+        api_key = 'CR6X2VLjiP0PUEGeN0Hwqyo6Lvjn3Fty'  # 6
+    elif number == 7:
+        api_key = 'xR0kWklCVUdWCiUPHjCWSuakJpHAhX1v'  # 7
+    elif number == 8:
+        api_key = 'eJPoGo4SbItvitkAxJYmxjivwgmrXto3'  # 8
+    elif number == 9:
+        api_key = 'ZfmREGOOvxJd5HyL0FPuHbFhYPPyeTbn'  # 9
+    elif number == 10:
+        api_key = 'JBE715oQE3Varh0hmNRtWrY4LZbzUOnM'  # 10
+    elif number == 11:
+        api_key = 'gWxgcKjlDQENcseGO8K4wQmpT2PZ219E'  # 11
+    elif number == 12:
+        api_key = 'r1RisDUsxbecTubSfOteZ5WCqgji9Twp'  # 12
+    else:
+        api_key = '6RSbnPGtIbog1UZxZhnWvBpE6Cay574K'
+    headers = {
+        'api-key': api_key,
+        'speed': '-2.0',
+        'voice': "banmai"
+    }
+    time.sleep(0.2)
+    response = requests.request('POST', url_api, data=text.encode('utf-8'), headers=headers)
+    audio_url = response.text.split("\"")[3]
+    return audio_url
+
 
 def main():
     # sample for select box
     list_phonemes = shuffle(_get_phonemes("phoneme_dict.txt"))
-    cl1, _, cl3 = st.columns([3, 1, 2])
+    voice = ["Phổ thông", "Địa phương"]
+    _, cl1,_, cl3, _ = st.columns([1, 10, 1 , 6, 1])
     with cl1:
         # setup interface
         st.markdown("<h1>Thu thập dữ liệu</h1>", unsafe_allow_html=True)
         st.markdown("<span style='color: red ;font-size: 20px'>Bạn vui lòng đọc hướng dẫn sử dụng</span>",
                     unsafe_allow_html=True)
 
-        scol1, scol2, scol3 = st.columns([3, 2, 2])
+        scol1, scol2, scol3 = st.columns([4, 2, 2])
 
         with scol1:
             # toggle box
@@ -58,7 +98,7 @@ def main():
                 "Gợi ý tự bạn muốn phát âm (phát âm đúng - sai)",
                 list_phonemes,
                 index=0,
-                placeholder="Select contact method...",
+                placeholder="Từ đúng - Từ sai",
             )
         # 
         selected_suggetion = suggestion.split("-")
@@ -78,44 +118,45 @@ def main():
             else:
                 mispronouned_word = st.text_input(f"Phát âm sai của f{target_text}", "")
 
-        # text = st.text_input('(tối đa 2 từ E.g: vào nụi)', '')
-        username = st.text_input("Tên của bạn", "")
-        country = st.text_input("Quê quán (E.g: Đà Nằng or ĐN)", "")
-        age = st.number_input("Tuổi", min_value=0)
+        c1, c2, c3, c4 = st.columns([2, 2, 2, 2])
+
+        with c1:
+            username = st.text_input("Tên của bạn", "", placeholder="Ví dụ: Nguyễn Văn A")
+        with c2:
+            country = st.text_input("Quê quán", "", placeholder="Ví dụ: Đà Nẵng/ĐN")
+        with c3:
+            age = st.number_input("Tuổi", min_value=0)
+        with c4:
+            voice_type = st.selectbox(
+                label="Giọng phát âm",
+                options=voice,
+                index=0,
+                placeholder="Giọng",
+            )
 
         # Record audio using the audio_recorder function
 
-        st.markdown(
-            """<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min
-            .css">"""
-            f"""<div style="display: flex; gap: 10px"><p style='font-size: 15px; color: 'black'>Từ phát âm đúng 
-            <span style='font-size: 20px; color: 'red'><strong>{target_text}</strong></span></p></div>""",
-            unsafe_allow_html=True)
-
-        sscol1, sscol2, sscol3 = st.columns([1, 1, 1])
+        sscol1, sscol2, _ = st.columns([5, 5, 1])
 
         with sscol1:
             st.markdown(
+                f"""<div style="display: flex; gap: 10px"><p style='font-size: 15px; color: 'black'>Từ phát âm đúng 
+                        <span style='font-size: 20px; color: 'red'><strong>{target_text}</strong></span></p></div>""",
+                unsafe_allow_html=True)
+        
+        if st.button("Nghe phát âm đúng"):
+            audio_url = get_api_audio_fpt(target_text)
+            if audio_url != "API rate limit exceeded":
+                st.audio(audio_url, format='audio/mp3', start_time=0)
+            else:
+                st.warning("API FPT rate limit exceeded")
+        
+        with sscol2:
+            st.markdown(
                 f"<p>Từ bạn muốn phát âm <span style='font-size: 20px; color: 'red'><strong>{mispronouned_word}</strong"
                 f"></span></p>",
-            unsafe_allow_html=True)
+                unsafe_allow_html=True)
 
-        with sscol2:
-            if st.button("Nghe từ muốn phát âm"):
-                url = 'https://api.fpt.ai/hmi/tts/v5'
-
-                payload = mispronouned_word
-                headers = {
-                    'api-key': '03Aw9xRXvspjlbUTlpJway0DTznJ01HY',
-                    'speed': '-2.5',
-                    'voice': 'banmai'
-                }
-
-                response = requests.request('POST', url, data=payload.encode('utf-8'), headers=headers)
-
-                audio_url = response.text.split("\"")[3]
-
-                st.audio(audio_url, format='audio/wav', start_time=0)
 
         # RECORD AUDIO WITH STREAMLIT-AUDIOREC
         wav_audio_data = st_audiorec()
@@ -126,7 +167,7 @@ def main():
         #     st.audio(audio_bytes, format="audio/wav")
 
         if st.button("Lưu dữ liệu") and wav_audio_data:
-            if username != '' and target_text != '' and age != 0 and country != '':
+            if username != '' and target_text != '' and age != 0 and country != '' and voice_type != '':
                 # Convert audio_bytes to a NumPy array
                 audio_array = np.frombuffer(wav_audio_data, dtype=np.int32)
 
@@ -147,14 +188,25 @@ def main():
                         wav_url = DB.storage.from_("vmd-bucket").get_public_url(path=f"{OUT_WAV_FILE}")
                         print(f"Wav url: {wav_url}")
                         st.write("Đang chờ xử lý")
-                        response = DB.table("vmd-data").insert(
-                            {"audio_url": wav_url, "canonical_text": target_text.strip(),
-                             "transcript_text": mispronouned_word.strip(),
-                             "username": username, "country": country,
-                             "age": age}).execute()
-                        print(f"DB: {response}")
+
+                        if voice_type == "Phổ thông":
+                            response = DB.table("vmd-data").insert(
+                                {"audio_url": wav_url, "canonical_text": target_text.strip(),
+                                 "transcript_text": mispronouned_word.strip(),
+                                 "username": username, "country": country,
+                                 "age": age, "type_voice": True}).execute()
+                            print(f"DB: {response}")
+                        else:
+                            response = DB.table("vmd-data").insert(
+                                {"audio_url": wav_url, "canonical_text": target_text.strip(),
+                                 "transcript_text": mispronouned_word.strip(),
+                                 "username": username, "country": country,
+                                 "age": age, "type_voice": False}).execute()
+                            print(f"DB: {response}")
+
                         if response:
-                            st.markdown(f"<div style='color: red; font-size: 25px'>Cảm ơn bạn đã giành thời gian</div>",
+                            st.markdown(f"<div style='color: red; font-size: 25px'>Cảm ơn bạn đã giành thời gian giúp "
+                                        f"chúng mình</div>",
                                         unsafe_allow_html=True)
 
                             # delete wav file
@@ -175,16 +227,17 @@ def main():
                     f"phát âm đúng”</strong> và”<strong>từ bạn muốn phát âm</strong>”. Lưu ý <strong>từ muốn bạn "
                     f"phát âm</strong> là <strong>từ bạn sẽ phát âm khi ghi âm.</strong> Bạn có thể nghe thử cách "
                     f"phát âm ở bên cạnh.</p>"
-                    f"<p><strong>Bước 3</strong> Bấm <strong>“Start Recording”</strong> để thu âm, sau khi thu âm "
+                    f"<p><strong>Bước 3</strong> Chọn phát âm theo giọng <strong>địa phương</strong> hay giọng <strong>phổ thông (Hà Nội)</strong>."
+                    f" Mặc định phát âm theo giọng phổ thông nhé</p>"
+                    f"<p><strong>Bước 4</strong> Bấm <strong>“Start Recording”</strong> để thu âm, sau khi thu âm "
                     f"xong bấm ”<strong>Stop</strong>” và nghe lại phần ghi âm ở bên dưới. Nếu phần ghi âm <strong>bị "
                     f"lỗi hoặc thiếu </strong>thì bấm <strong>“Reset”</strong> để ghi âm lại nha.</p>"
-                    f"<p><strong>Bước 4</strong> Bấm <strong>“Lưu dữ liệu”</strong> để gửi ghi âm về cho chúng mình "
+                    f"<p><strong>Bước 5</strong> Bấm <strong>“Lưu dữ liệu”</strong> để gửi ghi âm về cho chúng mình "
                     f"bạn nhé</p></br>"
                     f"<strong><span style='color: red'>Lưu ý: </span></strong> Nhóm chúng mình cần dữ liệu phát âm "
                     f"sai, bạn có thể giúp chúng mình phát âm <strong>1 từ với 4 bản ghi âm: 1 bản phát âm đúng và 3 "
-                    f"bản phát âm sai.</strong> Ví dụ: <strong>“vào núi (phát âm đúng) - vào nui, vào nùi, "
-                    f"vào nụi (phát âm sai).</strong></br>"
-                    f"<strong><span style='color: green'>Eg: vào nụi(phát âm đúng) -> vào núi, vào nui, vào nùi(phát "
+                    f"bản phát âm sai.</strong>"
+                    f"<strong><span style='color: green'> Eg: sinh viên(phát âm đúng) -> sinh diên, xinh viên, sinh viền(phát "
                     f"âm sai)</span></strong></p> </br>"
                     f"<strong><span style='color: red'>Khi thanh ghi âm hiện lên/sáng lên bạn hẳn phát âm "
                     f"nhé.</span></strong> </br>",
