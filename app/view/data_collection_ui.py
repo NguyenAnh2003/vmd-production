@@ -81,7 +81,7 @@ def get_api_audio_fpt(text):
 
 def main():
     # sample for select box
-    list_phonemes = shuffle(_get_phonemes("phoneme_dict.txt"))
+    list_phonemes = _get_phonemes("phoneme_dict.txt")
     voice = ["Phổ thông", "Địa phương"]
     _, cl1,_, cl3, _ = st.columns([1, 10, 1 , 6, 1])
     with cl1:
