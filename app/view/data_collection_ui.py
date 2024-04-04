@@ -37,7 +37,7 @@ def _get_phonemes(file_path):
     with open(file_path, "r", encoding="utf-8") as file:
         for line in file:
             list_of_phonemes.append(line)
-
+    shuffle(list_of_phonemes)
     return list_of_phonemes
 
 def get_api_audio_fpt(text):
