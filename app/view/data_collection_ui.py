@@ -6,6 +6,7 @@ import supabase
 from st_audiorec import st_audiorec
 from supabase import create_client, Client
 import scipy.io.wavfile as wavfile
+from random import shuffle
 import os
 import requests
 from pathlib import Path
@@ -41,7 +42,7 @@ def _get_phonemes(file_path):
 
 def main():
     # sample for select box
-    list_phonemes = _get_phonemes("phoneme_dict.txt")
+    list_phonemes = shuffle(_get_phonemes("phoneme_dict.txt"))
     cl1, _, cl3 = st.columns([3, 1, 2])
     with cl1:
         # setup interface

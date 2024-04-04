@@ -80,7 +80,7 @@ def correcting_service(media, file_name, text, username, country, age):
         predicted = prediction(Model_Training=Model,
                             path_save_model="./saved_model/model_Customize_All_3e3.pth",
                             audio=media, canonical=canonical)
-
+        
         logger.log(logger.INFO, f"Prediction: {predicted} Cannonical: {canonical} Target: {text}")
 
         with open("./core/note.txt", 'a') as file:
@@ -101,45 +101,10 @@ def correcting_service(media, file_name, text, username, country, age):
         # cast to dict
         result = dict(zip(target_list, result_compare))
 
-        # save data to csv
-        # _save_data_csv(file_name=file_name, prediction=predicted, cannonical=target, text_target=text,
-        #                result=json.dumps(result), username=username, country=country, age=age)
-
         return result
     except Exception as e:
         print(f"Error at service class: {e} Type: {type(e)}")
 
-# def _save_data_csv(file_name: str, prediction: str, cannonical: str, text_target: str,
-#                    result: json, username: str, country: str, age: int) -> None:
-#     """ save data sent from UI to csv file
-#     :param file_name: file name for audio
-#     :param prediction: string of prediction phoneme
-#     :param cannonical: string of cannonical phoneme
-#     :param text_target: text target for sample audio
-#     :param result: result for prediction (0, 1)
-#     :param username: user's name
-#     :param country: country
-#     :return:
-#     """
-#     try:
-#         csv_file = open("meta_data.csv", "w")
-#         csv_writer = csv.writer(csv_file)
-
-#         # write title for each col
-#         csv_writer.writerow(["audio_name", "prediction", "cannonical", "text_target",
-#                              "result", "username", "country", "age"])
-
-#         # write data
-#         csv_writer.writerow([file_name, prediction, cannonical, text_target,
-#                              result, username, country, age])
-
-#         logger.log(logger.INFO, f"Saved data: audio_id: {file_name} prediction: {prediction} "
-#                                 f"cannonical: {cannonical} target: {text_target} result: {result} "
-#                                 f"username: {username} country: {country} age: {age}")
-
-#         print("Saved successfully")
-#     except Exception as e:
-#         print(e)
 
 
 def _compare_transcript_canonical(canonical, transcript):
