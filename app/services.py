@@ -16,7 +16,7 @@ logger = setup_logger(path="./core/logs/prediction.log", location="services")
 logger.getLogger("services")
 
 # service class
-def correcting_service(media, file_name, text, username, country, age):
+def correcting_service(media, text):
     """ the service responsible for dealing with wav file
     translate text to phoneme and pass the audio to prediction function
     :return the output

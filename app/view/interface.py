@@ -24,9 +24,6 @@ def main():
 
     text = st.text_input('Target text', '')
     st.write('The current test is', text)
-    username = st.text_input("Your name", "")
-    country = st.text_input("Your country", "")
-    age = st.number_input("Your age", min_value=0)
 
     # Record audio using the audio_recorder function
     audio_bytes = audio_recorder(text="", pause_threshold=1, sample_rate=41_000)
@@ -53,7 +50,7 @@ def main():
             file_data = {"file": (OUT_WAV_FILE,
                                   io.BytesIO(audio_bytes), "audio/wav")}
             
-            st.write(OUT_WAV_FILE, text, username, country, age)
+            st.write(OUT_WAV_FILE, text)
             st.write(file_data)
             
             # packaging data form
