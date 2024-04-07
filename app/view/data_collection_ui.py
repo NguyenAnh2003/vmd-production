@@ -202,7 +202,7 @@ def main():
                                  "username": username, "country": country,
                                  "age": age, "type_voice": False}).execute()
                             print(f"DB: {response}")
-
+                        wav_audio_data = None
                         if response:
                             st.markdown(f"<div style='color: red; font-size: 25px'>Cảm ơn bạn đã giành thời gian giúp "
                                         f"chúng mình</div>",
