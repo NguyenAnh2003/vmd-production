@@ -143,12 +143,12 @@ def main():
                         <span style='font-size: 20px; color: 'red'><strong>{target_text}</strong></span></p></div>""",
                 unsafe_allow_html=True)
         
-        if st.button("Nghe phát âm đúng"):
-            audio_url = get_api_audio_fpt(target_text)
-            if audio_url != "API rate limit exceeded":
-                st.audio(audio_url, format='audio/mp3', start_time=0)
-            else:
-                st.warning("API FPT rate limit exceeded")
+        # if st.button("Nghe phát âm đúng"):
+        #     audio_url = get_api_audio_fpt(target_text)
+        #     if audio_url != "API rate limit exceeded":
+        #         st.audio(audio_url, format='audio/mp3', start_time=0)
+        #     else:
+        #         st.warning("API FPT rate limit exceeded")
         
         with sscol2:
             st.markdown(
