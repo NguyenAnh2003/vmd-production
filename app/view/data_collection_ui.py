@@ -2,16 +2,12 @@ import streamlit as st
 import numpy as np
 import soundfile as sf
 import time
-import supabase
 from st_audiorec import st_audiorec
 from supabase import create_client, Client
 import scipy.io.wavfile as wavfile
 from random import shuffle
 import os
 import requests
-from pathlib import Path
-import sys
-from PIL import Image
 
 # init DB
 url: str = "https://cceebjjirmrvyhqecubk.supabase.co"
