@@ -17,8 +17,7 @@ def index():
 
 
 @router.post('/danangvsr/vmd', status_code=status.HTTP_200_OK)
-def vmd_route(file: UploadFile = File(...), text_target: str = Form(...),
-                     username: str = Form(...), country: str = Form(...), age: int = Form(...)):
+def vmd_route(file: UploadFile = File(...), text_target: str = Form(...)):
     file_data = file.file # file content
     print(f"Filename: {file.filename} Username: {username} Country: {country} Age: {age}")
     result = vmd_service(media=file_data, file_name=str(file.filename), text=text_target,
