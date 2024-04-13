@@ -8,15 +8,9 @@ from utils.dataset.data_loader import Vocab
 from model.customize_model import Model
 from model.metric import Align
 import librosa
-from core.mylogger import setup_logger
-import csv
-import json
-
-logger = setup_logger(path="./core/logs/prediction.log", location="services")
-logger.getLogger("services")
 
 # service class
-def correcting_service(media, file_name, text, username, country, age):
+def vmd_service(media, file_name, text, username, country, age):
     """ the service responsible for dealing with wav file
     translate text to phoneme and pass the audio to prediction function
     :return the output
@@ -80,12 +74,7 @@ def correcting_service(media, file_name, text, username, country, age):
         predicted = prediction(Model_Training=Model,
                             path_save_model="./saved_model/model_Customize_All_3e3.pth",
                             audio=media, canonical=canonical)
-        
-        logger.log(logger.INFO, f"Prediction: {predicted} Cannonical: {canonical} Target: {text}")
-
-        with open("./core/note.txt", 'a') as file:
-            file.write(f"Prediction: {predicted} Cannonical: {canonical} Target: {text}")
-
+                            
         # canonical = " ".join(canonical.replace("$", "").split())
         target = " ".join(canonical.split())
         canonical = target.split()
