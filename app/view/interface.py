@@ -54,7 +54,7 @@ def main():
             st.write(file_data)
             
             # packaging data form
-            data_package = {"text_target": text, "username": username, "country": country, "age": age}
+            data_package = {"text_target": text}
             response = requests.post("http://127.0.0.1:8000/danangvsr/vmd", files=file_data, data=data_package)
 
 
