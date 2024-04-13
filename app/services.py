@@ -1,5 +1,4 @@
 import torch
-import torchaudio
 import io
 from utils.translate import translate, get_vocab_from_file
 import model.edit_distance as edit_distance
@@ -10,7 +9,7 @@ from model.metric import Align
 import librosa
 
 # service class
-def vmd_service(media, file_name, text, username, country, age):
+def vmd_service(media, text):
     """ the service responsible for dealing with wav file
     translate text to phoneme and pass the audio to prediction function
     :return the output

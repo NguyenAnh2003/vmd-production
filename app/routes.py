@@ -19,9 +19,7 @@ def index():
 @router.post('/danangvsr/vmd', status_code=status.HTTP_200_OK)
 def vmd_route(file: UploadFile = File(...), text_target: str = Form(...)):
     file_data = file.file # file content
-    print(f"Filename: {file.filename} Username: {username} Country: {country} Age: {age}")
-    result = vmd_service(media=file_data, file_name=str(file.filename), text=text_target,
-                                username=username, country=country, age=age)
+    result = vmd_service(media=file_data, text=text_target)
     """ input of correction route is "wav" file and text """
     return result
 
