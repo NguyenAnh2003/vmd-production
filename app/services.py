@@ -39,7 +39,6 @@ def vmd_service(media, text):
 
             audio_array, _ = librosa.load(audio)
             audio_array = torch.tensor(audio_array)
-            print(audio_array.shape)
             # audio_array = audio_array.reshape(1, audio_array.shape[0]*audio_array.shape[1]).squeeze(0)
             # audio_array = torch.mean(audio_array, dim=0)
             phonetic = phonetic_embedding(audio_array).unsqueeze(0)
