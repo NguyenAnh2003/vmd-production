@@ -3,10 +3,11 @@ import io
 from utils.translate import translate, get_vocab_from_file
 import model.edit_distance as edit_distance
 from feats.phonetic_embedding import phonetic_embedding
-from utils.dataset.data_loader import Vocab
+from utils.dicts.data_loader import Vocab
 from model.customize_model import Model
 from model.metric import Align
 import librosa
+from functools import lru_cache, cache
 
 # service class
 def vmd_service(media, text):

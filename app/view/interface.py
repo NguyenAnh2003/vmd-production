@@ -1,5 +1,6 @@
 import streamlit as st
 from audio_recorder_streamlit import audio_recorder
+from st_audiorec import st_audiorec
 import io
 import numpy as np
 import soundfile as sf
@@ -26,13 +27,11 @@ def main():
 
     # Record audio using the audio_recorder function
     audio_bytes = audio_recorder(text="", pause_threshold=1, sample_rate=41_000)
+    wav_audio_data = st_audiorec()
 
-    if audio_bytes:
-        st.audio(audio_bytes, format="audio/wav")
-
-    if st.button("Compute"):
+    if st.button("Compute") and wav_audio_data:
         # Convert audio_bytes to a NumPy array
-        audio_array = np.frombuffer(audio_bytes, dtype=np.int16)
+        audio_array = np.frombuffer(wav_audio_data, dtype=np.int32)
 
         if len(audio_array) > 0:
             # Save the audio to a file using soundfile library
@@ -43,7 +42,7 @@ def main():
             Alternative can use Cloudinary service
             """
             OUT_WAV_FILE = f"upload/recorded_audio{time.time()}.wav" # define absolute path
-            sf.write(OUT_WAV_FILE, audio_array, 41000, 'PCM_16')
+            sf.write(OUT_WAV_FILE, audio_array, 44100)
 
             # Use the recorded audio directly for the API request
             file_data = {"file": (OUT_WAV_FILE,
