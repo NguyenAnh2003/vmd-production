@@ -1,7 +1,6 @@
 from fastapi import FastAPI
-from setup.setup_app import setup_app
+from app.setup_app import setup_app
 import uvicorn
-from core.mylogger import setup_logger
 
 """ setup app and run """
 app = setup_app() #

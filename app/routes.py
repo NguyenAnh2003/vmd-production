@@ -1,11 +1,7 @@
 import io
-
 from fastapi import APIRouter, status, \
     UploadFile, Form, File
 from app.services import vmd_service
-import torchaudio
-
-""" modules """
 
 # router define
 router = APIRouter()
