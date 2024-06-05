@@ -1,5 +1,4 @@
 import streamlit as st
-from audio_recorder_streamlit import audio_recorder
 from st_audiorec import st_audiorec
 import io
 import numpy as np
@@ -26,7 +25,6 @@ def main():
     st.write('The current test is', text)
 
     # Record audio using the audio_recorder function
-    audio_bytes = audio_recorder(text="", pause_threshold=1, sample_rate=41_000)
     wav_audio_data = st_audiorec()
 
     if st.button("Compute") and wav_audio_data:
