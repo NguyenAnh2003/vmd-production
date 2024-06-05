@@ -1,7 +1,7 @@
 import io
 from fastapi import APIRouter, status, \
     UploadFile, Form, File
-from app.services import vmd_service
+from vmd_app.services import vmd_service
 
 # router define
 router = APIRouter()

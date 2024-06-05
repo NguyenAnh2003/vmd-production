@@ -2,9 +2,9 @@ import math
 import torch
 import torch.nn as nn
 from collections import OrderedDict
-from model.cnn_stack import CNN_Layer
-from model.rnn_stack import RNN_Layer
-from model.metric import Accuracy
+from model.modules.cnn_stack import CNN_Layer
+from model.modules.rnn_stack import RNN_Layer
+from model.modules.metric import Accuracy
 
 class Model_Main(nn.Module):
     def __init__(self, a_param=None, pi_param=None, p_param=None, l_param=None, vocab=None):

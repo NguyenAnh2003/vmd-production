@@ -16,8 +16,8 @@ venv
 */venv
 */*/venv
 
-# app/view
-app/view/
+# vmd_app/view
+vmd_app/view/
 
 # upload audio folder
 upload/

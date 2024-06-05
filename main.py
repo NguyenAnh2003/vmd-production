@@ -1,8 +1,8 @@
 from fastapi import FastAPI
-from app.setup_app import setup_app
+from vmd_app.setup_app import setup_app # type: ignore
 import uvicorn
 
-""" setup app and run """
+""" setup vmd_app and run """
 app = setup_app() #
 
 if __name__ == "__main__":

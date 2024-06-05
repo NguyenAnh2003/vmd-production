@@ -25,7 +25,7 @@ https://drive.google.com/drive/folders/1jrACQF0nceiSlgTyUmrRJSgX9VC0pd5O?usp=dri
 ### Project Structure
 ```bash
 ├── README.md
-├── app
+├── vmd_app
 │   ├── __pycache__
 │   ├── exceptions.py
 │   ├── routes.py

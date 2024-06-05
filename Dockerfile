@@ -17,7 +17,7 @@ RUN apt-get install && apt-get update && \
     pip install -r requirements.txt && \
     rm -rf /var/lib/apt/lists/*
 
-# copy all files to vmd-app folder
+# copy all files to vmd-vmd_app folder
 # copy . . if using . /vmd it would be /vmd/vmd (not fk good)
 COPY . .
 

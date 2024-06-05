@@ -1,8 +1,8 @@
 import torch
 import torch.nn as nn
-from model.rnn_stack import RNN_Layer
+from model.modules.rnn_stack import RNN_Layer
 from model.vmd_model import Model_Main
-from utils.dataset.data_loader import Vocab
+from data_manipulation.data_loader import Vocab
 from utils.utils import load_config
 
 class Model(Model_Main):

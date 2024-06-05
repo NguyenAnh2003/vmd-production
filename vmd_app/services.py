@@ -1,11 +1,11 @@
 import torch
 import io
 from utils.translate import translate, get_vocab_from_file
-import model.edit_distance as edit_distance
-from feats.phonetic_embedding import phonetic_embedding
-from utils.dicts.data_loader import Vocab
-from model.customize_model import Model
-from model.metric import Align
+import model.modules.edit_distance as edit_distance
+from data_manipulation.phonetic_embedding import phonetic_embedding
+from data_manipulation.data_loader import Vocab
+from model.modules.customize_model import Model
+from model.modules.metric import Align
 import librosa
 from functools import lru_cache, cache
 
