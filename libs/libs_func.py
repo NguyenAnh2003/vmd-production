@@ -148,7 +148,7 @@ def _display_word_mispronounce(canonicals, list_compare):
     return list_result
 
 
-def word2phoneme(word, path):
+def word2phoneme(word, path = "./storage/lexicon_vmd.txt"):
 
     def _parse_file(file_path):
         result_dict = {}

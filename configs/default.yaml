@@ -17,16 +17,16 @@ data:
   private_test_data_dir: ./dataset/private_test/
   public_test_data_dir: ./dataset/public_test/
   train_data_dir: ./dataset/train/
-  vocab_dir: ./data_manipulation/vocab_dataset.json
+  vocab_dir: ./storage/vocab_dataset.json
 service:
-  checkpoint_dir: ./exp/models/best.pth
+  checkpoint_dir: ./saved_model/best.pth
 train:
   best_checkpoint:
     data_name: test
     metric_type: f1_score
   best_score: 0.58
   best_seed: 42
-  checkpoint_dir: ./exp/models/best_not_aug.pth
+  checkpoint_dir: ./saved_model/best_not_aug.pth
   decoder:
     feed_forward:
       dropout: 0.1
