@@ -1,7 +1,7 @@
 from model.vmd_model import VMDModel
 from omegaconf import OmegaConf, DictConfig
 from libs.libs_func import load_config
-from core.modules.data_pipeline import DataProcessingPipeline
+from modules.data_pipeline import DataProcessingPipeline
 
 # config
 conf = load_config("./configs/default.yaml")
