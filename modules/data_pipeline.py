@@ -6,9 +6,10 @@ from libs.libs_func import word2phoneme
 
 
 class DataProcessingPipeline:
-    def __init__(self) -> None:
-        self.pretrained_model = "nguyenvulebinh/wav2vec2-base-vietnamese-250h"
-        self.sample_rate = 16000
+    def __init__(self, conf: DictConfig) -> None:
+        self.conf = OmegaConf.create(conf)
+        self.pretrained_model = self.conf.pre_trained_model
+        self.sample_rate = self.conf.rate
         self.model, self.feature_extractor = self.get_pretrained_model_extractor()
 
     def get_pretrained_model_extractor(self):

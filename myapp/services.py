@@ -13,7 +13,7 @@ vocab = model_modules.vocab
 device = model_modules.device
 
 # data pipeline
-data_pipeline = DataProcessingPipeline()
+data_pipeline = DataProcessingPipeline(conf=conf)
 
 
 # service class
