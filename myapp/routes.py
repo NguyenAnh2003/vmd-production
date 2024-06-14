@@ -16,6 +16,6 @@ def vmd_route(file: UploadFile = File(...), text_target: str = Form(...)):
     file_data = file.file  # file content
     result = vmd_service(media=file_data, text=text_target)
     if result is None:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
-                            detail="Từ ngữ không có trong từ điển")
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                            detail="Server Error")
     return result
