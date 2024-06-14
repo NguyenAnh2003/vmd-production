@@ -1,12 +1,11 @@
 import logging
 
-def setup_logger(path: str = "./logs/example.log", location: str = ""):
-    """ setup logger with logging package all log information will stored
-        in *.log files format date for logfile or filename """
-
-    # logger basic setup
-    logging.basicConfig(filename=path, encoding='utf-8',
-                        level=logging.INFO,
-                        format=f'{location}: %(levelname)s: -- %(message)s --: %(asctime)s',
-                        datefmt="%m/%d/%Y %I:%M:%S %p")
-    return logging
+def setup_logger():
+    logger = logging.getLogger(__name__)
+    handler = logging.StreamHandler()
+    formatter = logging.Formatter("%(levelname)s: -- %(message)s --: %(asctime)s")
+    handler.setFormatter(formatter)
+    logger.addHandler(handler)
+    logger.removeHandler(logging.FileHandler)  # remove file handler
+    logger.setLevel(logging.DEBUG)
+    return logger

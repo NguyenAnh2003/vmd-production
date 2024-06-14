@@ -44,7 +44,7 @@ test
 README.md
 
 # 
-test_main.http
+test/test_main.http
 
 # gitignore
 .gitignore
