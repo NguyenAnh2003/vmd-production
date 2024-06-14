@@ -20,5 +20,9 @@ class ModelModules:
         model.load_state_dict(torch.load(self.config.service.checkpoint_dir))
         model.to(self.device)
         model.eval()
-
         return model
+
+    def get_prediction(self, phonetic_emb, canonical_phoneme):
+        prediction = self.model.predict(self.model, self.vocab, self.device, phonetic_emb, canonical_phoneme)
+        return prediction
+

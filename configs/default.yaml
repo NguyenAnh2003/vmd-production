@@ -1,4 +1,4 @@
-vocab_dir: ./storage/vocab_dataset.json
+vocab_dir: ./libs/storage/vocab_dataset.json
 service:
   checkpoint_dir: ./saved_model/best.pth
 pre_trained_model: nguyenvulebinh/wav2vec2-base-vietnamese-250h

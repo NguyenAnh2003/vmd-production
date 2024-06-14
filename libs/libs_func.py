@@ -1,6 +1,9 @@
 import argparse
 import yaml
 
+gap_penalty = -1
+match_award = 1
+mismatch_penalty = -1
 
 def load_config(path: str):
     parser = argparse.ArgumentParser()
@@ -9,12 +12,6 @@ def load_config(path: str):
     config_path = args.conf
     param = yaml.safe_load(open(config_path, "r", encoding="utf8"))
     return param
-
-
-gap_penalty = -1
-match_award = 1
-mismatch_penalty = -1
-
 
 def zeros(rows, cols):
     # Define an empty list
@@ -119,7 +116,7 @@ def Align(seq1, seq2):
     return (align1, align2)
 
 
-def _compare_transcript_canonical(canonical, transcript):
+def compare_transcript_canonical(canonical, transcript):
     result = []
     can_align, trans_align = Align(canonical, transcript)
     for can, tran in zip(can_align, trans_align):
@@ -133,7 +130,7 @@ def _compare_transcript_canonical(canonical, transcript):
     return result
 
 
-def _display_word_mispronounce(canonicals, list_compare):
+def display_word_mispronounce(canonicals, list_compare):
     phoneme_each_word_compare = []
     phoneme_one_word_compare = []
     for i, (can, compare) in enumerate(zip(canonicals, list_compare)):
@@ -148,7 +145,7 @@ def _display_word_mispronounce(canonicals, list_compare):
     return list_result
 
 
-def word2phoneme(word, path = "./storage/lexicon_vmd.txt"):
+def word2phoneme(word, path = "./libs/storage/lexicon_vmd.txt"):
 
     def _parse_file(file_path):
         result_dict = {}
@@ -177,68 +174,3 @@ def word2phoneme(word, path = "./storage/lexicon_vmd.txt"):
             phonemes.append("$")
 
     return " ".join(phonemes)
-
-
-def translate(sentence: str, method: str, my_vocab):
-    data_trans = []
-    try:
-        # So sánh dữ liệu
-        def compare_data(arg: str, method: str):
-            str_split = lambda x: x.split()
-            t = str_split(arg)
-
-            for i, sublist in enumerate(my_vocab):
-                if t == sublist[1:] and method == "phoneme_to_text":
-                    rs = my_vocab[i]
-                    return rs
-                elif t == sublist[:1] and method == "text_to_phoneme":
-                    rs = my_vocab[i]
-                    return rs
-
-        if method == "phoneme_to_text":
-            trans = sentence.split(" $ ")
-            for i, tran in enumerate(trans):
-                if i == 0:
-                    data_trans = []
-                result = compare_data(tran, method=method)
-                if result is None:
-                    continue
-                data_trans.extend(result[:1])
-            return data_trans
-
-        elif method == "text_to_phoneme":
-            trans = sentence.split(" ")
-            for i, tran in enumerate(trans):
-                if i == 0:
-                    data_trans = []
-                result = compare_data(tran, method=method)
-                data_trans.extend(result[1:])
-                data_trans.extend("$")
-
-            data_trans.pop()
-            # print(f"Translate: {' '.join(data_trans)}")
-            return " ".join(data_trans)
-    except Exception as e:
-        print(f"Error: {e}")
-        raise e
-
-
-# Lấy dữ liệu để so sánh
-def get_vocab_from_file(file: str):
-    f = open(file, "r", encoding="UTF-8")
-    lines = f.readlines()
-    result = []
-    for x in lines:
-        x = x.replace("\n", "")
-        result.append(x.split("\n"))
-    f.close()
-
-    vocab = []
-    for res in result:
-        for r in res:
-            vocab.append(r.split(" "))
-    return vocab
-
-
-if __name__ == "__main__":
-    pass
