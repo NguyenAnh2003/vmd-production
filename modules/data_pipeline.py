@@ -2,6 +2,7 @@ import torch
 import torchaudio
 from transformers import Wav2Vec2FeatureExtractor, Wav2Vec2Model
 from omegaconf import OmegaConf, DictConfig  # later
+from libs.libs_func import word2phoneme
 
 
 class DataProcessingPipeline:
@@ -34,8 +35,9 @@ class DataProcessingPipeline:
 
         return audio_array
 
-    def get_feature(self, input):
+    def get_processed_input(self, input, text):
         # input is audio file (byte)
+        # text - converted to canonical phoneme
         audio_array = self._load_audio_array(input=input)
 
         audio_feature = self.feature_extractor(
@@ -45,4 +47,6 @@ class DataProcessingPipeline:
         with torch.no_grad():
             out = self.model(audio_feature)
 
-        return out.last_hidden_state
+        canonical_phoneme = word2phoneme(text.lower())
+
+        return out.last_hidden_state, canonical_phoneme
