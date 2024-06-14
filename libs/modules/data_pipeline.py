@@ -27,7 +27,7 @@ class DataProcessingPipeline:
     def _load_audio_array(self, input: torch.Tensor):
 
         audio_array, rate = torchaudio.load(input)
-        audio_array = torch.FloatTensor(audio_array)
+        audio_array = torch.mean(audio_array, dim=0) # take mean when stereo sound
 
         if rate != self.sample_rate:
             audio_array = torchaudio.functional.resample(
