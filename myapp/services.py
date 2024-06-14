@@ -8,9 +8,9 @@ conf = load_config("./configs/default.yaml")
 
 # init model modules
 model_modules = ModelModules(config=conf)
-model = model_modules.get_vmd_model()
-vocab = model_modules.vocab
-device = model_modules.device
+model = model_modules.model # model
+vocab = model_modules.vocab # vocab
+device = model_modules.device # device
 
 # data pipeline
 data_pipeline = DataProcessingPipeline(conf=conf)

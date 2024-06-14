@@ -8,6 +8,7 @@ class ModelModules:
         self.config = OmegaConf.create(config)
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.vocab = self.get_vocab() # get vocab
+        self.model = self.get_vmd_model()
 
     def get_vocab(self):
         with open(self.config.vocab_dir, 'r', encoding="utf8") as file:

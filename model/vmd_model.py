@@ -5,31 +5,8 @@ import numpy as np
 from transformers.modeling_outputs import ModelOutput
 import torch
 from torch import nn
-
-# from omegaconf import OmegaConf, DictConfig
-
-class RNN_Layer(torch.nn.Module):
-    def __init__(self, input_size, hidden_size, dropout):
-        super().__init__()
-        self.lstm = torch.nn.LSTM(
-            input_size=input_size,
-            hidden_size=hidden_size,
-            bidirectional=True,
-            batch_first=False,
-        )
-        self.batch_norm = torch.nn.BatchNorm1d(hidden_size * 2)
-        self.dropout = torch.nn.Dropout(dropout)
-
-    def forward(self, x):
-        x = x.transpose(0, 1).contiguous()
-        x, _ = self.lstm(x)
-        # (n_frames, batch_size, d_model) ->  (batch_size, d_model, n_frames) dể batch_norm
-        x = x.permute(1, 2, 0).contiguous()
-        x = self.batch_norm(x)
-        x = x.permute(2, 0, 1).contiguous()  # (n_frames, batch_size, d_model)
-
-        x = self.dropout(x)
-        return x
+from modules.rnn_modules import RNNLayer
+from omegaconf import OmegaConf, DictConfig
 
 
 @dataclass
@@ -41,38 +18,38 @@ class VMDModelOutput(ModelOutput):
 class VMDModel(torch.nn.Module):
     def __init__(self, config):
         super().__init__()
-        # self.config = OmegaConf.create(config) # config with omegaconf
-        self.num_classes = config["num_classes"]
+        self.config = OmegaConf.create(config) # config with omegaconf
+        self.num_classes = self.config.num_classes
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-        self.p_rnn_layer = RNN_Layer(
-            input_size=config["phonetic_encoder"]["input_size"],
-            hidden_size=config["phonetic_encoder"]["hidden_size"],
-            dropout=config["phonetic_encoder"]["drop_out"],
+        self.p_rnn_layer = RNNLayer(
+            input_size=self.config.phonetic_encoder.input_size,
+            hidden_size=self.config.phonetic_encoder.hidden_size,
+            dropout=self.config.phonetic_encoder.drop_out,
         )
 
         self.l_embs_vocab = nn.Embedding(
-            self.num_classes, config["linguistic_encoder"]["embs_dim"]
+            self.num_classes, self.config.linguistic_encoder.embs_dim
         )
 
-        self.l_rnn_layer = RNN_Layer(
-            input_size=config["linguistic_encoder"]["embs_dim"],
-            hidden_size=config["linguistic_encoder"]["hidden_size"],
-            dropout=config["linguistic_encoder"]["drop_out"],
+        self.l_rnn_layer = RNNLayer(
+            input_size=self.config.linguistic_encoder.embs_dim,
+            hidden_size=self.config.linguistic_encoder.hidden_size,
+            dropout=self.config.linguistic_encoder.drop_out,
         )
 
         self.mha_decoder = torch.nn.MultiheadAttention(
-            embed_dim=config["linguistic_encoder"]["hidden_size"] * 2,
-            num_heads=config["decoder"]["mha"]["num_heads"],
-            dropout=config["decoder"]["mha"]["dropout"],
+            embed_dim=self.config.linguistic_encoder.hidden_size * 2,
+            num_heads=self.config.decoder.mha.num_heads,
+            dropout=self.config.decoder.mha.dropout,
         )
 
         self.feed_foward_decoder = nn.Sequential(
-            nn.BatchNorm1d(config["linguistic_encoder"]["hidden_size"] * 4),
+            nn.BatchNorm1d(self.config.linguistic_encoder.hidden_size * 4),
             nn.ReLU(),
-            nn.Dropout(p=config["decoder"]["feed_forward"]["dropout"]),
+            nn.Dropout(p=self.config.decoder.feed_forward.dropout),
             nn.Linear(
-                config["linguistic_encoder"]["hidden_size"] * 4, self.num_classes
+                self.config.linguistic_encoder.hidden_size * 4, self.num_classes
             ),
         )
 
@@ -142,7 +119,7 @@ class VMDModel(torch.nn.Module):
 
         total_size_mb = total_size / (1024 * 1024)
         print(
-            f"Số lượng tham số : {round(totaconfig/1000000, 3)}M . Kích thước mô hình : {round(total_size_mb, 3)} MB"
+            f"Parameters : {round(totaconfig/1000000, 3)}M . Model size: {round(total_size_mb, 3)} MB"
         )
 
     def predict(self, model, vocab, device, phonetic_embs, canonical_phoneme):
