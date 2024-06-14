@@ -1,5 +1,4 @@
 import streamlit as st
-from audio_recorder_streamlit import audio_recorder
 from st_audiorec import st_audiorec
 import io
 import numpy as np
@@ -26,7 +25,6 @@ def main():
     st.write('The current test is', text)
 
     # Record audio using the audio_recorder function
-    audio_bytes = audio_recorder(text="", pause_threshold=1, sample_rate=41_000)
     wav_audio_data = st_audiorec()
 
     if st.button("Compute") and wav_audio_data:
@@ -66,13 +64,13 @@ def main():
                 st.markdown(f"<div style='display: flex; flex-direction: row; gap: 0;'>{result_html}</div>",
                             unsafe_allow_html=True)
 
-                # Display the data in your Streamlit app
+                # Display the data in your Streamlit vmd_app
                 # st.write("API Response:", data, response.status_code) # including status code and data
             else:
                 st.error(f"Failed to fetch data. Status code: {response.status_code}")
         else:
             st.warning("The audio data is empty.")
 
-# run interface ui `streamlit run app/view/interface.py`
+# run interface ui `streamlit run vmd_app/view/interface.py`
 st.set_page_config(page_title="Mispronunciation detection")
 main()
