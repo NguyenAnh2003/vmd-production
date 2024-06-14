@@ -10,11 +10,9 @@ def setup_app() -> FastAPI:
     try:
         app = FastAPI()  # app dec
 
-        origin = "http://localhost:3000"  # request resoure
-
         app.add_middleware(
             CORSMiddleware,
-            allow_origins=origin,
+            allow_origins=["*"],
             allow_credentials=True,
             allow_methods=["*"],
             allow_headers=["*"],
