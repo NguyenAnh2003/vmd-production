@@ -1,6 +1,6 @@
 from libs.libs_func import load_config
-from modules.data_pipeline import DataProcessingPipeline
-from modules.model_modules import ModelModules
+from libs.modules.data_pipeline import DataProcessingPipeline
+from libs.modules.model_modules import ModelModules
 from libs.libs_func import _display_word_mispronounce, _compare_transcript_canonical
 
 # config
