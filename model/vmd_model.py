@@ -1,141 +1,128 @@
-import math
+from dataclasses import dataclass
+import json
+
+import numpy as np
+from transformers.modeling_outputs import ModelOutput
 import torch
-import torch.nn as nn
-from collections import OrderedDict
-from model.cnn_stack import CNN_Layer
-from model.rnn_stack import RNN_Layer
-from model.metric import Accuracy
+from torch import nn
 
-class Model_Main(nn.Module):
-    def __init__(self, a_param=None, pi_param=None, p_param=None, l_param=None, vocab=None):
-        """
-        cnn_param [dict]:  cnn parameters, only support Conv2d i.e.
-        rnn_param [dict]:  rnn parameters i.e.
-        vocab_size  [int]:  Sizes of vocab, default: 54
-        """
+# from omegaconf import OmegaConf, DictConfig
+
+class RNN_Layer(torch.nn.Module):
+    def __init__(self, input_size, hidden_size, dropout):
         super().__init__()
-        self.vocab = vocab
-        self.a_param = a_param
-        self.pi_param = pi_param
-        self.p_param = p_param
-        self.l_param = l_param
+        self.lstm = torch.nn.LSTM(
+            input_size=input_size,
+            hidden_size=hidden_size,
+            bidirectional=True,
+            batch_first=False,
+        )
+        self.batch_norm = torch.nn.BatchNorm1d(hidden_size * 2)
+        self.dropout = torch.nn.Dropout(dropout)
 
-    def _encoder(self, param=None):
-        rnn_input_size = param["rnn_input_size"]
-        if param["cnn_layers"] != 0:
-            # CNN Stack
-            cnn_drop_out = param["cnn_drop_out"]
-
-            stack = []
-            for n in range(param["cnn_layers"]):
-                in_channel = eval(param["cnn_channel"])[n][0]
-                out_channel = eval(param["cnn_channel"])[n][1]
-                kernel_size = eval(param["cnn_kernel_size"])[n]
-                stride = eval(param["cnn_stride"])[n]
-                padding = eval(param["cnn_padding"])[n]
-
-                cnn_layer = CNN_Layer(in_channel, out_channel, kernel_size, stride, padding, dropout=cnn_drop_out)
-                stack.append(('%d' % n, cnn_layer))
-
-                rnn_input_size = int(math.floor((rnn_input_size + 2 * padding[1] - kernel_size[1]) / stride[1]) + 1)
-            cnn_stack = nn.Sequential(OrderedDict(stack))
-            rnn_input_size = rnn_input_size * out_channel if out_channel else rnn_input_size
-        else:
-            cnn_stack = None
-        # RNN Stack
-        rnn_dropout = param["rnn_drop_out"]
-        rnn_hidden_size = param["rnn_hidden_size"]
-        rnn_bidirectional = param["rnn_bidirectional"]
-        rnn_num_directions = 2 if rnn_bidirectional else 1
-        rnn_batch_first = param["rnn_batch_first"]
-
-        stack = []
-        rnn_layer = RNN_Layer(input_size=rnn_input_size,
-                              hidden_size=rnn_hidden_size,
-                              bidirectional=rnn_bidirectional,
-                              batch_first=rnn_batch_first,
-                              dropout=rnn_dropout)
-        stack.append(('0', rnn_layer))
-        for n in range(param["rnn_layers"] - 1):
-            rnn_layer = RNN_Layer(input_size=rnn_num_directions * rnn_hidden_size,
-                                  hidden_size=rnn_hidden_size,
-                                  bidirectional=rnn_bidirectional,
-                                  batch_first=rnn_batch_first,
-                                  dropout=rnn_dropout)
-
-            stack.append(('%d' % (n + 1), rnn_layer))
-        rnn_stack = torch.nn.Sequential(OrderedDict(stack))
-        return cnn_stack, rnn_stack
-
-    def _decoder(self, query, key, value):
-        attn_score = query @ key.transpose(1, 2)
-        attn_max, _ = torch.max(attn_score, dim=-1, keepdim=True)
-        exp_score = torch.exp(attn_score - attn_max)
-
-        attn_weights = exp_score
-        weights_denom = torch.sum(attn_weights, dim=-1, keepdim=True)
-        attn_weights = attn_weights / (weights_denom + 1e-30)
-        context = attn_weights @ value
-
-        # query and context concat
-        x = torch.concat((query, context), dim=-1)
-        # x = torch.add(query, context)
+    def forward(self, x):
         x = x.transpose(0, 1).contiguous()
+        x, _ = self.lstm(x)
+        # (n_frames, batch_size, d_model) ->  (batch_size, d_model, n_frames) dể batch_norm
+        x = x.permute(1, 2, 0).contiguous()
+        x = self.batch_norm(x)
+        x = x.permute(2, 0, 1).contiguous()  # (n_frames, batch_size, d_model)
 
+        x = self.dropout(x)
         return x
 
-    def _forward_encoder(self, x, cnn_stack, rnn_stack):
-        if cnn_stack:
-            x = cnn_stack(x.unsqueeze(1))
-            x = x.transpose(1, 2).contiguous()
-            x = x.view(x.shape[0], x.shape[1], x.shape[2] * x.shape[3])
-        x = rnn_stack(x)
-        return x
 
-    def _padding_to_concat(self, ac=None, pi=None, ph=None):
-        ac_frames = ac.shape[1]if torch.is_tensor(ac) else 0
-        pi_frames = pi.shape[1] if torch.is_tensor(pi) else 0
-        ph_frames = ph.shape[1] if torch.is_tensor(ph) else 0
-        max_n_frames = max(ac_frames, pi_frames, ph_frames)
-        if ac_frames < max_n_frames if torch.is_tensor(ac) else 0:
-            zeros = torch.zeros(ac.shape[0], max_n_frames - ac_frames, ac.shape[2]).cuda()
-            ac = torch.concat((ac, zeros), dim=1)
-        if pi_frames < max_n_frames and torch.is_tensor(pi):
-            zeros = torch.zeros(pi.shape[0], max_n_frames - pi_frames, pi.shape[2]).cuda()
-            pi = torch.concat((pi, zeros), dim=1)
-        if ph_frames < max_n_frames if torch.is_tensor(ph) else 0:
-            zeros = torch.zeros(ph.shape[0], max_n_frames - ph_frames, ph.shape[2]).cuda()
-            ph = torch.concat((ph, zeros), dim=1)
-        return ac, pi, ph
+@dataclass
+class VMDModelOutput(ModelOutput):
+    logits: torch.FloatTensor = None
+    loss: torch.FloatTensor = None
 
-    def compute_wer(self, index, input_sizes, targets, target_sizes):
-        batch_errs = 0
-        batch_tokens = 0
-        for i in range(len(index)):
-            label = targets[i][:target_sizes[i]]
-            label = list(filter(lambda x: x != 1, label))
-            pred = self.preprocess_predict(index[i], input_sizes[i])
-            # for j in range(len(index[i][:input_sizes[i]])):
-            #     if index[i][j] == 0 or index[i][j] == 1:
-            #         continue
-            #     if j == 0:
-            #         pred.append(index[i][j])
-            #     if j > 0 and index[i][j] != index[i][j - 1]:
-            #         if len(pred) == 0:
-            #             pred.append(index[i][j])
-            #         elif index[i][j] != pred[-1]:
-            #             pred.append(index[i][j])
 
-            err, len_ = Accuracy(label, pred)
-            batch_errs += err
-            batch_tokens += len_
+class VMDModel(torch.nn.Module):
+    def __init__(self, config):
+        super().__init__()
+        # self.config = OmegaConf.create(config) # config with omegaconf
+        self.num_classes = config["num_classes"]
+        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-        return batch_errs, batch_tokens
+        self.p_rnn_layer = RNN_Layer(
+            input_size=config["phonetic_encoder"]["input_size"],
+            hidden_size=config["phonetic_encoder"]["hidden_size"],
+            dropout=config["phonetic_encoder"]["drop_out"],
+        )
 
-    def preprocess_predict(self, predict, input_size):
+        self.l_embs_vocab = nn.Embedding(
+            self.num_classes, config["linguistic_encoder"]["embs_dim"]
+        )
+
+        self.l_rnn_layer = RNN_Layer(
+            input_size=config["linguistic_encoder"]["embs_dim"],
+            hidden_size=config["linguistic_encoder"]["hidden_size"],
+            dropout=config["linguistic_encoder"]["drop_out"],
+        )
+
+        self.mha_decoder = torch.nn.MultiheadAttention(
+            embed_dim=config["linguistic_encoder"]["hidden_size"] * 2,
+            num_heads=config["decoder"]["mha"]["num_heads"],
+            dropout=config["decoder"]["mha"]["dropout"],
+        )
+
+        self.feed_foward_decoder = nn.Sequential(
+            nn.BatchNorm1d(config["linguistic_encoder"]["hidden_size"] * 4),
+            nn.ReLU(),
+            nn.Dropout(p=config["decoder"]["feed_forward"]["dropout"]),
+            nn.Linear(
+                config["linguistic_encoder"]["hidden_size"] * 4, self.num_classes
+            ),
+        )
+
+        self.log_softmax = nn.LogSoftmax(dim=-1)
+
+    def forward(
+        self, phonetic, canonical, transcript=None, input_sizes=None, label_sizes=None
+    ):
+        query = self.p_rnn_layer(phonetic)
+        query = phonetic.transpose(0, 1).contiguous() + query
+
+        # Linguistic
+        can_embs = self.l_embs_vocab(canonical)
+        can_tensor = self.l_rnn_layer(can_embs)
+
+        # Decoder
+        mha_output, _ = self.mha_decoder(query, can_tensor, can_tensor)
+
+        output = torch.concat((query, mha_output), dim=-1)
+
+        L, N, _ = output.size()
+        output = output.view(L * N, -1)
+        output = self.feed_foward_decoder(output)
+        output = output.view(L, N, -1)
+        output = self.log_softmax(output)
+
+        if transcript is not None:
+            loss_fn = nn.CTCLoss(reduction="sum")
+            loss = loss_fn(output, transcript, input_sizes, label_sizes)
+            loss /= N
+        else:
+            loss = 0
+
+        return VMDModelOutput(logits=output, loss=loss)
+
+    def get_predict(self, predicts, predict_sizes):
+        list_predict = []
+        for i in range(len(predicts)):
+            pred = self._post_process(predicts[i], predict_sizes[i])
+            list_predict.append(pred)
+
+        return list_predict
+
+    def _post_process(self, predict, input_size=None):
         pred = []
-        for i in range(len(predict[:input_size])):
-            if predict[i] == 0 or predict[i] == 1:
+        predict_actual = predict[:input_size] if input_size is not None else predict[:]
+        for i in range(len(predict_actual)):
+            if predict[i] == 0:
+                continue
+            if predict[i] == 1 and input_size is not None:
                 continue
             if i == 0:
                 pred.append(predict[i])
@@ -146,25 +133,28 @@ class Model_Main(nn.Module):
                     pred.append(predict[i])
         return pred
 
-    @staticmethod
-    def save_package(model, optimizer=None, paramaters=None, list_acc_loss=None):
-        package = {
-            'a_param': model.a_param,
-            'pi_param': model.pi_param,
-            'p_param': model.p_param,
-            'l_param': model.l_param,
-            'vocab': model.vocab,
-            'state_dict': model.state_dict()
-        }
-        if optimizer is not None:
-            package['optim_dict'] = optimizer.state_dict()
-        if paramaters is not None:
-            package['paramaters'] = paramaters
-        if list_acc_loss is not None:
-            list_train_acc, list_train_loss, list_dev_acc, list_dev_loss = list_acc_loss
-            package['list_train_acc'] = list_train_acc
-            package['list_train_loss'] = list_train_loss
-            package['list_dev_acc'] = list_dev_acc
-            package['list_dev_loss'] = list_dev_loss
+    def get_param_size(self):
+        """
+        In ra số lượng tham số  của mô hình và kích thước, trọng lượng của mô hình (MB)
+        """
+        totaconfig = sum(p.numel() for p in self.parameters() if p.requires_grad)
+        total_size = sum(p.numel() * p.element_size() for p in self.parameters())
 
-        return package
+        total_size_mb = total_size / (1024 * 1024)
+        print(
+            f"Số lượng tham số : {round(totaconfig/1000000, 3)}M . Kích thước mô hình : {round(total_size_mb, 3)} MB"
+        )
+
+    def predict(self, model, vocab, device, phonetic_embs, canonical_phoneme):
+        canonical_phoneme = canonical_phoneme.split()
+        canonical_phoneme = torch.IntTensor(
+            [*map(vocab["label2index"].get, canonical_phoneme)]
+        ).unsqueeze(0)
+        with torch.no_grad():
+            output = model(phonetic_embs.to(device), canonical_phoneme.to(device))
+            _, predicts = torch.max(output.logits, dim=-1)
+            predicts = predicts.transpose(0, 1).cpu().numpy()
+        transcript = self._post_process(predicts[0])
+        transcript = [str(element) for element in transcript]
+        transcript = [*map(vocab["index2label"].get, transcript)]
+        return transcript

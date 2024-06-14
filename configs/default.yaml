@@ -1,0 +1,57 @@
+augment:
+  change_pitch:
+  - -0.5
+  - 1
+  change_speech:
+  - 0.7
+  - 1.2
+  - 1.5
+  change_volume:
+  - 0.2
+  - 0.5
+  - 2
+data:
+  aug_data_dir: ./dataset/aug_data/
+  collect_data_dir: ./dataset/data_collect/
+  openai_data_dir: ./dataset/data_openai/
+  private_test_data_dir: ./dataset/private_test/
+  public_test_data_dir: ./dataset/public_test/
+  train_data_dir: ./dataset/train/
+  vocab_dir: ./data_manipulation/vocab_dataset.json
+service:
+  checkpoint_dir: ./exp/models/best.pth
+train:
+  best_checkpoint:
+    data_name: test
+    metric_type: f1_score
+  best_score: 0.58
+  best_seed: 42
+  checkpoint_dir: ./exp/models/best_not_aug.pth
+  decoder:
+    feed_forward:
+      dropout: 0.1
+    mha:
+      dropout: 0.1
+      num_heads: 4
+  early_stopping:
+    data_name: test
+    loss_type: loss
+    patience: 5
+  epoch_num: 80
+  linguistic_encoder:
+    drop_out: 0.1
+    embs_dim: 768
+    embs_type_dim: 256
+    hidden_size: 384
+    input_size: 768
+    num_types: 6
+  lr: 0.0002
+  n_train: 1
+  num_classes: 124
+  phonetic_encoder:
+    drop_out: 0.1
+    hidden_size: 384
+    input_size: 768
+  pre_trained_model: nguyenvulebinh/wav2vec2-base-vietnamese-250h
+  test_batch_size: 16
+  train_batch_size: 16

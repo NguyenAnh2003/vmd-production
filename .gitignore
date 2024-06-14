@@ -166,10 +166,7 @@ cython_debug/
 .devcontainer
 
 # saved model
-saved_model/model_Customize_All_3e3.pth
+saved_model/
 
 # pycache
 **/__pycache__/
-
-# storage data csv
-meta_data.csv
