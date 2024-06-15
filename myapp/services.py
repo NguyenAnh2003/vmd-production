@@ -12,6 +12,7 @@ model_modules = ModelModules(config=conf)
 # data pipeline
 data_pipeline = DataProcessingPipeline(conf=conf)
 
+
 # vmd service
 def vmd_service(media, text):
     phonetic_emb, canonical_phoneme = data_pipeline.get_processed_input(
@@ -22,8 +23,7 @@ def vmd_service(media, text):
 
     canonical_phoneme = canonical_phoneme.split()  # split to List
 
-    compared_list = compare_transcript_canonical(canonical_phoneme, prediction)
-    compared_result = display_word_mispronounce(canonical_phoneme, compared_list)
+    compared_result = data_pipeline.post_process_result(canonical_phoneme, prediction)
     text = text.split()  # split target text to align with result
 
     result = dict(zip(text, compared_result))
