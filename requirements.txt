@@ -3,7 +3,7 @@
 # torch~=2.1.2
 torchaudio~=2.1.2
 
-transformers~=4.38.1
+# transformers~=4.38.1
 pydantic~=2.5.3
 fastapi~=0.109.0
 python-multipart~=0.0.6

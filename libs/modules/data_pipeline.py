@@ -71,7 +71,7 @@ class DataProcessingPipeline:
         return result
 
     def post_process_result(self, canonical_phoneme, prediction):
-        compared_result = self._compare_transcript_canonical(prediction)
+        compared_result = self._compare_transcript_canonical(canonical_phoneme, prediction)
         phoneme_each_word_compare = []
         phoneme_one_word_compare = []
         for i, (can, compare) in enumerate(zip(canonical_phoneme, compared_result)):

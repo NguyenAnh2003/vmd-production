@@ -1,7 +1,6 @@
 from libs.libs_func import load_config
 from libs.modules.data_pipeline import DataProcessingPipeline
 from libs.modules.model_modules import ModelModules
-from libs.libs_func import display_word_mispronounce, compare_transcript_canonical
 
 # config
 conf = load_config("./configs/default.yaml")
