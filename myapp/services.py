@@ -17,10 +17,9 @@ def vmd_service(media, text):
     phonetic_emb, canonical_phoneme, num_phoneme = data_pipeline.get_processed_input(
         media, text
     )  # get phonetic embedding and canonical phoneme
-    
-    prediction = model_modules.get_prediction(phonetic_emb, canonical_phoneme)
 
     canonical_phoneme = " ".join(canonical_phoneme)
+    prediction = model_modules.get_prediction(phonetic_emb, canonical_phoneme)
 
     compared_result = data_pipeline.post_process_result(canonical_phoneme, prediction, num_phoneme)
     text = text.split()  # split target text to align with result
