@@ -2,7 +2,7 @@ import torch
 import torchaudio
 from transformers import Wav2Vec2FeatureExtractor, Wav2Vec2Model
 from omegaconf import OmegaConf, DictConfig  # later
-from data_modules import word2phoneme, word2subword
+from .data_modules import word2phoneme, word2subword
 
 
 class DataProcessingPipeline:
