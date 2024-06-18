@@ -27,6 +27,24 @@ def _split_charac(arg: str):
     )
 
 
+# Lấy dữ liệu để so sánh
+def _get_vocab_from_file(file: str):
+    f = open(file, "r", encoding="UTF-8")
+    lines = f.readlines()
+    result = []
+    for x in lines:
+        x = x.replace("\n", "")
+        result.append(x.split("\n"))
+    f.close()
+
+    vocab = []
+    for res in result:
+        for r in res:
+            vocab.append(r.split(" ", maxsplit=1))
+
+    return vocab
+
+
 def word2subword(text: str):
     text = " ".join(text.lower().split())
     list_text = text.split()
@@ -37,8 +55,8 @@ def word2subword(text: str):
     return [r for r in vocabs if r is not None]
 
 
-def _word2phoneme(text: str):
-    global vocab
+def _word2phoneme(text: str, path: str = "./libs/storage/dictionary.txt"):
+    vocab = _get_vocab_from_file(path)
     rs = None
 
     str_split = _split_charac(text)

@@ -1,0 +1,917 @@
+b ɓ
+c k
+d z
+đ ɗ
+g ɣ
+h h
+k k
+l l
+m m
+n n
+p p
+q k
+r z
+s s
+t t
+v v
+x s
+ch t͡ɕ
+gh ɣ
+gi z
+kh x
+ng ŋ
+ngh ŋ
+nh ɲ
+th tʰ
+tr t͡ɕ
+ph f
+qu k w
+xu s u
+a aː-0
+à aː-1
+ã aː-2
+ả aː-3
+á aː-4
+ạ aː-5
+ă a-0
+ắ a-4
+ằ a-1
+ẳ a-3
+ẵ a-2
+ặ a-5
+â ə-0
+ấ ə-4
+ầ ə-1
+ẩ ə-3
+ẫ ə-2
+ậ ə-5
+e ɛ-0
+é ɛ-4
+è ɛ-1
+ẻ ɛ-3
+ẽ ɛ-2
+ẹ ɛ-5
+ê e-0
+ế e-4
+ề e-1
+ể e-3
+ễ e-2
+ệ e-5
+i i-0
+í i-4
+ì i-1
+ỉ i-3
+ĩ i-2
+ị i-5
+o ɔ-0
+ó ɔ-4
+ò ɔ-1
+ọ ɔ-5
+õ ɔ-2
+ỏ ɔ-3
+ô o-0
+ố o-4
+ồ o-1
+ổ o-3
+ộ o-5
+ỗ o-2
+ơ əː-0
+ớ əː-4
+ờ əː-1
+ở əː-3
+ợ əː-5
+ỡ əː-2
+u u-0
+ú u-4
+ù u-1
+ủ u-3
+ụ u-5
+ũ u-2
+ư ɨ-0
+ứ ɨ-4
+ừ ɨ-1
+ử ɨ-3
+ữ ɨ-2
+ự ɨ-5
+y i-0
+ý i-4
+ỳ i-1
+ỹ i-2
+ỷ i-3
+ỵ i-5
+ác aː-4 kz
+ạc aː-5 kz
+ắc a-4 kz
+ặc a-5 kz
+ấc ə-4 kz
+ậc ə-5 kz
+ai aː-0 iz
+ái aː-4 iz
+ải aː-3 iz
+ãi aː-2 iz
+ài aː-1 iz
+ại aː-5 iz
+am aː-0 mz
+ám aː-4 mz
+ãm aː-2 mz
+ảm aː-3 mz
+àm aː-1 mz
+ạm aː-5 mz
+ăm a-0 mz
+ẵm a-2 mz
+ẳm a-3 mz
+ắm a-4 mz
+ằm a-1 mz
+ặm a-5 mz
+âm ə-0 mz
+ấm ə-4 mz
+ầm ə-1 mz
+ẩm ə-3 mz
+ậm ə-5 mz
+ẫm ə-2 mz
+an aː-0 nz
+án aː-4 nz
+àn aː-1 nz
+ản aː-3 nz
+ãn aː-2 nz
+ạn aː-5 nz
+ăn a-0 nz
+ắn a-4 nz
+ằn a-1 nz
+ẳn a-3 nz
+ẵn a-2 nz
+ặn a-5 nz
+ân ə-0 nz
+ần ə-1 nz
+ấn ə-4 nz
+ẩn ə-3 nz
+ẫn ə-2 nz
+ận ə-5 nz
+ang aː-0 ŋz
+áng aː-4 ŋz
+àng aː-1 ŋz
+ãng aː-2 ŋz
+ảng aː-3 ŋz
+ạng aː-5 ŋz
+ăng a-0 ŋz
+ắng a-4 ŋz
+ằng a-1 ŋz
+ẳng a-3 ŋz
+ẵng a-2 ŋz
+ặng a-5 ŋz
+âng ə-0 ŋz
+ầng ə-0 ŋz
+ấng ə-0 ŋz
+ẩng ə-0 ŋz
+ẫng ə-0 ŋz
+ậng ə-0 ŋz
+anh eaː-0 ŋ̟z
+ánh eaː-4 ŋ̟z
+ành eaː-1 ŋ̟z
+ảnh eaː-3 ŋ̟z
+ãnh eaː-2 ŋ̟z
+ạnh eaː-5 ŋ̟z
+ách eaː-4 k̟z
+ạch eaː-5 k̟z
+ao aː-0 uz
+áo aː-4 uz
+ào aː-1 uz
+ão aː-2 uz
+ảo aː-3 uz
+ạo aː-5 uz
+áp aː-4 pz
+ạp aː-5 pz
+ắp a-4 pz
+ặp a-5 pz
+ấp ə-4 pz
+ập ə-5 pz
+at aː-0 tz
+át aː-4 tz
+ạt aː-5 tz
+ắt a-4 tz
+ăt a-0 tz
+ặt a-5 tz
+ắk a-5 kz
+ất ə-4 tz
+ật ə-5 tz
+au a-0 uz
+áu a-4 uz
+àu a-1 uz
+ảu a-3 uz
+ãu a-2 uz
+ạu a-5 uz
+âu ə-0 uz
+ấu ə-4 uz
+ầu ə-1 uz
+ẩu ə-3 uz
+ẫu ə-2 uz
+ậu ə-5 uz
+ay a-0 iz
+áy a-4 iz
+ảy a-3 iz
+ãy a-2 iz
+ày a-1 iz
+ạy a-5 iz
+ây ə-0 iz
+ấy ə-4 iz
+ầy ə-1 iz
+ẩy ə-3 iz
+ẫy ə-2 iz
+ậy ə-5 iz
+éc ɛ-4 kz
+ẹc ɛ-5 kz
+ếch e-4 k̟z
+ệch e-5 k̟z
+em ɛ-0 mz
+ém ɛ-4 mz
+èm ɛ-1 mz
+ẽm ɛ-2 mz
+ẻm ɛ-3 mz
+ẹm ɛ-5 mz
+êm e-0 mz
+ếm e-4 mz
+ềm e-1 mz
+ểm e-3 mz
+ễm e-2 mz
+ệm e-5 mz
+en ɛ-0 nz
+én ɛ-4 nz
+èn ɛ-1 nz
+ẻn ɛ-3 nz
+ẽn ɛ-2 nz
+ẹn ɛ-5 nz
+ên e-0 nz
+ền e-1 nz
+ến e-4 nz
+ển e-3 nz
+ễn e-2 nz
+ện e-5 nz
+éch ɛ-4 k̟z
+ẹch ɛ-5 k̟z
+eng ɛ-0 ŋz
+éng ɛ-4 ŋz
+èng ɛ-1 ŋz
+ẻng ɛ-3 ŋz
+ẽng ɛ-2 ŋz
+ẹng ɛ-5 ŋz
+ênh e-0 ŋ̟z
+ếnh e-4 ŋ̟z
+ềnh e-1 ŋ̟z
+ểnh e-3 ŋ̟z
+ễnh e-2 ŋ̟z
+ệnh e-5 ŋ̟z
+êng e-0 ŋz
+ếng e-4 ŋz
+ềng e-1 ŋz
+ểng e-3 ŋz
+ễng e-2 ŋz
+ệng e-5 ŋz
+eo ɛ-0 uz
+éo ɛ-4 uz
+èo ɛ-1 uz
+ẽo ɛ-2 uz
+ẻo ɛ-3 uz
+ẹo ɛ-5 uz
+ép ɛ-4 pz
+ẹp ɛ-5 pz
+ét ɛ-4 tz
+ẹt ɛ-5 tz
+ết e-4 tz
+ệt e-5 tz
+ếc e-4 kz
+ệc e-5 kz
+ếp e-4 pz
+ệp e-5 pz
+êu e-0 uz
+ếu e-4 uz
+ều e-1 uz
+ểu e-3 uz
+ễu e-2 uz
+ệu e-5 uz
+ia iə-0
+ía iə-4
+ìa iə-1
+ĩa iə-2
+ỉa iə-3
+ịa iə-5
+íc i-4 kz
+ịc i-5 kz
+ích i-4 k̟z
+ịch i-5 k̟z
+iết iə-4 tz
+iệt iə-5 tz
+iếc iə-4 kz
+iệc iə-5 kz
+iếp iə-4 pz
+iệp iə-5 pz
+iêu iə-0 uz
+iếu iə-4 uz
+iều iə-1 uz
+iểu iə-3 uz
+iễu iə-2 uz
+iệu iə-5 uz
+iêm iə-0 mz
+iếm iə-4 mz
+iềm iə-1 mz
+iểm iə-3 mz
+iễm iə-2 mz
+iệm iə-5 mz
+iên iə-0 nz
+iến iə-4 nz
+iền iə-1 nz
+iển iə-3 nz
+iễn iə-2 nz
+iện iə-5 nz
+iêng iə-0 ŋz
+iếng iə-4 ŋz
+iềng iə-1 ŋz
+iểng iə-3 ŋz
+iễng iə-2 ŋz
+iệng iə-5 ŋz
+im i-0 mz
+ím i-4 mz
+ìm i-1 mz
+ỉm i-3 mz
+ĩm i-2 mz
+ịm i-5 mz
+in i-0 nz
+ín i-4 nz
+ìn i-1 nz
+ỉn i-3 nz
+ĩn i-2 nz
+ịn i-5 nz
+inh i-0 ŋ̟z
+ình i-4 ŋ̟z
+ính i-1 ŋ̟z
+ỉnh i-3 ŋ̟z
+ĩnh i-2 ŋ̟z
+ịnh i-5 ŋ̟z
+ít i-4 tz
+ịt i-5 tz
+íp i-4 pz
+ịp i-5 pz
+iu i-0 uz
+íu i-4 uz
+ìu i-1 uz
+ỉu i-3 uz
+ĩu i-2 uz
+ịu i-5 uz
+oa w aː-0
+òa w aː-1
+óa w aː-4
+ỏa w aː-3
+õa w aː-2
+ọa w aː-5
+oá w aː-4
+oà w aː-1
+oả w aː-3
+oã w aː-2
+oạ w aː-5
+oây w ə-0 iz
+oấy w ə-4 iz
+oầy w ə-1 iz
+oẩy w ə-3 iz
+oẫy w ə-2 iz
+oậy w ə-5 iz
+oác w aː-4 kz
+oạc w aː-5 kz
+oách w eaː-4 k̟z
+oạch w eaː-5 k̟z
+oai w aː-0 iz
+oái w aː-4 iz
+oài w aː-1 iz
+oải w aː-3 iz
+oãi w aː-2 iz
+oại w aː-5 iz
+oao w aː-0 uz
+oáo w aː-4 uz
+oào w aː-1 uz
+oảo w aː-3 uz
+oão w aː-2 uz
+oạo w aː-5 uz
+oam w aː-0 mz
+oàm w aː-1 mz
+oám w aː-4 mz
+oảm w aː-3 mz
+oãm w aː-2 mz
+oạm w aː-5 mz
+oăm w a-0 mz
+oắm w a-4 mz
+oằm w a-1 mz
+oẳm w a-3 mz
+oẵm w a-2 mz
+oặm w a-5 mz
+oan w aː-0 nz
+oán w aː-4 nz
+oàn w aː-1 nz
+oản w aː-3 nz
+oãn w aː-2 nz
+oạn w aː-5 nz
+oăn w a-0 nz
+oắn w a-4 nz
+oằn w a-1 nz
+oẳn w a-3 nz
+oẵn w a-2 nz
+oặn w a-5 nz
+oắc w a-4 kz
+oặc w a-5 kz
+oắt w a-4 tz
+oặt w a-5 tz
+oay w aː-0 iz
+oáy w aː-4 iz
+oày w aː-1 iz
+oảy w aː-3 iz
+oãy w aː-2 iz
+oạy w aː-5 iz
+oang w aː-0 ŋz
+oáng w aː-4 ŋz
+oàng w aː-1 ŋz
+oảng w aː-3 ŋz
+oãng w aː-2 ŋz
+oạng w aː-5 ŋz
+oăng w a-0 ŋz
+oắng w a-4 ŋz
+oằng w a-1 ŋz
+oẳng w a-3 ŋz
+oẵng w a-2 ŋz
+oặng w a-5 ŋz
+oanh w eaː-0 ŋ̟z
+oánh w eaː-4 ŋ̟z
+oành w eaː-1 ŋ̟z
+oảnh w eaː-3 ŋ̟z
+oãnh w eaː-2 ŋ̟z
+oạnh w eaː-5 ŋ̟z
+oáp w aː-4 pz
+oạp w aː-5 pz
+oát w aː-4 tz
+oạt w aː-5 tz
+oắt w a-4 tz
+oặt w a-5 tz
+
+óc ɔ-4 kpz
+ọc ɔ-5 kpz
+ốc o-4 kpz
+ộc o-5 kpz
+
+oe w ɛ-0
+óe w ɛ-4
+òe w ɛ-1
+ỏe w ɛ-3
+õe w ɛ-2
+ọe w ɛ-5
+oé w ɛ-4
+oè w ɛ-1
+oẻ w ɛ-3
+oẽ w ɛ-2
+oẹ w ɛ-5
+oeo w ɛ-0 uz
+oèo w ɛ-1 uz
+oéo w ɛ-4 uz
+oẻo w ɛ-3 uz
+oẽo w ɛ-2 uz
+oẹo w ɛ-5 uz
+oéc w ɛ-4 kz
+oẹc w ɛ-5 kz
+oem w ɛ-0 mz
+oém w ɛ-4 mz
+oèm w ɛ-1 mz
+oẻm w ɛ-3 mz
+oẽm w ɛ-2 mz
+oẹm w ɛ-5 mz
+oen w ɛ-0 nz
+oén w ɛ-4 nz
+oèn w ɛ-1 nz
+oẻn w ɛ-3 nz
+oẽn w ɛ-2 nz
+oẹn w ɛ-5 nz
+oeng w ɛ-0 ŋz
+oéng w ɛ-4 ŋz
+oèng w ɛ-1 ŋz
+oẻng w ɛ-3 ŋz
+oẽng w ɛ-2 ŋz
+oẹng w ɛ-5 ŋz
+oeo w ɛ-0 uz
+oèo w ɛ-1 uz
+oéo w ɛ-4 uz
+oẻo w ɛ-3 uz
+oẽo w ɛ-2 uz
+oẹo w ɛ-5 uz
+oét w ɛ-4 tz
+oẹt w ɛ-5 tz
+oi ɔ-0 iz
+ói ɔ-4 iz
+òi ɔ-1 iz
+ỏi ɔ-3 iz
+õi ɔ-2 iz
+ọi ɔ-5 iz
+ôi o-0 iz
+ối o-4 iz
+ồi o-1 iz
+ổi o-3 iz
+ỗi o-2 iz
+ội o-5 iz
+ơi əː-0 iz
+ới əː-4 iz
+ời əː-1 iz
+ởi əː-3 iz
+ỡi əː-2 iz
+ợi əː-5 iz
+om ɔ-0 mz
+òm ɔ-1 mz
+óm ɔ-4 mz
+ỏm ɔ-3 mz
+õm ɔ-2 mz
+ọm ɔ-5 mz
+ôm o-0 mz
+ốm o-4 mz
+ồm o-1 mz
+ổm o-3 mz
+ỗm o-2 mz
+ộm o-5 mz
+ơm əː-0 mz
+ớm əː-4 mz
+ờm əː-1 mz
+ởm əː-3 mz
+ỡm əː-2 mz
+ợm əː-5 mz
+on ɔ-0 nz
+òn ɔ-1 nz
+ón ɔ-4 nz
+ỏn ɔ-3 nz
+õn ɔ-2 nz
+ọn ɔ-5 nz
+ôn o-0 nz
+ồn o-1 nz
+ốn o-4 nz
+ổn o-3 nz
+ỗn o-2 nz
+ộn o-5 nz
+ơn əː-0 nz
+ớn əː-4 nz
+ờn əː-1 nz
+ởn əː-3 nz
+ỡn əː-2 nz
+ợn əː-5 nz
+
+ong ɔ-0 ŋmz
+óng ɔ-4 ŋmz
+òng ɔ-1 ŋmz
+ỏng ɔ-3 ŋmz
+õng ɔ-2 ŋmz
+ọng ɔ-5 ŋmz
+ông o-0 ŋmz
+ống o-4 ŋmz
+ồng o-1 ŋmz
+ổng o-3 ŋmz
+ỗng o-2 ŋmz
+ộng o-5 ŋmz
+
+óp ɔ-4 pz
+ọp ɔ-5 pz
+ốp o-4 pz
+ộp o-5 pz
+ớp əː-4 pz
+ợp əː-5 pz
+ót ɔ-4 tz
+ọt ɔ-5 tz
+ốt o-4 tz
+ột o-5 tz
+ớt əː-4 tz
+ợt əː-5 tz
+ớc əː-4 kz
+ợc əː-5 kz
+ua uə-0
+úa uə-4
+ùa uə-1
+ủa uə-3
+ũa uə-2
+ụa uə-5
+uă w a-0
+uắ w a-4
+uằ w a-1
+uẳ w a-3
+uẵ w a-2
+uặ w a-5
+ưa ɨə-0
+ứa ɨə-4
+ừa ɨə-1
+ửa ɨə-3
+ữa ɨə-2
+ựa ɨə-5
+uan w aː-0 nz
+uán w aː-4 nz
+uàn w aː-1 nz
+uản w aː-3 nz
+uãn w aː-2 nz
+uạn w aː-5 nz
+uăn w a-0 nz
+uắn w a-4 nz
+uằn w a-1 nz
+uẳn w a-3 nz
+uẵn w a-2 nz
+uặn w a-5 nz
+uang w aː-0 ŋz
+uáng w aː-4 ŋz
+uàng w aː-1 ŋz
+uảng w aː-3 ŋz
+uãng w aː-2 ŋz
+uạng w aː-5 ŋz
+uăng w a-0 ŋ̟z
+uắng w a-4 ŋ̟z
+uằng w a-1 ŋ̟z
+uẳng w a-3 ŋ̟z
+uẵng w a-2 ŋ̟z
+uặng w a-5 ŋ̟z
+uanh w eaː-0 ŋ̟z
+uánh w eaː-4 ŋ̟z
+uành w eaː-1 ŋ̟z
+uảnh w eaː-3 ŋ̟z
+uãnh w eaː-2 ŋ̟z
+uạnh w eaː-5 ŋ̟z
+uân w ə-0 nz
+uấn w ə-4 nz
+uần w ə-1 nz
+uẩn w ə-3 nz
+uẫn w ə-2 nz
+uận w ə-5 nz
+uất w ə-4 tz
+uật w ə-5 tz
+uây w ə-0 iz
+uấy w ə-4 iz
+uầy w ə-1 iz
+uẩy w ə-3 iz
+uẫy w ə-2 iz
+uậy w ə-5 iz
+ueo w ɛ-0 uz
+uéo w ɛ-4 uz
+uèo w ɛ-1 uz
+uẻo w ɛ-3 uz
+uẽo w ɛ-2 uz
+uẹo w ɛ-5 uz
+
+úc u-4 kpz
+ục u-5 kpz
+
+ức ɨ-4 kz
+ực ɨ-5 kz
+uê w e-0
+uế w e-4
+uề w e-1
+uể w e-3
+uễ w e-2
+uệ w e-5
+ui w i-0
+úi w i-4
+ùi w i-1
+ủi w i-3
+ũi w i-2
+ụi w i-5
+ưi ɨ-0 iz
+ứi ɨ-4 iz
+ừi ɨ-1 iz
+ửi ɨ-3 iz
+ữi ɨ-2 iz
+ựi ɨ-5 iz
+um u-0 mz
+úm u-4 mz
+ùm u-1 mz
+ủm u-3 mz
+ũm u-2 mz
+ụm u-5 mz
+un u-0 nz
+ún u-4 nz
+ùn u-1 nz
+ủn u-3 nz
+ũn u-2 nz
+ụn u-5 nz
+ưn ɨ-0 nz
+ừn ɨ-1 nz
+ứn ɨ-4 nz
+ửn ɨ-3 nz
+ữn ɨ-2 nz
+ựn ɨ-5 nz
+ưm ɨ-0 mz
+ừm ɨ-1 mz
+ứm ɨ-4 mz
+ửm ɨ-3 mz
+ữm ɨ-2 mz
+ựm ɨ-5 mz
+uêu w e-0 uz
+uều w e-1 uz
+uếu w e-4 uz
+uểu w e-3 uz
+uễu w e-2 uz
+uệu w e-5 uz
+uếch w e-4 k̟z
+uệch w e-5 k̟z
+uênh w e-0 ŋ̟z
+uềnh w e-1 ŋ̟z
+uếnh w e-4 ŋ̟z
+uểnh w e-3 ŋ̟z
+uễnh w e-2 ŋ̟z
+uệnh w e-5 ŋ̟z
+
+ung u-0 ŋmz
+úng u-4 ŋmz
+ùng u-1 ŋmz
+ủng u-3 ŋmz
+ũng u-2 ŋmz
+ụng u-5 ŋmz
+
+ưng ɨ-0 ŋz
+ứng ɨ-4 ŋz
+ừng ɨ-1 ŋz
+ửng ɨ-3 ŋz
+ững ɨ-2 ŋz
+ựng ɨ-5 ŋz
+uơ w əː-0
+uớ w əː-4
+uờ w əː-1
+uở w əː-3
+uỡ w əː-2
+uợ w əː-5
+ước ɨə-4 kz
+ược ɨə-5 kz
+uôi w o-0 iz
+uồi w o-1 iz
+uối w o-4 iz
+uổi w o-3 iz
+uỗi w o-2 iz
+uội w o-5 iz
+ươi ɨə-0 iz
+ưới ɨə-4 iz
+ười ɨə-1 iz
+ưởi ɨə-3 iz
+ưỡi ɨə-2 iz
+ượi ɨə-5 iz
+uôm w o-0 mz
+uốm w o-4 mz
+uồm w o-1 mz
+uổm w o-3 mz
+uỗm w o-2 mz
+uộm w o-5 mz
+ươm ɨə-0 mz
+ướm ɨə-4 mz
+ườm ɨə-1 mz
+ưởm ɨə-3 mz
+ưỡm ɨə-2 mz
+ượm ɨə-5 mz
+uôn w o-0 nz
+uồn w o-1 nz
+uốn w o-4 nz
+uổn w o-3 nz
+uỗn w o-2 nz
+uộn w o-5 nz
+uột w o-5 tz
+uốt w o-4 tz
+
+uộc w o-5 kpz
+uốc w o-4 kpz
+
+ươn ɨə-0 nz
+ướn ɨə-4 nz
+ườn ɨə-1 nz
+ưởn ɨə-3 nz
+ưỡn ɨə-2 nz
+ượn ɨə-5 nz
+
+uông w o-0 ŋmz
+uống w o-4 ŋmz
+uồng w o-1 ŋmz
+uổng w o-3 ŋmz
+uỗng w o-2 ŋmz
+uộng w o-5 ŋmz
+
+ương ɨə-0 ŋz
+ướng ɨə-4 ŋz
+ường ɨə-1 ŋz
+ưởng ɨə-3 ŋz
+ưỡng ɨə-2 ŋz
+ượng ɨə-5 ŋz
+ướp ɨə-4 pz
+ượp ɨə-5 pz
+uốt w o-4 tz
+uột w o-5 tz
+ướt ɨə-4 tz
+ượt ɨə-5 tz
+ươu ɨə-0 uz
+ướu ɨə-4 uz
+ườu ɨə-1 uz
+ưởu ɨə-3 uz
+ưỡu ɨə-2 uz
+ượu ɨə-5 uz
+úp u-4 pz
+ụp u-5 pz
+út u-4 tz
+ụt u-5 tz
+ứt ɨ-4 tz
+ựt ɨ-5 tz
+
+ưu ɨ-0 uz
+ứu ɨ-4 uz
+ừu ɨ-1 uz
+ửu ɨ-3 uz
+ữu ɨ-2 uz
+ươ ɨə-0
+ướ ɨə-4
+ườ ɨə-1
+ưở ɨə-3
+ưỡ ɨə-2
+ượ ɨə-5
+ựu ɨ-5 uz
+uy w i-0
+úy w i-4
+ùy w i-1
+ủy w i-3
+ũy w i-2
+ụy w i-5
+uyu w i-0 uz
+uýu w i-4 uz
+uỳu w i-1 uz
+uỷu w i-3 uz
+uỹu w i-2 uz
+uỵu w i-5 uz
+uýt w i-4 tz
+uỵt w i-5 tz
+uýp w i-4 pz
+uỵp w i-5 pz
+uỵch w i-5 k̟z
+uých w i-4 k̟z
+uyên w iə-0 nz
+uyền w iə-1 nz
+uyến w iə-4 nz
+uyển w iə-3 nz
+uyễn w iə-2 nz
+uyện w iə-5 nz
+uyênh w iə-0 ŋ̟z
+uyếnh w iə-4 ŋ̟z
+uyềnh w iə-1 ŋ̟z
+uyểnh w iə-3 ŋ̟z
+uyễnh w iə-2 ŋ̟z
+uyệnh w iə-5 ŋ̟z
+uyết w iə-4 tz
+uyệt w iə-5 tz
+uya w iə-0
+uýa w iə-4
+uỳa w iə-1
+uỷa w iə-3
+uỹa w iə-2
+uỵa w iə-5
+uyn w i-0 nz
+uýn w i-4 nz
+uỳn w i-1 nz
+uỷn w i-3 nz
+uỹn w i-2 nz
+uỵn w i-5 nz
+uynh w i-0 ŋ̟z
+uỳnh w i-1 ŋ̟z
+uýnh w i-4 ŋ̟z
+uỷnh w i-3 ŋ̟z
+uỹnh w i-2 ŋ̟z
+uỵnh w i-5 ŋ̟z
+yêm iə-0 mz
+yềm iə-1 mz
+yếm iə-4 mz
+yểm iə-3 mz
+yễm iə-2 mz
+yệm iə-5 mz
+yên iə-0 nz
+yến iə-4 nz
+yền iə-1 nz
+yển iə-3 nz
+yễn iə-2 nz
+yện iə-5 nz
+yênh iə-0 ŋ̟z
+yếnh iə-4 ŋ̟z
+yềnh iə-1 ŋ̟z
+yểnh iə-3 ŋ̟z
+yễnh iə-2 ŋ̟z
+yệnh iə-5 ŋ̟z
+yêng iə-0 ŋz
+yếng iə-4 ŋz
+yềng iə-1 ŋz
+yểng iə-3 ŋz
+yễng iə-2 ŋz
+yệng iə-5 ŋz
+ynh i-0 ŋ̟z
+ýnh i-4 ŋ̟z
+ỳnh i-1 ŋ̟z
+ỷnh i-3 ŋ̟z
+ỹnh i-2 ŋ̟z
+ỵnh i-5 ŋ̟z
+ýt i-4 tz
+ỵt i-5 tz
+yu i-0 tz
+ýu i-4 tz
+ỳu i-1 tz
+ỷu i-3 tz
+ỹu i-2 tz
+ỵu i-5 tz
+yết iə-4 tz
+yệt iə-5 tz
+yêu iə-0 uz
+yếu iə-4 uz
+yều iə-1 uz
+yểu iə-3 uz
+yễu iə-2 uz
+yệu iə-5 uz
