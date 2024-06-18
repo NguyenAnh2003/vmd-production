@@ -17,6 +17,8 @@ def vmd_service(media, text):
     phonetic_emb, canonical_phoneme = data_pipeline.get_processed_input(
         media, text
     )  # get phonetic embedding and canonical phoneme
+    
+    canonical_phoneme = data_pipeline.process_canonical_phoneme(text) # process subword
 
     prediction = model_modules.get_prediction(phonetic_emb, canonical_phoneme)
 

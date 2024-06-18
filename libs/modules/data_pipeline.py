@@ -2,7 +2,7 @@ import torch
 import torchaudio
 from transformers import Wav2Vec2FeatureExtractor, Wav2Vec2Model
 from omegaconf import OmegaConf, DictConfig  # later
-from libs.libs_func import word2phoneme
+from data_modules import word2phoneme, word2subword
 
 
 class DataProcessingPipeline:
@@ -70,21 +70,37 @@ class DataProcessingPipeline:
                     result.append(0)
         return result
 
-    def post_process_result(self, canonical_phoneme, prediction):
-        compared_result = self._compare_transcript_canonical(canonical_phoneme, prediction)
+    def post_process_result(self, canonical_phoneme, prediction, num_phoneme):
+        compared_result = self._compare_transcript_canonical(
+            canonical_phoneme, prediction
+        )
         phoneme_each_word_compare = []
         phoneme_one_word_compare = []
-        for i, (can, compare) in enumerate(zip(canonical_phoneme, compared_result)):
-            if can != "$":
-                phoneme_one_word_compare.append(compare)
-            if can == "$" or i == len(canonical_phoneme) - 1:
+        for i, compare in enumerate(compared_result):
+            phoneme_one_word_compare.append(compare)
+            if (i + 1) in num_phoneme[1:] or i == len(canonical_phoneme) - 1:
                 phoneme_each_word_compare.append(phoneme_one_word_compare)
                 phoneme_one_word_compare = []
         list_result = [
-            0 if any(list_one_word) else 1
+            1 if any(list_one_word) else 0
             for list_one_word in phoneme_each_word_compare
         ]
         return list_result
+
+    def _convert_word2subword(self, canonical):
+        canonical_subword = word2subword(canonical.lower())
+        return canonical_subword
+
+    def process_canonical_phoneme(self, canonical):
+        canonical_subword = self._convert_word2subword(canonical)
+        num_phoneme = [0]
+        list_phoneme = []
+        for subw in canonical_subword:
+            phoneme = word2phoneme(subw)
+            num_phoneme.append(num_phoneme[-1] + len(phoneme))
+
+            list_phoneme += phoneme
+        return list_phoneme, num_phoneme
 
     def _zeros(self, rows, cols):
         # Define an empty list
