@@ -53,7 +53,7 @@ class DataProcessingPipeline:
         with torch.no_grad():
             out = self.model(audio_feature)
 
-        canonical_phoneme = word2phoneme(text.lower())
+        canonical_phoneme = self.process_canonical_phoneme(text.lower())
 
         return out.last_hidden_state, canonical_phoneme
 
