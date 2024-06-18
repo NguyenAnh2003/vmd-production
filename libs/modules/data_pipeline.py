@@ -53,9 +53,9 @@ class DataProcessingPipeline:
         with torch.no_grad():
             out = self.model(audio_feature)
 
-        canonical_phoneme = self.process_canonical_phoneme(text.lower())
+        canonical_phoneme, number_phoneme = self._process_canonical_phoneme(text.lower())
 
-        return out.last_hidden_state, canonical_phoneme
+        return out.last_hidden_state, canonical_phoneme, number_phoneme
 
     def _compare_transcript_canonical(self, canonical_phoneme, prediction):
         result = []
@@ -91,7 +91,7 @@ class DataProcessingPipeline:
         canonical_subword = word2subword(canonical.lower())
         return canonical_subword
 
-    def process_canonical_phoneme(self, canonical):
+    def _process_canonical_phoneme(self, canonical):
         canonical_subword = self._convert_word2subword(canonical)
         num_phoneme = [0]
         list_phoneme = []
