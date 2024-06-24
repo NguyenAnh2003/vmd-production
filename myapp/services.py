@@ -18,7 +18,6 @@ def vmd_service(media, text):
         media, text
     )  # get phonetic embedding and canonical phoneme
 
-    canonical_phoneme = " ".join(canonical_phoneme)
     prediction = model_modules.get_prediction(phonetic_emb, canonical_phoneme)
 
     compared_result = data_pipeline.post_process_result(canonical_phoneme, prediction, num_phoneme)

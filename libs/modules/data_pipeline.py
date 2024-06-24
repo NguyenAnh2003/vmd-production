@@ -54,7 +54,7 @@ class DataProcessingPipeline:
             out = self.model(audio_feature)
 
         canonical_phoneme, number_phoneme, canonical_subword = self._process_canonical_phoneme(text.lower())
-
+        canonical_phoneme = " ".join(canonical_phoneme)
         return out.last_hidden_state, canonical_phoneme, number_phoneme, canonical_subword
 
     def _compare_transcript_canonical(self, canonical_phoneme, prediction):
@@ -86,13 +86,9 @@ class DataProcessingPipeline:
         list_result = [1 if any(list_one_word) else 0 for list_one_word in phoneme_each_word_compare]
         return list_result
 
-    def _convert_word2subword(self, canonical):
-        canonical_subword = word2subword(canonical.lower())
-        return canonical_subword
-
     def _process_canonical_phoneme(self, canonical):
         # process subword
-        canonical_subword = self._convert_word2subword(canonical)
+        canonical_subword = word2subword(canonical)
         num_phoneme = [0]
         list_phoneme = []
         for subw in canonical_subword:
