@@ -53,13 +53,15 @@ class DataProcessingPipeline:
         with torch.no_grad():
             out = self.model(audio_feature)
 
-        canonical_phoneme, number_phoneme = self._process_canonical_phoneme(text.lower())
+        canonical_phoneme, number_phoneme, canonical_subword = self._process_canonical_phoneme(text.lower())
 
-        return out.last_hidden_state, canonical_phoneme, number_phoneme
+        return out.last_hidden_state, canonical_phoneme, number_phoneme, canonical_subword
 
     def _compare_transcript_canonical(self, canonical_phoneme, prediction):
         result = []
         can_align, trans_align = self.align_seq(canonical_phoneme, prediction)
+        if can_align.count("<eps>") > 3:
+            return [0] * len(canonical_phoneme)
         for can, tran in zip(can_align, trans_align):
             if can != "<eps>" and tran == "<eps>":
                 result.append(1)
@@ -81,10 +83,7 @@ class DataProcessingPipeline:
             if (i + 1) in num_phoneme[1:] or i == len(canonical_phoneme) - 1:
                 phoneme_each_word_compare.append(phoneme_one_word_compare)
                 phoneme_one_word_compare = []
-        list_result = [
-            1 if any(list_one_word) else 0
-            for list_one_word in phoneme_each_word_compare
-        ]
+        list_result = [1 if any(list_one_word) else 0 for list_one_word in phoneme_each_word_compare]
         return list_result
 
     def _convert_word2subword(self, canonical):
@@ -92,6 +91,7 @@ class DataProcessingPipeline:
         return canonical_subword
 
     def _process_canonical_phoneme(self, canonical):
+        # process subword
         canonical_subword = self._convert_word2subword(canonical)
         num_phoneme = [0]
         list_phoneme = []
@@ -100,7 +100,7 @@ class DataProcessingPipeline:
             num_phoneme.append(num_phoneme[-1] + len(phoneme))
 
             list_phoneme += phoneme
-        return list_phoneme, num_phoneme
+        return list_phoneme, num_phoneme, canonical_subword
 
     def _zeros(self, rows, cols):
         # Define an empty list
